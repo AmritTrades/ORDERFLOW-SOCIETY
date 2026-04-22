@@ -73,19 +73,18 @@ export default function Guarantee() {
                 </span>
               </div>
               <h2 className="font-heading font-bold text-3xl sm:text-4xl text-zinc-100 mb-4">
-                100-Day Profitability{" "}
+                100-Day{" "}
                 <span className="gradient-text">Guarantee</span>
               </h2>
               <p className="font-body text-zinc-400 leading-relaxed mb-3">
-                Follow the curriculum. Attend every session. Implement the plan.
-                If after 100 days you&apos;re still not consistently profitable, I will{" "}
+                Do the work. If you&apos;re not profitable within 100 days, I will{" "}
                 <span className="text-zinc-100 font-medium">
-                  refund you in full — no questions asked.
-                </span>
+                  personally teach you for free until you are.
+                </span>{" "}
+                No extra cost. No excuses.
               </p>
               <p className="font-body text-zinc-600 text-[0.85rem] leading-relaxed">
-                This isn&apos;t a get-rich promise. It&apos;s a guarantee that if you do the
-                work, you get results. The only risk is not starting.
+                The guarantee exists because the system works — if you do.
               </p>
             </div>
 

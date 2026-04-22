@@ -138,6 +138,8 @@ function HeroGeometric({
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 md:px-6 pt-20">
+        {/* Dark scrim so text stays readable over the 3D scene */}
+        <div className="absolute inset-0 -z-10 bg-[#09090B]/55 rounded-3xl blur-2xl scale-110 pointer-events-none" />
         <div className="max-w-3xl mx-auto text-center">
 
           {/* Badge */}
@@ -162,11 +164,11 @@ function HeroGeometric({
             animate="visible"
           >
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-6 md:mb-8 tracking-tight font-heading">
-              <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/80">
+              <span className="text-white drop-shadow-lg">
                 {title1}
               </span>
               <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-white/90 to-emerald-300">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-white to-emerald-300 drop-shadow-lg">
                 {title2}
               </span>
             </h1>
@@ -179,7 +181,7 @@ function HeroGeometric({
             initial="hidden"
             animate="visible"
           >
-            <p className="text-base sm:text-lg md:text-xl text-white/40 mb-10 md:mb-12 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4 font-body">
+            <p className="text-base sm:text-lg md:text-xl text-white/80 mb-10 md:mb-12 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4 font-body">
               {subtitle}
             </p>
           </motion.div>
