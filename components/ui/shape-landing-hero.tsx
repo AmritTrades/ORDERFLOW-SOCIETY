@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Circle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { GenerativeArtScene } from "@/components/ui/anomalous-matter-hero";
 
 function ElegantShape({
   className,
@@ -85,6 +86,9 @@ function HeroGeometric({
 
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#09090B]">
+      {/* 3D generative art background */}
+      <GenerativeArtScene />
+
       {/* Ambient gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-amber-500/[0.05] via-transparent to-emerald-500/[0.05] blur-3xl" />
 
@@ -190,6 +194,8 @@ function HeroGeometric({
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
                 href={primaryCTA.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-xl px-8 py-4 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-sm transition-all duration-200 shadow-[0_12px_32px_rgba(245,158,11,0.28)] font-heading tracking-wide group"
               >
                 <DiscordIcon />

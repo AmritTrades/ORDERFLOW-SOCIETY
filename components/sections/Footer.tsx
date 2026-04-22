@@ -1,7 +1,7 @@
 const footerLinks = [
-  { label: "Discord",    href: "#community" },
-  { label: "Mentorship", href: "#mentorship" },
-  { label: "Guarantee",  href: "#guarantee" },
+  { label: "Discord",    href: "https://discord.gg/d4xSrsWAK", external: true },
+  { label: "Mentorship", href: "#mentorship", external: false },
+  { label: "Guarantee",  href: "#guarantee",  external: false },
 ];
 
 export default function Footer() {
@@ -40,6 +40,8 @@ export default function Footer() {
               <a
                 key={link.href}
                 href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
                 className="font-body text-[0.8rem] text-zinc-500 hover:text-zinc-100 transition-colors duration-200"
               >
                 {link.label}

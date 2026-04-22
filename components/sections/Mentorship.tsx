@@ -242,6 +242,7 @@ export default function Mentorship() {
 
                   {/* Liquid Glass CTA */}
                   <LiquidButton
+                    asChild
                     size="xl"
                     className="w-full justify-center rounded-full font-heading font-semibold text-[0.85rem] tracking-wide"
                     style={{
@@ -249,7 +250,13 @@ export default function Mentorship() {
                       border: "1px solid rgba(201,169,110,0.35)",
                     }}
                   >
-                    Pay $799 via PayPal
+                    <a
+                      href="https://www.paypal.com/paypalme/amrittrades/799"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Pay $799 via PayPal
+                    </a>
                   </LiquidButton>
                 </div>
 
@@ -315,6 +322,7 @@ export default function Mentorship() {
                   </ul>
 
                   <LiquidButton
+                    asChild
                     size="xl"
                     className="w-full justify-center rounded-full font-heading font-semibold text-[0.85rem] tracking-wide"
                     style={{
@@ -322,7 +330,13 @@ export default function Mentorship() {
                       border: "1px solid rgba(255,255,255,0.1)",
                     }}
                   >
-                    Start with $400 via PayPal
+                    <a
+                      href="https://www.paypal.com/paypalme/amrittrades/400"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Start with $400 via PayPal
+                    </a>
                   </LiquidButton>
                 </div>
 

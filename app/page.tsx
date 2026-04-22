@@ -23,7 +23,7 @@ export default function Home() {
         title1="Master the"
         title2="Order Flow Edge."
         subtitle="Stop guessing the tape. Start reading it. Futures trading mentorship for serious traders ready to trade with institutional edge."
-        primaryCTA={{ label: "Join Free Discord", href: "#community" }}
+        primaryCTA={{ label: "Join Free Discord", href: "https://discord.gg/d4xSrsWAK" }}
         secondaryCTA={{ label: "View Mentorship", href: "#mentorship" }}
       />
 

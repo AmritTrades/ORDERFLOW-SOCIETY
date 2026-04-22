@@ -41,7 +41,9 @@ export default function FinalCTA() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a
-            href="#community"
+            href="https://discord.gg/d4xSrsWAK"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2.5 rounded-xl font-heading font-bold text-base text-zinc-950 transition-all duration-200 group"
             style={{
               background: "#F59E0B",

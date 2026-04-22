@@ -95,7 +95,9 @@ export default function Community() {
         {/* CTA */}
         <div className="text-center">
           <a
-            href="#"
+            href="https://discord.gg/d4xSrsWAK"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-3 rounded-xl px-9 py-4 transition-all duration-200 group emerald-glow font-heading font-semibold text-[0.95rem] text-zinc-100"
             style={{
               background: "rgba(24,24,27,.9)",

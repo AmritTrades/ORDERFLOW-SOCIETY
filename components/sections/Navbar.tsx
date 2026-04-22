@@ -59,8 +59,10 @@ export default function Navbar() {
           {/* Desktop CTA + hamburger */}
           <div className="flex items-center gap-3">
             <a
-              href="#community"
+              href="https://discord.gg/d4xSrsWAK"
               className="hidden md:inline-flex items-center gap-2 pulse-cta bg-amber-500 hover:bg-amber-400 text-zinc-950 rounded-lg px-4 py-2 font-heading font-bold text-[0.8rem] transition-colors duration-200"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <DiscordIcon />
               Join Discord
@@ -101,8 +103,10 @@ export default function Navbar() {
             ))}
             <div className="pt-3 pb-1">
               <a
-                href="#community"
+                href="https://discord.gg/d4xSrsWAK"
                 onClick={() => setMenuOpen(false)}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-zinc-950 rounded-xl px-5 py-3 font-heading font-bold text-[0.85rem] transition-colors"
               >
                 <DiscordIcon />

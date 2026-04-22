@@ -13,7 +13,9 @@
       "Bash(npm --version)",
       "PowerShell(node --version)",
       "PowerShell(npm --version)",
-      "PowerShell(Get-ChildItem \"C:\\\\Program Files\\\\nodejs\\\\\" -ErrorAction SilentlyContinue; Get-ChildItem \"$env:APPDATA\\\\npm\\\\\" -ErrorAction SilentlyContinue | Select-Object -First 5; $env:PATH -split \";\" | Select-String -Pattern \"node|npm\" -SimpleMatch)"
+      "PowerShell(Get-ChildItem \"C:\\\\Program Files\\\\nodejs\\\\\" -ErrorAction SilentlyContinue; Get-ChildItem \"$env:APPDATA\\\\npm\\\\\" -ErrorAction SilentlyContinue | Select-Object -First 5; $env:PATH -split \";\" | Select-String -Pattern \"node|npm\" -SimpleMatch)",
+      "Bash(npm run *)",
+      "PowerShell(Get-Command node, npm, npx -ErrorAction SilentlyContinue)"
     ]
   }
 }
