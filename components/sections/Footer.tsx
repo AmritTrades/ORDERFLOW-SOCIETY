@@ -1,12 +1,12 @@
 const footerLinks = [
-  { label: "Discord",    href: "https://discord.gg/d4xSrsWAK", external: true },
-  { label: "Mentorship", href: "#mentorship", external: false },
-  { label: "Guarantee",  href: "#guarantee",  external: false },
+  { label: "Discord",    href: "https://discord.gg/d4xSrsWAK", external: true  },
+  { label: "Mentorship", href: "#mentorship",                   external: false },
+  { label: "Guarantee",  href: "#guarantee",                    external: false },
 ];
 
 export default function Footer() {
   return (
-    <footer style={{ borderTop: "1px solid rgba(39,39,42,.7)", padding: "2.5rem 0" }}>
+    <footer className="border-t border-white/[0.07] bg-white/[0.02] backdrop-blur-sm" style={{ padding: "2.5rem 0" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -57,8 +57,7 @@ export default function Footer() {
             className="flex items-center gap-2.5 group"
           >
             <div
-              className="w-8 h-8 rounded-[0.6rem] flex items-center justify-center transition-colors duration-200"
-              style={{ background: "rgba(39,39,42,.8)", border: "1px solid rgba(63,63,70,.6)" }}
+              className="w-8 h-8 rounded-[0.6rem] flex items-center justify-center transition-colors duration-200 border border-white/10 bg-white/5 backdrop-blur-sm group-hover:bg-white/10 group-hover:border-white/20"
             >
               <svg
                 className="w-4 h-4 text-zinc-400 group-hover:text-zinc-100 transition-colors"
@@ -75,10 +74,7 @@ export default function Footer() {
 
         </div>
 
-        <div
-          className="mt-8 pt-6 text-center"
-          style={{ borderTop: "1px solid rgba(24,24,27,.8)" }}
-        >
+        <div className="mt-8 pt-6 text-center border-t border-white/[0.05]">
           <p className="font-body text-[0.72rem] text-zinc-600">
             © 2025 Orderflow Society. All rights reserved.{" "}
             Trading futures involves substantial risk of loss. Past performance is

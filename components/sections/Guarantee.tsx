@@ -2,49 +2,25 @@ export default function Guarantee() {
   return (
     <section id="guarantee" className="py-24">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          className="rounded-3xl overflow-hidden relative"
-          style={{ border: "1px solid rgba(245,158,11,.15)" }}
-        >
-          {/* BG layers */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "linear-gradient(135deg,rgba(24,24,27,.95) 0%,rgba(9,9,11,.98) 100%)",
-            }}
-          />
-          <div className="grid-bg absolute inset-0" style={{ opacity: 0.4 }} />
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              height: 1,
-              background: "linear-gradient(90deg,transparent,rgba(245,158,11,.5),transparent)",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: 1,
-              background: "linear-gradient(90deg,transparent,rgba(245,158,11,.25),transparent)",
-            }}
-          />
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl">
+          {/* Glow */}
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 h-80 w-80 rounded-full bg-amber-500/5 blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 -ml-20 -mb-20 h-64 w-64 rounded-full bg-white/[0.02] blur-3xl pointer-events-none" />
+          {/* Top shimmer */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+          {/* Bottom shimmer */}
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-          <div className="relative flex flex-col md:flex-row items-center gap-10 p-10 sm:p-14">
+          <div className="relative z-10 flex flex-col md:flex-row items-center gap-10 p-10 sm:p-14">
 
             {/* Shield */}
             <div className="flex-shrink-0">
               <div
-                className="w-24 h-24 rounded-2xl flex items-center justify-center amber-glow"
+                className="w-24 h-24 rounded-2xl flex items-center justify-center"
                 style={{
                   background: "rgba(245,158,11,.07)",
                   border: "1px solid rgba(245,158,11,.22)",
+                  boxShadow: "0 0 40px rgba(245,158,11,0.12), 0 0 80px rgba(245,158,11,0.04)",
                 }}
               >
                 <svg

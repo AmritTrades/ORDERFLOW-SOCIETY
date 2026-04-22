@@ -86,14 +86,7 @@ export default function Mentorship() {
               {deliverables.map((d) => (
                 <div
                   key={d.num}
-                  className="rounded-2xl p-5 transition-all duration-200"
-                  style={{ background: "rgba(24,24,27,.7)", border: "1px solid rgba(39,39,42,.8)" }}
-                  onMouseOver={(e) =>
-                    ((e.currentTarget as HTMLElement).style.borderColor = "rgba(245,158,11,.22)")
-                  }
-                  onMouseOut={(e) =>
-                    ((e.currentTarget as HTMLElement).style.borderColor = "rgba(39,39,42,.8)")
-                  }
+                  className="relative overflow-hidden rounded-2xl p-5 border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-200 hover:border-white/20 hover:bg-white/[0.08]"
                 >
                   <div className="flex gap-4 items-start">
                     <div

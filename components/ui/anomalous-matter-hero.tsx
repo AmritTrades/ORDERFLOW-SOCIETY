@@ -22,10 +22,10 @@ export function GenerativeArtScene() {
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     currentMount.appendChild(renderer.domElement);
 
-    const geometry = new THREE.IcosahedronGeometry(1.2, 64);
+    const geometry = new THREE.IcosahedronGeometry(1.2, 4);
     const material = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 },
