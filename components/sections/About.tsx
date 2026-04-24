@@ -1,144 +1,253 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeUp, slideLeft, slideRight, viewport } from "@/lib/motion";
+import { fadeUp, viewport } from "@/lib/motion";
 
-const chips = [
-  "Footprint Charts",
-  "Market Profile",
-  "Volume Profile",
-  "Delta Divergence",
-  "ES / NQ Futures",
-  "Tape Reading",
+const fullIncludes = [
+  "Full orderflow curriculum access",
+  "Weekly 1-on-1 screen-share sessions",
+  "Custom trading plan built for you",
+  "100-day money-back guarantee",
+];
+
+const splitIncludes = [
+  "Everything included — same programme",
+  "Flexible for your budget",
+  "Start immediately upon first payment",
+];
+
+function Check({ bright }: { bright?: boolean }) {
+  return (
+    <svg
+      width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      style={{ color: bright ? "rgba(255,255,255,0.7)" : "rgba(255,255,255,0.25)", flexShrink: 0, marginTop: "2px" }}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+    </svg>
+  );
+}
+
+const imageCards = [
+  {
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1280&q=80",
+    title: "Read the Market",
+    description: "Learn to read delta, footprint and tape — the way institutions actually trade.",
+  },
+  {
+    image: "https://images.unsplash.com/photo-1640340434855-6084b1f4901c?w=1280&q=80",
+    title: "Your fastest path to consistency.",
+    description: "Private, personalised coaching built around your charts and your specific edge.",
+  },
 ];
 
 export default function About() {
   return (
     <section id="about" className="py-36 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
 
-          {/* Left — editorial pull quote */}
-          <motion.div
-            variants={slideLeft}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewport}
-          >
-            <p className="label-mono mb-8">About the Mentor</p>
-
-            <blockquote
-              style={{
-                fontFamily: "var(--font-cormorant), Georgia, serif",
-                fontSize: "clamp(2rem, 3.5vw, 3rem)",
-                fontWeight: 300,
-                lineHeight: 1.25,
-                color: "#f5f5f5",
-                letterSpacing: "-0.02em",
-                marginBottom: "2rem",
-              }}
-            >
-              "I stopped chasing lagging indicators. I learned to read what institutions
-              actually do to move price."
-            </blockquote>
-
-            <div
-              className="w-8 h-px mb-8"
-              style={{ background: "rgba(255,255,255,0.2)" }}
-            />
-
-            <p style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.75, marginBottom: "1.5rem" }}>
-              I&apos;m <span style={{ color: "#f5f5f5" }}>Amrit</span> — a full-time futures trader
-              specialising in orderflow analysis, footprint charts, and market microstructure.
-              After years of losing money chasing lagging indicators, I discovered what institutions
-              actually do to move price.
-            </p>
-            <p style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.75, marginBottom: "2rem" }}>
-              Now I teach serious traders how to read the tape — understanding aggressive buyers
-              and sellers, identifying iceberg orders, absorbing imbalances, and positioning with
-              the smart money instead of against it.
-            </p>
-
-            <div className="flex flex-wrap gap-2">
-              {chips.map((chip) => (
-                <span
-                  key={chip}
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    padding: "0.3rem 0.85rem",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    borderRadius: "9999px",
-                    fontSize: "0.72rem",
-                    color: "rgba(255,255,255,0.45)",
-                    letterSpacing: "0.04em",
-                  }}
-                >
-                  {chip}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Right — video card */}
-          <motion.div
-            variants={slideRight}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewport}
-          >
-            <div
+        {/* Two image cards */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10"
+        >
+          {imageCards.map((card, i) => (
+            <motion.div
+              key={i}
+              variants={fadeUp}
               className="relative overflow-hidden"
               style={{
-                aspectRatio: "16/9",
+                minHeight: "500px",
                 borderRadius: "1.25rem",
-                border: "1px solid rgba(255,255,255,0.08)",
-                background: "rgba(255,255,255,0.03)",
+                backgroundImage: `url(${card.image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
               }}
             >
-              {/* Faint chart line */}
-              <div className="absolute inset-0 opacity-[0.07] pointer-events-none">
-                <svg viewBox="0 0 640 360" style={{ width: "100%", height: "100%" }} preserveAspectRatio="xMidYMid slice">
-                  <polyline
-                    points="0,320 80,280 160,300 240,210 320,230 400,150 480,170 560,90 640,110"
-                    fill="none"
-                    stroke="#f5f5f5"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </div>
-
-              {/* Play button */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                <motion.div
-                  whileHover={{ scale: 1.08 }}
-                  whileTap={{ scale: 0.96 }}
-                  className="cursor-pointer flex items-center justify-center"
+              {/* Dark overlay */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.15) 100%)",
+                  borderRadius: "1.25rem",
+                }}
+              />
+              {/* Text */}
+              <div
+                className="absolute bottom-0 left-0 right-0"
+                style={{ padding: "2.25rem" }}
+              >
+                <h3
                   style={{
-                    width: "4rem",
-                    height: "4rem",
-                    borderRadius: "9999px",
-                    background: "#fff",
+                    fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif",
+                    fontSize: "clamp(1.5rem, 2.5vw, 2rem)",
+                    fontWeight: 600,
+                    color: "#ffffff",
+                    letterSpacing: "-0.03em",
+                    lineHeight: 1.15,
+                    marginBottom: "0.65rem",
                   }}
                 >
-                  <svg className="ml-1" width="18" height="18" viewBox="0 0 24 24" fill="#080808">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </motion.div>
-                <div className="text-center">
-                  <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.8)", fontWeight: 500, marginBottom: "0.25rem" }}>
-                    How I Read Order Flow — Full Breakdown
-                  </p>
-                  <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.3)" }}>
-                    YouTube · @amrittrades
-                  </p>
-                </div>
+                  {card.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: "0.9375rem",
+                    color: "rgba(255,255,255,0.65)",
+                    lineHeight: 1.65,
+                    maxWidth: "28rem",
+                  }}
+                >
+                  {card.description}
+                </p>
               </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Pricing cards */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          className="grid grid-cols-1 md:grid-cols-2 gap-4"
+        >
+          {/* Full payment */}
+          <motion.div
+            whileHover={{ scale: 1.015 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            style={{
+              borderRadius: "1.25rem",
+              border: "1px solid rgba(255,255,255,0.15)",
+              background: "rgba(255,255,255,0.04)",
+              padding: "2rem",
+            }}
+          >
+            <div className="flex items-start justify-between mb-4">
+              <p className="label-mono">Full Payment</p>
+              <span
+                className="label-mono"
+                style={{ background: "rgba(255,255,255,0.07)", borderRadius: "9999px", padding: "0.2rem 0.65rem", color: "rgba(255,255,255,0.6)" }}
+              >
+                Best Value
+              </span>
             </div>
+            <div
+              style={{
+                fontFamily: "var(--font-cormorant), Georgia, serif",
+                fontSize: "clamp(3rem, 6vw, 4.5rem)",
+                fontWeight: 300,
+                color: "#f5f5f5",
+                lineHeight: 1,
+                letterSpacing: "-0.02em",
+                marginBottom: "0.5rem",
+              }}
+            >
+              $799
+            </div>
+            <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.28)", marginBottom: "1.5rem" }}>
+              One-time · save vs split
+            </p>
+            <ul className="flex flex-col gap-2.5 mb-6">
+              {fullIncludes.map(item => (
+                <li key={item} className="flex items-start gap-2.5" style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.65)" }}>
+                  <Check bright />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <button
+              onClick={() => window.open("https://www.paypal.com/paypalme/amrittrades/799", "_blank", "noopener,noreferrer")}
+              className="w-full font-semibold transition-all duration-200 hover:bg-white/90"
+              style={{
+                background: "#fff",
+                color: "#080808",
+                borderRadius: "9999px",
+                padding: "0.85rem",
+                fontSize: "0.875rem",
+                letterSpacing: "-0.01em",
+                cursor: "pointer",
+                border: "none",
+              }}
+            >
+              Pay $799 via PayPal
+            </button>
           </motion.div>
 
-        </div>
+          {/* Split payment */}
+          <motion.div
+            whileHover={{ scale: 1.015 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            style={{
+              borderRadius: "1.25rem",
+              border: "1px solid rgba(255,255,255,0.07)",
+              background: "rgba(255,255,255,0.02)",
+              padding: "2rem",
+            }}
+          >
+            <p className="label-mono mb-4">Split Payment</p>
+            <div className="flex items-end gap-2 mb-1" style={{ lineHeight: 1 }}>
+              <span
+                style={{
+                  fontFamily: "var(--font-cormorant), Georgia, serif",
+                  fontSize: "clamp(2.4rem, 5vw, 3.5rem)",
+                  fontWeight: 300,
+                  color: "rgba(255,255,255,0.75)",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                $400
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-cormorant), Georgia, serif",
+                  fontSize: "1.5rem",
+                  fontWeight: 300,
+                  color: "rgba(255,255,255,0.3)",
+                  marginBottom: "0.35rem",
+                }}
+              >
+                × 2
+              </span>
+            </div>
+            <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.25)", marginBottom: "1.5rem" }}>
+              30 days between payments
+            </p>
+            <ul className="flex flex-col gap-2.5 mb-6">
+              {splitIncludes.map(item => (
+                <li key={item} className="flex items-start gap-2.5" style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.38)" }}>
+                  <Check />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <button
+              onClick={() => window.open("https://www.paypal.com/paypalme/amrittrades/400", "_blank", "noopener,noreferrer")}
+              className="w-full font-semibold transition-all duration-200 hover:border-white/25 hover:text-white/70"
+              style={{
+                background: "transparent",
+                color: "rgba(255,255,255,0.4)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                borderRadius: "9999px",
+                padding: "0.85rem",
+                fontSize: "0.875rem",
+                letterSpacing: "-0.01em",
+                cursor: "pointer",
+              }}
+            >
+              Start with $400 via PayPal
+            </button>
+          </motion.div>
+
+        </motion.div>
+
+        <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.18)", textAlign: "center", marginTop: "1rem" }}>
+          Protected by 100-day profitability guarantee · Secure payments via PayPal
+        </p>
+
       </div>
     </section>
   );

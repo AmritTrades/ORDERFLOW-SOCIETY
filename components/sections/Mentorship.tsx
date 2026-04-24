@@ -1,25 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeUp, slideLeft, slideRight, stagger, viewport } from "@/lib/motion";
-
-const deliverables = [
-  {
-    num: "I",
-    title: "Full Orderflow Curriculum",
-    body: "Step-by-step system covering footprint charts, volume profile, delta divergence, and tape reading — structured for your pace and experience level.",
-  },
-  {
-    num: "II",
-    title: "Live Screen-Share Sessions",
-    body: "Weekly 1-on-1 calls where we review your trades, break down your mistakes, and work on execution in real time with your actual charts.",
-  },
-  {
-    num: "III",
-    title: "Custom Rules-Based Trading Plan",
-    body: "A personalised playbook built around your schedule, account size, and risk tolerance — so you never enter a trade without a defined edge again.",
-  },
-];
+import { fadeUp, slideRight, viewport } from "@/lib/motion";
 
 const fullIncludes = [
   "Full orderflow curriculum access",
@@ -50,89 +32,14 @@ export default function Mentorship() {
     <section id="mentorship" className="py-36 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
+        {/* Pricing cards */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
-          className="mb-20"
+          className="grid grid-cols-1 md:grid-cols-2 gap-4"
         >
-          <p className="label-mono mb-4">1-on-1 Mentorship</p>
-          <h2
-            style={{
-              fontSize: "clamp(2.4rem, 5vw, 4rem)",
-              fontWeight: 700,
-              color: "#f5f5f5",
-              letterSpacing: "-0.04em",
-              lineHeight: 1.05,
-              maxWidth: "32rem",
-            }}
-          >
-            Your fastest path<br />
-            <span style={{ color: "rgba(255,255,255,0.35)", fontWeight: 300 }}>to consistency.</span>
-          </h2>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-
-          {/* Roman numeral deliverables */}
-          <motion.div
-            variants={slideLeft}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewport}
-          >
-            <p style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.75, marginBottom: "2.5rem" }}>
-              Private, personalised coaching built around your charts, your mistakes,
-              and your specific edge — not a generic course.
-            </p>
-            <motion.div
-              variants={stagger}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewport}
-              className="flex flex-col"
-            >
-              {deliverables.map((d, i) => (
-                <motion.div
-                  key={d.num}
-                  variants={fadeUp}
-                  className="flex gap-6 py-7"
-                  style={{ borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: i === deliverables.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none" }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "var(--font-cormorant), Georgia, serif",
-                      fontSize: "1.1rem",
-                      fontWeight: 300,
-                      color: "rgba(255,255,255,0.2)",
-                      minWidth: "2rem",
-                      paddingTop: "0.1rem",
-                    }}
-                  >
-                    {d.num}
-                  </span>
-                  <div>
-                    <h4 style={{ fontSize: "0.9375rem", fontWeight: 600, color: "#f5f5f5", marginBottom: "0.4rem", letterSpacing: "-0.02em" }}>
-                      {d.title}
-                    </h4>
-                    <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.42)", lineHeight: 1.7 }}>
-                      {d.body}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Pricing cards */}
-          <motion.div
-            variants={slideRight}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewport}
-            className="flex flex-col gap-4"
-          >
             {/* Full payment */}
             <motion.div
               whileHover={{ scale: 1.015 }}
@@ -263,9 +170,8 @@ export default function Mentorship() {
             <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.18)", textAlign: "center" }}>
               Protected by 100-day profitability guarantee · Secure payments via PayPal
             </p>
-          </motion.div>
+        </motion.div>
 
-        </div>
       </div>
     </section>
   );

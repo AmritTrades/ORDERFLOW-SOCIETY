@@ -3,7 +3,6 @@ import Navbar      from "@/components/sections/Navbar";
 import StatsBar    from "@/components/sections/StatsBar";
 import About       from "@/components/sections/About";
 import Community   from "@/components/sections/Community";
-import Mentorship  from "@/components/sections/Mentorship";
 import Guarantee   from "@/components/sections/Guarantee";
 import Comparison  from "@/components/sections/Comparison";
 import FinalCTA    from "@/components/sections/FinalCTA";
@@ -24,7 +23,6 @@ export default function Home() {
       <StatsBar />
       <About />
       <Community />
-      <Mentorship />
       <Guarantee />
       <Comparison />
       <FinalCTA />
