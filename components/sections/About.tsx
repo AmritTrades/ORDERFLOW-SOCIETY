@@ -1,3 +1,8 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { fadeUp, slideLeft, slideRight, viewport } from "@/lib/motion";
+
 const chips = [
   "Footprint Charts",
   "Market Profile",
@@ -9,101 +14,129 @@ const chips = [
 
 export default function About() {
   return (
-    <section id="about" className="py-28 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section id="about" className="py-36 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
 
-          {/* Copy */}
-          <div>
-            <div className="flex items-center gap-2 mb-4" style={{ color: "#F59E0B" }}>
-              <span className="w-6 h-px bg-amber-500 block" />
-              <span className="text-[0.7rem] uppercase tracking-[0.12em] font-body">
-                About the Mentor
-              </span>
-            </div>
+          {/* Left — editorial pull quote */}
+          <motion.div
+            variants={slideLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+          >
+            <p className="label-mono mb-8">About the Mentor</p>
 
-            <h2 className="font-heading font-bold text-4xl sm:text-5xl text-zinc-100 leading-tight mb-6">
-              From Retail Trader<br />
-              to{" "}
-              <span className="gradient-text">Orderflow Reader</span>
-            </h2>
+            <blockquote
+              style={{
+                fontFamily: "var(--font-cormorant), Georgia, serif",
+                fontSize: "clamp(2rem, 3.5vw, 3rem)",
+                fontWeight: 300,
+                lineHeight: 1.25,
+                color: "#f5f5f5",
+                letterSpacing: "-0.02em",
+                marginBottom: "2rem",
+              }}
+            >
+              "I stopped chasing lagging indicators. I learned to read what institutions
+              actually do to move price."
+            </blockquote>
 
-            <p className="font-body text-zinc-400 leading-relaxed mb-5">
-              I&apos;m{" "}
-              <span className="text-zinc-100 font-medium">Amrit</span> — a
-              full-time futures trader specialising in orderflow analysis,
-              footprint charts, and market microstructure. After years of losing
-              money chasing lagging indicators, I discovered what institutions
+            <div
+              className="w-8 h-px mb-8"
+              style={{ background: "rgba(255,255,255,0.2)" }}
+            />
+
+            <p style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.75, marginBottom: "1.5rem" }}>
+              I&apos;m <span style={{ color: "#f5f5f5" }}>Amrit</span> — a full-time futures trader
+              specialising in orderflow analysis, footprint charts, and market microstructure.
+              After years of losing money chasing lagging indicators, I discovered what institutions
               actually do to move price.
             </p>
-            <p className="font-body text-zinc-400 leading-relaxed mb-8">
-              Now I teach serious traders how to read the tape — understanding
-              aggressive buyers and sellers, identifying iceberg orders, absorbing
-              imbalances, and positioning with the smart money instead of against
-              it.
+            <p style={{ fontSize: "0.9375rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.75, marginBottom: "2rem" }}>
+              Now I teach serious traders how to read the tape — understanding aggressive buyers
+              and sellers, identifying iceberg orders, absorbing imbalances, and positioning with
+              the smart money instead of against it.
             </p>
 
             <div className="flex flex-wrap gap-2">
               {chips.map((chip) => (
                 <span
                   key={chip}
-                  className="inline-flex items-center px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-[0.7rem] text-zinc-300 transition-colors hover:border-amber-500/30 hover:text-white"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    padding: "0.3rem 0.85rem",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    borderRadius: "9999px",
+                    fontSize: "0.72rem",
+                    color: "rgba(255,255,255,0.45)",
+                    letterSpacing: "0.04em",
+                  }}
                 >
                   {chip}
                 </span>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* YouTube placeholder */}
-          <div>
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl" style={{ aspectRatio: "16/9" }}>
-              <div className="absolute top-0 right-0 h-48 w-48 -mr-12 -mt-12 rounded-full bg-white/[0.03] blur-3xl pointer-events-none" />
-
-              {/* Faint chart */}
-              <div className="absolute inset-0 opacity-10 pointer-events-none">
+          {/* Right — video card */}
+          <motion.div
+            variants={slideRight}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+          >
+            <div
+              className="relative overflow-hidden"
+              style={{
+                aspectRatio: "16/9",
+                borderRadius: "1.25rem",
+                border: "1px solid rgba(255,255,255,0.08)",
+                background: "rgba(255,255,255,0.03)",
+              }}
+            >
+              {/* Faint chart line */}
+              <div className="absolute inset-0 opacity-[0.07] pointer-events-none">
                 <svg viewBox="0 0 640 360" style={{ width: "100%", height: "100%" }} preserveAspectRatio="xMidYMid slice">
-                  <defs>
-                    <linearGradient id="chartfill" x1="0" x2="0" y1="0" y2="1">
-                      <stop offset="0%" stopColor="#F59E0B" stopOpacity={0.5} />
-                      <stop offset="100%" stopColor="#F59E0B" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
                   <polyline
                     points="0,320 80,280 160,300 240,210 320,230 400,150 480,170 560,90 640,110"
                     fill="none"
-                    stroke="#F59E0B"
-                    strokeWidth="2.5"
+                    stroke="#f5f5f5"
+                    strokeWidth="2"
                     strokeLinecap="round"
-                  />
-                  <polygon
-                    points="0,320 80,280 160,300 240,210 320,230 400,150 480,170 560,90 640,110 640,360 0,360"
-                    fill="url(#chartfill)"
                   />
                 </svg>
               </div>
 
               {/* Play button */}
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                <div
-                  className="w-16 h-16 rounded-full bg-amber-500 flex items-center justify-center hover:scale-110 transition-transform duration-200 cursor-pointer"
-                  style={{ boxShadow: "0 0 32px rgba(245,158,11,0.5)" }}
+                <motion.div
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.96 }}
+                  className="cursor-pointer flex items-center justify-center"
+                  style={{
+                    width: "4rem",
+                    height: "4rem",
+                    borderRadius: "9999px",
+                    background: "#fff",
+                  }}
                 >
-                  <svg className="w-6 h-6 text-zinc-950 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="ml-1" width="18" height="18" viewBox="0 0 24 24" fill="#080808">
                     <path d="M8 5v14l11-7z" />
                   </svg>
-                </div>
+                </motion.div>
                 <div className="text-center">
-                  <p className="font-heading font-semibold text-sm text-zinc-100">
+                  <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.8)", fontWeight: 500, marginBottom: "0.25rem" }}>
                     How I Read Order Flow — Full Breakdown
                   </p>
-                  <p className="font-body text-xs text-zinc-500 mt-1">
+                  <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.3)" }}>
                     YouTube · @amrittrades
                   </p>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

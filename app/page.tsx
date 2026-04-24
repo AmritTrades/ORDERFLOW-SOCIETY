@@ -9,15 +9,10 @@ import Comparison  from "@/components/sections/Comparison";
 import FinalCTA    from "@/components/sections/FinalCTA";
 import Footer      from "@/components/sections/Footer";
 
-function Divider() {
-  return <div className="section-divider" />;
-}
-
 export default function Home() {
   return (
-    <main>
+    <main style={{ background: "#080808" }}>
       <Navbar />
-
       <HeroGeometric
         badge="Orderflow Society"
         title1="Master the"
@@ -26,18 +21,12 @@ export default function Home() {
         primaryCTA={{ label: "Join Free Discord", href: "https://discord.gg/d4xSrsWAK" }}
         secondaryCTA={{ label: "View Mentorship", href: "#mentorship" }}
       />
-
       <StatsBar />
       <About />
-      <Divider />
       <Community />
-      <Divider />
       <Mentorship />
-      <Divider />
       <Guarantee />
-      <Divider />
       <Comparison />
-      <Divider />
       <FinalCTA />
       <Footer />
     </main>

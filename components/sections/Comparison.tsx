@@ -1,3 +1,8 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { fadeUp, slideLeft, slideRight, stagger, viewport } from "@/lib/motion";
+
 const forYou = [
   "You're serious about futures and ready to put in genuine work every day",
   "You're tired of lagging indicators and want to understand what's actually moving price",
@@ -14,86 +19,141 @@ const notForYou = [
   "You're looking for shortcuts — there aren't any in this craft",
 ];
 
+const itemVariant = {
+  hidden: { opacity: 0, x: -12 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+};
+
 export default function Comparison() {
   return (
-    <section className="py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-36 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
-        <div className="text-center mb-14">
-          <h2 className="font-heading font-bold text-4xl sm:text-5xl text-zinc-100 mb-3">
-            Is This{" "}
-            <span className="gradient-text">Right for You?</span>
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          className="mb-16"
+        >
+          <p className="label-mono mb-4">Is this right for you?</p>
+          <h2
+            style={{
+              fontSize: "clamp(2.4rem, 5vw, 4rem)",
+              fontWeight: 700,
+              color: "#f5f5f5",
+              letterSpacing: "-0.04em",
+              lineHeight: 1.05,
+            }}
+          >
+            Be honest with yourself<br />
+            <span style={{ color: "rgba(255,255,255,0.3)", fontWeight: 300 }}>before you apply.</span>
           </h2>
-          <p className="font-body text-zinc-400 text-base">
-            Be honest with yourself before you apply.
-          </p>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-8">
 
-          {/* FOR YOU */}
-          <div className="relative overflow-hidden rounded-3xl border border-emerald-500/20 bg-emerald-500/[0.04] backdrop-blur-xl p-8">
-            <div className="absolute top-0 right-0 h-40 w-40 -mr-10 -mt-10 rounded-full bg-emerald-500/5 blur-2xl pointer-events-none" />
-            <div className="relative z-10">
-              <div className="flex items-center gap-3.5 mb-7">
-                <div
-                  className="w-10 h-10 rounded-[0.75rem] flex items-center justify-center flex-shrink-0"
-                  style={{ background: "rgba(16,185,129,.1)", border: "1px solid rgba(16,185,129,.22)" }}
-                >
-                  <svg className="w-5 h-5" style={{ color: "#10B981" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h3 className="font-heading font-bold text-zinc-100 text-[1.1rem]">
-                  This{" "}
-                  <span className="gradient-text-green">IS</span>{" "}
-                  for you if…
-                </h3>
+          {/* For you */}
+          <motion.div
+            variants={slideLeft}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <div
+                className="flex items-center justify-center"
+                style={{
+                  width: "1.75rem",
+                  height: "1.75rem",
+                  borderRadius: "9999px",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                }}
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
               </div>
-              <ul className="flex flex-col gap-3.5">
-                {forYou.map((item) => (
-                  <li key={item} className="flex items-start gap-3 font-body text-zinc-300 text-[0.88rem] leading-relaxed">
-                    <svg className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: "#10B981" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                    </svg>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <h3 style={{ fontSize: "0.9375rem", fontWeight: 600, color: "rgba(255,255,255,0.8)", letterSpacing: "-0.02em" }}>
+                This <span style={{ color: "#f5f5f5" }}>IS</span> for you if…
+              </h3>
             </div>
-          </div>
 
-          {/* NOT FOR YOU */}
-          <div className="relative overflow-hidden rounded-3xl border border-red-500/20 bg-red-500/[0.04] backdrop-blur-xl p-8">
-            <div className="absolute top-0 right-0 h-40 w-40 -mr-10 -mt-10 rounded-full bg-red-500/5 blur-2xl pointer-events-none" />
-            <div className="relative z-10">
-              <div className="flex items-center gap-3.5 mb-7">
-                <div
-                  className="w-10 h-10 rounded-[0.75rem] flex items-center justify-center flex-shrink-0"
-                  style={{ background: "rgba(239,68,68,.08)", border: "1px solid rgba(239,68,68,.2)" }}
+            <motion.ul
+              variants={stagger}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewport}
+              className="flex flex-col"
+            >
+              {forYou.map((item, i) => (
+                <motion.li
+                  key={item}
+                  variants={itemVariant}
+                  className="flex items-start gap-4 py-4"
+                  style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
                 >
-                  <svg className="w-5 h-5" style={{ color: "#EF4444" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth={2.5} style={{ flexShrink: 0, marginTop: "2px" }}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
-                </div>
-                <h3 className="font-heading font-bold text-zinc-100 text-[1.1rem]">
-                  This is{" "}
-                  <span style={{ color: "#EF4444" }}>NOT</span>{" "}
-                  for you if…
-                </h3>
-              </div>
-              <ul className="flex flex-col gap-3.5">
-                {notForYou.map((item) => (
-                  <li key={item} className="flex items-start gap-3 font-body text-zinc-400 text-[0.88rem] leading-relaxed">
-                    <svg className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: "#EF4444" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                  <span style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.65 }}>
                     {item}
-                  </li>
-                ))}
-              </ul>
+                  </span>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </motion.div>
+
+          {/* Not for you */}
+          <motion.div
+            variants={slideRight}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <div
+                className="flex items-center justify-center"
+                style={{
+                  width: "1.75rem",
+                  height: "1.75rem",
+                  borderRadius: "9999px",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                }}
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <h3 style={{ fontSize: "0.9375rem", fontWeight: 600, color: "rgba(255,255,255,0.45)", letterSpacing: "-0.02em" }}>
+                This is <span style={{ color: "rgba(255,255,255,0.25)" }}>NOT</span> for you if…
+              </h3>
             </div>
-          </div>
+
+            <motion.ul
+              variants={stagger}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewport}
+              className="flex flex-col"
+            >
+              {notForYou.map((item) => (
+                <motion.li
+                  key={item}
+                  variants={itemVariant}
+                  className="flex items-start gap-4 py-4"
+                  style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth={2.5} style={{ flexShrink: 0, marginTop: "2px" }}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  <span style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.3)", lineHeight: 1.65 }}>
+                    {item}
+                  </span>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </motion.div>
 
         </div>
       </div>
