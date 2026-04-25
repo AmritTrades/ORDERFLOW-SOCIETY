@@ -1,10 +1,12 @@
 import { HeroGeometric } from "@/components/ui/shape-landing-hero";
 import Navbar            from "@/components/sections/Navbar";
+import StatsBar          from "@/components/sections/StatsBar";
 import TradingStack      from "@/components/sections/TradingStack";
+import Community         from "@/components/sections/Community";
 import Comparison        from "@/components/sections/Comparison";
 import PricingSection    from "@/components/sections/PricingSection";
-import Community         from "@/components/sections/Community";
 import Guarantee         from "@/components/sections/Guarantee";
+import ClosingQuote      from "@/components/sections/ClosingQuote";
 import TapeMarquee       from "@/components/ui/tape-marquee";
 import Footer            from "@/components/sections/Footer";
 import { SectionReveal } from "@/components/ui/section-reveal";
@@ -20,35 +22,40 @@ export default function Home() {
       <HeroGeometric
         badge="Orderflow Society"
         title1="Master the"
-        title2="Order Flow Edge."
         subtitle="Stop guessing the tape. Start reading it. Futures trading mentorship for serious traders ready to trade with institutional edge."
-        primaryCTA={{ label: "Join Free Discord", href: "https://discord.gg/d4xSrsWAK" }}
-        secondaryCTA={{ label: "View Mentorship", href: "#mentorship" }}
       />
 
-      {/* 2 — Trading Stack: Build authority before the pitch */}
+      {/* Stats bar */}
+      <StatsBar />
+
+      {/* 2 — Trading Stack: Build authority */}
       <SectionReveal>
         <TradingStack />
       </SectionReveal>
 
-      {/* 3 — Honesty Filter: Qualify the lead before showing price */}
-      <SectionReveal>
-        <Comparison />
-      </SectionReveal>
-
-      {/* 4 — Mentorship: The offer, for those who passed the filter */}
-      <SectionReveal>
-        <PricingSection />
-      </SectionReveal>
-
-      {/* 5 — Community: Secondary option under the main offer */}
+      {/* 3 — Community: Free & paid tiers */}
       <SectionReveal>
         <Community />
       </SectionReveal>
 
-      {/* 6 — Guarantee: Final objection handler before the footer */}
+      {/* 4 — Honesty Filter: Qualify the lead */}
+      <SectionReveal>
+        <Comparison />
+      </SectionReveal>
+
+      {/* 5 — Mentorship: The offer */}
+      <SectionReveal>
+        <PricingSection />
+      </SectionReveal>
+
+      {/* 6 — Guarantee: Remove final risk */}
       <SectionReveal>
         <Guarantee />
+      </SectionReveal>
+
+      {/* 7 — Closing Quote: The send-off */}
+      <SectionReveal>
+        <ClosingQuote />
       </SectionReveal>
 
       {/* ── Footer chrome ── */}

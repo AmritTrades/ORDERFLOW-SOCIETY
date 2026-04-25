@@ -1,88 +1,101 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import { viewport } from "@/lib/motion";
+import { useRef, useEffect, useState } from "react";
+import { motion, useInView, animate } from "framer-motion";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
+const vp   = { once: true, margin: "-80px" } as const;
+const MONO = "var(--font-jetbrains), 'JetBrains Mono', ui-monospace, monospace";
 
 const stats = [
-  { value: 40, suffix: "+", label: "Active Students", sublabel: "traders enrolled" },
-  { value: 100, suffix: "%", label: "Free Community", sublabel: "no paid tiers" },
-  { value: 24, suffix: "/7", label: "Discord Access", sublabel: "always online" },
-  { value: 100, suffix: " days", label: "Guarantee", sublabel: "or teach free" },
+  { end: 40,  suffix: "+",     label: "Active Students"      },
+  { end: 100, suffix: "%",     label: "Orderflow Focused"    },
+  { end: 24,  suffix: "/7",    label: "Tape Reading Support" },
+  { end: 100, suffix: " Days", label: "Mentorship Guarantee" },
 ];
 
-function CountUp({ target, suffix }: { target: number; suffix: string }) {
-  const [count, setCount] = useState(0);
-  const [started, setStarted] = useState(false);
-  const ref = useRef<HTMLSpanElement>(null);
+function StatCounter({
+  end, suffix, label, delay,
+}: {
+  end: number; suffix: string; label: string; delay: number;
+}) {
+  const ref    = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true });
+  const [val, setVal] = useState(0);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting && !started) setStarted(true); },
-      { threshold: 0.5 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [started]);
-
-  useEffect(() => {
-    if (!started) return;
-    let frame: number;
-    const duration = 1400;
-    const start = performance.now();
-    const animate = (now: number) => {
-      const t = Math.min((now - start) / duration, 1);
-      const ease = 1 - Math.pow(1 - t, 3);
-      setCount(Math.round(ease * target));
-      if (t < 1) frame = requestAnimationFrame(animate);
-    };
-    frame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frame);
-  }, [started, target]);
+    if (!inView) return;
+    const ctrl = animate(0, end, {
+      duration: 1.6,
+      delay,
+      ease: "easeOut",
+      onUpdate: (v) => setVal(Math.round(v)),
+    });
+    return () => ctrl.stop();
+  }, [inView, end, delay]);
 
   return (
-    <span ref={ref}>
-      {count}{suffix}
-    </span>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={vp}
+      transition={{ duration: 0.6, delay, ease: EASE }}
+      className="flex flex-col items-center text-center"
+    >
+      <span
+        style={{
+          fontFamily: "var(--font-inter), -apple-system, sans-serif",
+          fontSize: "clamp(2.25rem, 5vw, 3.5rem)",
+          fontWeight: 800,
+          color: "var(--foreground)",
+          letterSpacing: "-0.05em",
+          lineHeight: 1,
+          marginBottom: "0.45rem",
+        }}
+      >
+        {val}
+        <span style={{ color: "rgba(var(--foreground-rgb),0.38)" }}>{suffix}</span>
+      </span>
+      <p
+        style={{
+          fontFamily: MONO,
+          fontSize: "0.58rem",
+          color: "var(--muted-foreground)",
+          letterSpacing: "0.15em",
+          textTransform: "uppercase",
+        }}
+      >
+        {label}
+      </p>
+    </motion.div>
   );
 }
 
 export default function StatsBar() {
   return (
-    <section className="py-0 overflow-hidden" style={{ background: "var(--surface-1)", borderTop: "1px solid var(--border)" }}>
-      <motion.div
-        className="flex overflow-x-auto no-scrollbar"
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewport}
-        variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
-      >
-        {stats.map((s, i) => (
-          <motion.div
-            key={s.label}
-            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } } }}
-            className="flex-1 min-w-[160px] flex flex-col items-center justify-center py-12 px-6 text-center"
-            style={{ borderRight: i < stats.length - 1 ? "1px solid var(--border)" : "none" }}
-          >
+    <section
+      style={{
+        background: "var(--surface-1)",
+        borderTop: "1px solid var(--border)",
+        borderBottom: "1px solid var(--border)",
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-14">
+        <div className="grid grid-cols-2 md:grid-cols-4">
+          {stats.map((s, i) => (
             <div
-              className="font-serif-display leading-none mb-2"
+              key={s.label}
+              className="px-6 py-2"
               style={{
-                fontFamily: "var(--font-cormorant), Georgia, serif",
-                fontSize: "clamp(2.8rem, 5vw, 4.5rem)",
-                fontWeight: 300,
-                color: "var(--foreground)",
-                letterSpacing: "-0.02em",
+                borderLeft: i === 0 ? "none" : "1px solid var(--border)",
               }}
             >
-              <CountUp target={s.value} suffix={s.suffix} />
+              <StatCounter {...s} delay={i * 0.1} />
             </div>
-            <div className="label-mono mb-1">{s.label}</div>
-            <div style={{ fontSize: "0.72rem", color: "var(--muted-foreground)" }}>{s.sublabel}</div>
-          </motion.div>
-        ))}
-      </motion.div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

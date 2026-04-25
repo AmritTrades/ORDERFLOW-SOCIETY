@@ -90,7 +90,7 @@ export default function Footer() {
           style={{ borderTop: "1px solid var(--border)" }}
         >
           <p style={{ fontSize: "0.72rem", color: "var(--muted-foreground)" }}>
-            © 2025 Orderflow Society. All rights reserved.
+            © 2026 Orderflow Society. All rights reserved.
           </p>
           <p style={{ fontSize: "0.68rem", color: "rgba(var(--foreground-rgb),0.35)", maxWidth: "32rem", lineHeight: 1.6 }}>
             Trading futures involves substantial risk of loss. Past performance is not indicative of future results.

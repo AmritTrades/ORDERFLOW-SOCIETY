@@ -39,14 +39,6 @@ const cards: CardData[] = [
     glowColor: "#03a9f4",
     isInnerCircle: true,
   },
-  {
-    title: "1-on-1 Mentorship",
-    desc: "Direct access to Amrit. Your setups reviewed, your mistakes addressed, your progress tracked.",
-    gradientFrom: "#4dff03",
-    gradientTo: "#00d0ff",
-    buttonLabel: "Apply Now",
-    buttonHref: "https://forms.gle/RC7TY65MEQDLE6Tp9",
-  },
 ];
 
 /* ── Success toast ── */

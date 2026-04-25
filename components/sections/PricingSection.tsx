@@ -1,7 +1,37 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Users } from "lucide-react";
+import { useState } from "react";
+
+function BeamBorder({ speed = 4 }: { speed?: number }) {
+  return (
+    <motion.div
+      aria-hidden
+      animate={{ rotate: 360 }}
+      transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
+      style={{
+        position: "absolute",
+        inset: 0,
+        borderRadius: "inherit",
+        background:
+          "conic-gradient(from 0deg, transparent 58%, rgba(var(--foreground-rgb),0.9) 74%, rgba(255,255,255,0.85) 80%, rgba(var(--foreground-rgb),0.9) 84%, transparent 90%)",
+        WebkitMaskImage: "linear-gradient(#fff,#fff), linear-gradient(#fff,#fff)",
+        WebkitMaskSize: "calc(100% - 2px) calc(100% - 2px)",
+        WebkitMaskPosition: "center",
+        WebkitMaskRepeat: "no-repeat",
+        WebkitMaskComposite: "xor",
+        maskImage: "linear-gradient(#fff,#fff), linear-gradient(#fff,#fff)",
+        maskSize: "calc(100% - 2px) calc(100% - 2px)",
+        maskPosition: "center",
+        maskRepeat: "no-repeat",
+        maskComposite: "exclude",
+        pointerEvents: "none",
+        zIndex: 40,
+      }}
+    />
+  );
+}
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const vp   = { once: true, margin: "-80px" } as const;
@@ -154,6 +184,7 @@ const rowVariant = {
 
 /* ══════════════════════════════════════════════════ */
 export default function PricingSection() {
+  const [beam, setBeam] = useState(false);
   return (
     <section
       id="mentorship"
@@ -218,6 +249,9 @@ export default function PricingSection() {
               scale: 1.012,
               transition: { type: "spring", stiffness: 280, damping: 30 },
             }}
+            onHoverStart={() => setBeam(true)}
+            onHoverEnd={() => setBeam(false)}
+            className="relative overflow-hidden"
             style={{
               width: "100%",
               maxWidth: "42rem",
@@ -231,6 +265,14 @@ export default function PricingSection() {
                 "0 0 40px rgba(var(--foreground-rgb),0.06), 0 0 80px rgba(var(--foreground-rgb),0.03), inset 0 1px 0 rgba(var(--foreground-rgb),0.08)",
             }}
           >
+            <AnimatePresence>
+              {beam && (
+                <motion.div key="beam" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <BeamBorder />
+                </motion.div>
+              )}
+            </AnimatePresence>
+
             {/* Top accent line */}
             <div
               className="absolute top-0 left-0 right-0 h-px pointer-events-none"

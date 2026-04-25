@@ -58,7 +58,7 @@ function TrustSeal() {
         className="label-mono relative z-10"
         style={{ color: "rgba(var(--foreground-rgb),0.65)" }}
       >
-        Fully guaranteed · No fine print · Secure via PayPal
+        Fully guaranteed · No fine print · Secure Payments via Stripe
       </span>
     </span>
   );

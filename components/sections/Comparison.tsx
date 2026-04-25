@@ -1,8 +1,37 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Check, X } from "lucide-react";
 import { fadeUp, slideLeft, slideRight, viewport } from "@/lib/motion";
+import { useState } from "react";
+
+function BeamBorder({ color, speed = 3.5 }: { color: string; speed?: number }) {
+  return (
+    <motion.div
+      aria-hidden
+      animate={{ rotate: 360 }}
+      transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
+      style={{
+        position: "absolute",
+        inset: 0,
+        borderRadius: "inherit",
+        background: `conic-gradient(from 0deg, transparent 58%, ${color} 74%, rgba(255,255,255,0.85) 80%, ${color} 84%, transparent 90%)`,
+        WebkitMaskImage: "linear-gradient(#fff,#fff), linear-gradient(#fff,#fff)",
+        WebkitMaskSize: "calc(100% - 2px) calc(100% - 2px)",
+        WebkitMaskPosition: "center",
+        WebkitMaskRepeat: "no-repeat",
+        WebkitMaskComposite: "xor",
+        maskImage: "linear-gradient(#fff,#fff), linear-gradient(#fff,#fff)",
+        maskSize: "calc(100% - 2px) calc(100% - 2px)",
+        maskPosition: "center",
+        maskRepeat: "no-repeat",
+        maskComposite: "exclude",
+        pointerEvents: "none",
+        zIndex: 40,
+      }}
+    />
+  );
+}
 
 const forYou = [
   "You're serious about futures and ready to put in genuine work every day",
@@ -39,6 +68,8 @@ const iconPop = {
 };
 
 export default function Comparison() {
+  const [beamL, setBeamL] = useState(false);
+  const [beamR, setBeamR] = useState(false);
   return (
     <section
       id="filter"
@@ -111,6 +142,8 @@ export default function Comparison() {
             initial="hidden"
             whileInView="visible"
             viewport={viewport}
+            onHoverStart={() => setBeamL(true)}
+            onHoverEnd={() => setBeamL(false)}
             className="relative rounded-2xl overflow-hidden"
             style={{
               background: "rgba(var(--background-rgb),0.55)",
@@ -121,6 +154,13 @@ export default function Comparison() {
                 "0 0 90px -24px rgba(34,197,94,0.22), inset 0 1px 0 rgba(34,197,94,0.1)",
             }}
           >
+            <AnimatePresence>
+              {beamL && (
+                <motion.div key="beamL" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <BeamBorder color="rgba(34,197,94,0.9)" />
+                </motion.div>
+              )}
+            </AnimatePresence>
             {/* Top accent line */}
             <div
               className="absolute top-0 left-0 right-0 h-px pointer-events-none"
@@ -229,6 +269,8 @@ export default function Comparison() {
             initial="hidden"
             whileInView="visible"
             viewport={viewport}
+            onHoverStart={() => setBeamR(true)}
+            onHoverEnd={() => setBeamR(false)}
             className="relative rounded-2xl overflow-hidden"
             style={{
               background: "rgba(var(--background-rgb),0.55)",
@@ -239,6 +281,13 @@ export default function Comparison() {
                 "0 0 90px -24px rgba(239,68,68,0.18), inset 0 1px 0 rgba(239,68,68,0.07)",
             }}
           >
+            <AnimatePresence>
+              {beamR && (
+                <motion.div key="beamR" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
+                  <BeamBorder color="rgba(239,68,68,0.9)" />
+                </motion.div>
+              )}
+            </AnimatePresence>
             {/* Top accent line */}
             <div
               className="absolute top-0 left-0 right-0 h-px pointer-events-none"

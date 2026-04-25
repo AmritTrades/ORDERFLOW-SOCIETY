@@ -40,7 +40,7 @@ function BorderBeamButton({ href, children, className = "" }: {
         style={{
           borderRadius: "9999px",
           background:
-            "conic-gradient(from 0deg, transparent 72%, #f5c842 83%, #fffbe0 87%, #f5c842 93%, transparent 100%)",
+            "conic-gradient(from 0deg, transparent 72%, #065f46 83%, #34d399 87%, #065f46 93%, transparent 100%)",
         }}
       />
       {/* Solid fill covers the center — only the 1px edge shows as the beam */}
@@ -116,8 +116,10 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             {links.map((l) => (
               <a
-                key={l.href}
+                key={l.label}
                 href={l.href}
+                target={l.href.startsWith("http") ? "_blank" : undefined}
+                rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 className="transition-colors duration-200"
                 style={{ fontSize: "0.875rem", color: "var(--muted-foreground)", letterSpacing: "-0.01em" }}
                 onMouseEnter={e => ((e.target as HTMLElement).style.color = "var(--foreground)")}
@@ -169,9 +171,11 @@ export default function Navbar() {
             <div className="px-6 py-5 flex flex-col gap-1">
               {links.map((l, i) => (
                 <motion.a
-                  key={l.href}
+                  key={l.label}
                   href={l.href}
-                  onClick={() => setOpen(false)}
+                  target={l.href.startsWith("http") ? "_blank" : undefined}
+                  rel={l.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  onClick={() => { if (!l.href.startsWith("http")) setOpen(false); }}
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}

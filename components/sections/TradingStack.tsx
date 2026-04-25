@@ -1,7 +1,37 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink } from "lucide-react";
+import { useState } from "react";
+
+/* ── Border-beam ring (mask punch-out keeps it at the card edge) ── */
+function BeamBorder({ color = "rgba(0,255,65,0.85)", speed = 3.5 }: { color?: string; speed?: number }) {
+  return (
+    <motion.div
+      aria-hidden
+      animate={{ rotate: 360 }}
+      transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
+      style={{
+        position: "absolute",
+        inset: 0,
+        borderRadius: "inherit",
+        background: `conic-gradient(from 0deg, transparent 58%, ${color} 74%, rgba(255,255,255,0.9) 80%, ${color} 84%, transparent 90%)`,
+        WebkitMaskImage: "linear-gradient(#fff,#fff), linear-gradient(#fff,#fff)",
+        WebkitMaskSize: "calc(100% - 2px) calc(100% - 2px)",
+        WebkitMaskPosition: "center",
+        WebkitMaskRepeat: "no-repeat",
+        WebkitMaskComposite: "xor",
+        maskImage: "linear-gradient(#fff,#fff), linear-gradient(#fff,#fff)",
+        maskSize: "calc(100% - 2px) calc(100% - 2px)",
+        maskPosition: "center",
+        maskRepeat: "no-repeat",
+        maskComposite: "exclude",
+        pointerEvents: "none",
+        zIndex: 40,
+      }}
+    />
+  );
+}
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const vp   = { once: true, margin: "-80px" } as const;
@@ -53,6 +83,7 @@ function FootprintIcon() {
 
 /* ══════════════════════════════════════════════════════════════════ */
 export default function TradingStack() {
+  const [beam, setBeam] = useState(false);
   return (
     <section
       id="tools"
@@ -92,6 +123,8 @@ export default function TradingStack() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={vp}
           transition={{ duration: 0.8, ease: EASE }}
+          onHoverStart={() => setBeam(true)}
+          onHoverEnd={() => setBeam(false)}
           /*
            * overflow-hidden ensures the absolute background glow is
            * clipped at the card boundary and can never escape onto the page.
@@ -104,6 +137,13 @@ export default function TradingStack() {
             WebkitBackdropFilter: "blur(24px)",
           }}
         >
+          <AnimatePresence>
+            {beam && (
+              <motion.div key="beam" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
+                <BeamBorder />
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* ── Vapor glow — ABSOLUTE TOP-0 LEFT-0, Z-0, POINTER-EVENTS-NONE ──
                overflow-hidden on the card clips it at the card boundary.
