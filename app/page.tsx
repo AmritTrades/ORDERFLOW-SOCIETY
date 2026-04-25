@@ -1,17 +1,25 @@
-import { HeroGeometric } from "@/components/ui/shape-landing-hero";
-import Navbar      from "@/components/sections/Navbar";
-import StatsBar    from "@/components/sections/StatsBar";
-import About       from "@/components/sections/About";
-import Community   from "@/components/sections/Community";
-import Guarantee   from "@/components/sections/Guarantee";
-import Comparison  from "@/components/sections/Comparison";
-import FinalCTA    from "@/components/sections/FinalCTA";
-import Footer      from "@/components/sections/Footer";
+import { HeroGeometric }    from "@/components/ui/shape-landing-hero";
+import Navbar               from "@/components/sections/Navbar";
+import FinalCTA             from "@/components/sections/FinalCTA";
+import StatsBar             from "@/components/sections/StatsBar";
+import ImageCardsSection    from "@/components/sections/ImageCardsSection";
+import TradingStack         from "@/components/sections/TradingStack";
+import Comparison           from "@/components/sections/Comparison";
+import Community            from "@/components/sections/Community";
+import Guarantee            from "@/components/sections/Guarantee";
+import PricingSection       from "@/components/sections/PricingSection";
+import TapeMarquee          from "@/components/ui/tape-marquee";
+import Footer               from "@/components/sections/Footer";
+import { SectionReveal }    from "@/components/ui/section-reveal";
 
 export default function Home() {
   return (
-    <main style={{ background: "#080808" }}>
+    <main style={{ background: "var(--background)" }}>
+
+      {/* ── Always-visible chrome ── */}
       <Navbar />
+
+      {/* 1 — Hero: The promise */}
       <HeroGeometric
         badge="Orderflow Society"
         title1="Master the"
@@ -20,13 +28,49 @@ export default function Home() {
         primaryCTA={{ label: "Join Free Discord", href: "https://discord.gg/d4xSrsWAK" }}
         secondaryCTA={{ label: "View Mentorship", href: "#mentorship" }}
       />
-      <StatsBar />
-      <About />
-      <Community />
-      <Guarantee />
-      <Comparison />
-      <FinalCTA />
+
+      {/* 2 — Problem: Agitate the pain */}
+      <SectionReveal>
+        <FinalCTA />
+      </SectionReveal>
+
+      {/* 3 — Stats & Evidence: Social proof */}
+      <SectionReveal>
+        <StatsBar />
+      </SectionReveal>
+      <SectionReveal>
+        <ImageCardsSection />
+      </SectionReveal>
+
+      {/* 3b — Trading Stack: Partner tools */}
+      <SectionReveal>
+        <TradingStack />
+      </SectionReveal>
+
+      {/* 4 — Honesty Filter: Qualify the lead */}
+      <SectionReveal>
+        <Comparison />
+      </SectionReveal>
+
+      {/* 5 — Community Tiers: The free entry point */}
+      <SectionReveal>
+        <Community />
+      </SectionReveal>
+
+      {/* 6 — Guarantee: Remove risk */}
+      <SectionReveal>
+        <Guarantee />
+      </SectionReveal>
+
+      {/* 7 — Final Pricing: Convert */}
+      <SectionReveal>
+        <PricingSection />
+      </SectionReveal>
+
+      {/* ── Footer chrome ── */}
+      <TapeMarquee />
       <Footer />
+
     </main>
   );
 }

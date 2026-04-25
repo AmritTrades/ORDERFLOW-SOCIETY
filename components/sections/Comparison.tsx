@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeUp, slideLeft, slideRight, stagger, viewport } from "@/lib/motion";
+import { Check, X } from "lucide-react";
+import { fadeUp, slideLeft, slideRight, viewport } from "@/lib/motion";
 
 const forYou = [
   "You're serious about futures and ready to put in genuine work every day",
@@ -19,16 +20,54 @@ const notForYou = [
   "You're looking for shortcuts — there aren't any in this craft",
 ];
 
-const itemVariant = {
-  hidden: { opacity: 0, x: -12 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+const rowItem = {
+  hidden: { opacity: 0, x: -10 },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.45, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] },
+  }),
+};
+
+const iconPop = {
+  hidden: { scale: 0, opacity: 0 },
+  visible: (i: number) => ({
+    scale: 1,
+    opacity: 1,
+    transition: { type: "spring" as const, stiffness: 420, damping: 16, delay: 0.15 + i * 0.07 },
+  }),
 };
 
 export default function Comparison() {
   return (
-    <section className="py-36 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section
+      className="py-36 relative overflow-hidden"
+      style={{ background: "var(--surface-1)", borderTop: "1px solid var(--border)" }}
+    >
+      {/* ── Trading-chart grid background ── */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(var(--foreground-rgb),0.055) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(var(--foreground-rgb),0.055) 1px, transparent 1px),
+            linear-gradient(rgba(var(--foreground-rgb),0.018) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(var(--foreground-rgb),0.018) 1px, transparent 1px)
+          `,
+          backgroundSize: "80px 80px, 80px 80px, 16px 16px, 16px 16px",
+        }}
+      />
+      {/* Radial vignette to soften grid edges */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, var(--surface-1) 100%)",
+        }}
+      />
 
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+
+        {/* ── Header ── */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -41,118 +80,264 @@ export default function Comparison() {
             style={{
               fontSize: "clamp(2.4rem, 5vw, 4rem)",
               fontWeight: 700,
-              color: "#f5f5f5",
+              color: "var(--foreground)",
               letterSpacing: "-0.04em",
               lineHeight: 1.05,
             }}
           >
-            Be honest with yourself<br />
-            <span style={{ color: "rgba(255,255,255,0.3)", fontWeight: 300 }}>before you apply.</span>
+            Be honest with yourself
+            <br />
+            <span
+              style={{
+                fontWeight: 300,
+                background: "linear-gradient(90deg, var(--foreground) 0%, var(--muted-foreground) 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            >
+              before you apply.
+            </span>
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        {/* ── Bento comparison grid ── */}
+        <div className="grid md:grid-cols-2 gap-6">
 
-          {/* For you */}
+          {/* ── LEFT: FOR YOU — green glow ── */}
           <motion.div
             variants={slideLeft}
             initial="hidden"
             whileInView="visible"
             viewport={viewport}
+            className="relative rounded-2xl overflow-hidden"
+            style={{
+              background: "rgba(var(--background-rgb),0.55)",
+              backdropFilter: "blur(14px)",
+              WebkitBackdropFilter: "blur(14px)",
+              border: "1px solid rgba(34,197,94,0.22)",
+              boxShadow:
+                "0 0 90px -24px rgba(34,197,94,0.22), inset 0 1px 0 rgba(34,197,94,0.1)",
+            }}
           >
-            <div className="flex items-center gap-3 mb-8">
-              <div
-                className="flex items-center justify-center"
-                style={{
-                  width: "1.75rem",
-                  height: "1.75rem",
-                  borderRadius: "9999px",
-                  border: "1px solid rgba(255,255,255,0.2)",
-                }}
-              >
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 style={{ fontSize: "0.9375rem", fontWeight: 600, color: "rgba(255,255,255,0.8)", letterSpacing: "-0.02em" }}>
-                This <span style={{ color: "#f5f5f5" }}>IS</span> for you if…
-              </h3>
-            </div>
+            {/* Top accent line */}
+            <div
+              className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent 0%, rgba(34,197,94,0.7) 50%, transparent 100%)",
+              }}
+            />
+            {/* Corner radial glow */}
+            <div
+              className="absolute top-0 left-0 w-56 h-56 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(circle at top left, rgba(34,197,94,0.13) 0%, transparent 70%)",
+              }}
+            />
 
-            <motion.ul
-              variants={stagger}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewport}
-              className="flex flex-col"
-            >
-              {forYou.map((item, i) => (
-                <motion.li
-                  key={item}
-                  variants={itemVariant}
-                  className="flex items-start gap-4 py-4"
-                  style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
+            <div className="relative p-8">
+              {/* Card header */}
+              <div className="flex items-center gap-3 mb-8">
+                <motion.div
+                  initial={{ scale: 0, rotate: -120, opacity: 0 }}
+                  whileInView={{ scale: 1, rotate: 0, opacity: 1 }}
+                  viewport={viewport}
+                  transition={{ type: "spring", stiffness: 380, damping: 15, delay: 0.1 }}
+                  className="flex items-center justify-center w-8 h-8 rounded-full flex-shrink-0"
+                  style={{
+                    background: "rgba(34,197,94,0.12)",
+                    border: "1px solid rgba(34,197,94,0.35)",
+                    boxShadow: "0 0 18px rgba(34,197,94,0.2)",
+                  }}
                 >
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth={2.5} style={{ flexShrink: 0, marginTop: "2px" }}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.65 }}>
-                    {item}
-                  </span>
-                </motion.li>
-              ))}
-            </motion.ul>
+                  <Check className="w-4 h-4" style={{ color: "rgb(34,197,94)" }} strokeWidth={2.5} />
+                </motion.div>
+                <h3
+                  style={{
+                    fontSize: "0.9375rem",
+                    fontWeight: 600,
+                    color: "var(--foreground)",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  This{" "}
+                  <span
+                    style={{
+                      color: "rgb(34,197,94)",
+                      textShadow: "0 0 20px rgba(34,197,94,0.5)",
+                    }}
+                  >
+                    IS
+                  </span>{" "}
+                  for you if…
+                </h3>
+              </div>
+
+              {/* List */}
+              <ul className="flex flex-col">
+                {forYou.map((item, i) => (
+                  <motion.li
+                    key={item}
+                    custom={i}
+                    variants={rowItem}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={viewport}
+                    className="flex items-start gap-4 py-3.5"
+                    style={{
+                      borderTop:
+                        i === 0
+                          ? "none"
+                          : "1px solid rgba(34,197,94,0.09)",
+                    }}
+                  >
+                    <motion.span
+                      custom={i}
+                      variants={iconPop}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={viewport}
+                      className="flex-shrink-0 mt-0.5"
+                    >
+                      <Check
+                        className="w-3.5 h-3.5"
+                        style={{ color: "rgba(34,197,94,0.75)" }}
+                        strokeWidth={2.5}
+                      />
+                    </motion.span>
+                    <span
+                      style={{
+                        fontSize: "0.9rem",
+                        color: "rgba(var(--foreground-rgb),0.72)",
+                        lineHeight: 1.65,
+                      }}
+                    >
+                      {item}
+                    </span>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
           </motion.div>
 
-          {/* Not for you */}
+          {/* ── RIGHT: NOT FOR YOU — red glow ── */}
           <motion.div
             variants={slideRight}
             initial="hidden"
             whileInView="visible"
             viewport={viewport}
+            className="relative rounded-2xl overflow-hidden"
+            style={{
+              background: "rgba(var(--background-rgb),0.55)",
+              backdropFilter: "blur(14px)",
+              WebkitBackdropFilter: "blur(14px)",
+              border: "1px solid rgba(239,68,68,0.16)",
+              boxShadow:
+                "0 0 90px -24px rgba(239,68,68,0.18), inset 0 1px 0 rgba(239,68,68,0.07)",
+            }}
           >
-            <div className="flex items-center gap-3 mb-8">
-              <div
-                className="flex items-center justify-center"
-                style={{
-                  width: "1.75rem",
-                  height: "1.75rem",
-                  borderRadius: "9999px",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                }}
-              >
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </div>
-              <h3 style={{ fontSize: "0.9375rem", fontWeight: 600, color: "rgba(255,255,255,0.45)", letterSpacing: "-0.02em" }}>
-                This is <span style={{ color: "rgba(255,255,255,0.25)" }}>NOT</span> for you if…
-              </h3>
-            </div>
+            {/* Top accent line */}
+            <div
+              className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent 0%, rgba(239,68,68,0.6) 50%, transparent 100%)",
+              }}
+            />
+            {/* Corner radial glow */}
+            <div
+              className="absolute top-0 right-0 w-56 h-56 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(circle at top right, rgba(239,68,68,0.11) 0%, transparent 70%)",
+              }}
+            />
 
-            <motion.ul
-              variants={stagger}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewport}
-              className="flex flex-col"
-            >
-              {notForYou.map((item) => (
-                <motion.li
-                  key={item}
-                  variants={itemVariant}
-                  className="flex items-start gap-4 py-4"
-                  style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
+            <div className="relative p-8">
+              {/* Card header */}
+              <div className="flex items-center gap-3 mb-8">
+                <motion.div
+                  initial={{ scale: 0, rotate: 120, opacity: 0 }}
+                  whileInView={{ scale: 1, rotate: 0, opacity: 1 }}
+                  viewport={viewport}
+                  transition={{ type: "spring", stiffness: 380, damping: 15, delay: 0.1 }}
+                  className="flex items-center justify-center w-8 h-8 rounded-full flex-shrink-0"
+                  style={{
+                    background: "rgba(239,68,68,0.1)",
+                    border: "1px solid rgba(239,68,68,0.28)",
+                    boxShadow: "0 0 18px rgba(239,68,68,0.14)",
+                  }}
                 >
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth={2.5} style={{ flexShrink: 0, marginTop: "2px" }}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                  <span style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.3)", lineHeight: 1.65 }}>
-                    {item}
-                  </span>
-                </motion.li>
-              ))}
-            </motion.ul>
+                  <X className="w-4 h-4" style={{ color: "rgb(239,68,68)" }} strokeWidth={2.5} />
+                </motion.div>
+                <h3
+                  style={{
+                    fontSize: "0.9375rem",
+                    fontWeight: 600,
+                    color: "var(--muted-foreground)",
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  This is{" "}
+                  <span
+                    style={{
+                      color: "rgba(239,68,68,0.85)",
+                      textShadow: "0 0 20px rgba(239,68,68,0.35)",
+                    }}
+                  >
+                    NOT
+                  </span>{" "}
+                  for you if…
+                </h3>
+              </div>
+
+              {/* List */}
+              <ul className="flex flex-col">
+                {notForYou.map((item, i) => (
+                  <motion.li
+                    key={item}
+                    custom={i}
+                    variants={rowItem}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={viewport}
+                    className="flex items-start gap-4 py-3.5"
+                    style={{
+                      borderTop:
+                        i === 0
+                          ? "none"
+                          : "1px solid rgba(239,68,68,0.07)",
+                    }}
+                  >
+                    <motion.span
+                      custom={i}
+                      variants={iconPop}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={viewport}
+                      className="flex-shrink-0 mt-0.5"
+                    >
+                      <X
+                        className="w-3.5 h-3.5"
+                        style={{ color: "rgba(239,68,68,0.65)" }}
+                        strokeWidth={2.5}
+                      />
+                    </motion.span>
+                    <span
+                      style={{
+                        fontSize: "0.9rem",
+                        color: "rgba(var(--foreground-rgb),0.42)",
+                        lineHeight: 1.65,
+                      }}
+                    >
+                      {item}
+                    </span>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
           </motion.div>
 
         </div>

@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 
-/* ── Shared animation config ── */
 const EASE = [0.16, 1, 0.3, 1] as const;
 const vp   = { once: true, margin: "-80px" } as const;
 
@@ -30,7 +29,6 @@ function ShinyBadge({ children }: { children: React.ReactNode }) {
         }
         .shiny-badge-sweep { animation: shiny-sweep 2.8s ease-in-out infinite; }
       `}</style>
-      {/* Sweep highlight */}
       <span
         aria-hidden
         className="shiny-badge-sweep absolute inset-y-0 w-2/5 pointer-events-none"
@@ -62,22 +60,6 @@ function Check({ bright }: { bright?: boolean }) {
   );
 }
 
-/* ── Data ── */
-const imageCards = [
-  {
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1280&q=80",
-    title: "Read the Market",
-    description:
-      "Learn to read delta, footprint and tape — the way institutions actually trade.",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1640340434855-6084b1f4901c?w=1280&q=80",
-    title: "Your fastest path to consistency.",
-    description:
-      "Private, personalised coaching built around your charts and your specific edge.",
-  },
-];
-
 const fullIncludes = [
   "Full orderflow curriculum access",
   "Weekly 1-on-1 screen-share sessions",
@@ -91,15 +73,14 @@ const splitIncludes = [
   "Start immediately upon first payment",
 ];
 
-/* ══════════════════════════════════════════════════ */
-export default function About() {
+export default function PricingSection() {
   return (
     <section
-      id="about"
+      id="mentorship"
       className="py-36 relative overflow-hidden"
       style={{ background: "var(--surface-1)", borderTop: "1px solid var(--border)" }}
     >
-      {/* ── Radial gradient: center slightly lifted, edges fade back ── */}
+      {/* Radial gradient: center slightly lifted, edges fade back */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -110,64 +91,18 @@ export default function About() {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
 
-        {/* ── Image cards — staggered fade-up ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-          {imageCards.map((card, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={vp}
-              transition={{ duration: 0.7, delay: i * 0.14, ease: EASE }}
-              className="relative overflow-hidden"
-              style={{
-                minHeight: "500px",
-                borderRadius: "1.25rem",
-                backgroundImage: `url(${card.image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-              {/* Dark overlay — text on images always stays white */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.15) 100%)",
-                  borderRadius: "1.25rem",
-                }}
-              />
-              <div className="absolute bottom-0 left-0 right-0" style={{ padding: "2.25rem" }}>
-                <h3
-                  style={{
-                    fontFamily:
-                      "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif",
-                    fontSize: "clamp(1.5rem, 2.5vw, 2rem)",
-                    fontWeight: 600,
-                    color: "#ffffff",
-                    letterSpacing: "-0.03em",
-                    lineHeight: 1.15,
-                    marginBottom: "0.65rem",
-                  }}
-                >
-                  {card.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: "0.9375rem",
-                    color: "rgba(255,255,255,0.65)",
-                    lineHeight: 1.65,
-                    maxWidth: "28rem",
-                  }}
-                >
-                  {card.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        {/* Section label */}
+        <motion.p
+          className="label-mono mb-6"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={vp}
+          transition={{ duration: 0.55, ease: EASE }}
+        >
+          Choose your plan
+        </motion.p>
 
-        {/* ── Pricing cards — staggered reveal after images ── */}
+        {/* Pricing cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
           {/* Full payment — glow card */}
@@ -182,7 +117,6 @@ export default function About() {
               border: "1px solid var(--border-bright)",
               background: "var(--surface-2)",
               padding: "2rem",
-              /* Subtle lift glow — foreground-based so it works in both themes */
               boxShadow:
                 "0 0 30px rgba(var(--foreground-rgb),0.05), 0 0 60px rgba(var(--foreground-rgb),0.025), inset 0 1px 0 rgba(var(--foreground-rgb),0.06)",
             }}

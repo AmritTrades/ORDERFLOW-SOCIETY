@@ -51,7 +51,7 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
 
 export default function StatsBar() {
   return (
-    <section className="py-0 overflow-hidden" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+    <section className="py-0 overflow-hidden" style={{ background: "var(--surface-1)", borderTop: "1px solid var(--border)" }}>
       <motion.div
         className="flex overflow-x-auto no-scrollbar"
         initial="hidden"
@@ -64,7 +64,7 @@ export default function StatsBar() {
             key={s.label}
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } } }}
             className="flex-1 min-w-[160px] flex flex-col items-center justify-center py-12 px-6 text-center"
-            style={{ borderRight: i < stats.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none" }}
+            style={{ borderRight: i < stats.length - 1 ? "1px solid var(--border)" : "none" }}
           >
             <div
               className="font-serif-display leading-none mb-2"
@@ -72,14 +72,14 @@ export default function StatsBar() {
                 fontFamily: "var(--font-cormorant), Georgia, serif",
                 fontSize: "clamp(2.8rem, 5vw, 4.5rem)",
                 fontWeight: 300,
-                color: "#f5f5f5",
+                color: "var(--foreground)",
                 letterSpacing: "-0.02em",
               }}
             >
               <CountUp target={s.value} suffix={s.suffix} />
             </div>
             <div className="label-mono mb-1">{s.label}</div>
-            <div style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.22)" }}>{s.sublabel}</div>
+            <div style={{ fontSize: "0.72rem", color: "var(--muted-foreground)" }}>{s.sublabel}</div>
           </motion.div>
         ))}
       </motion.div>

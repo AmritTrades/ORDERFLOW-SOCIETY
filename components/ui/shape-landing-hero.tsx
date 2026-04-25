@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { GenerativeArtScene } from "@/components/ui/anomalous-matter-hero";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 
 interface HeroGeometricProps {
   badge?: string;
@@ -12,20 +13,30 @@ interface HeroGeometricProps {
   secondaryCTA?: { label: string; href: string };
 }
 
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.13, delayChildren: 0.1 } },
 };
 
+/* Blur-fade reveal for each staggered child */
 const item = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  hidden:  { opacity: 0, y: 28, filter: "blur(8px)" },
+  visible: { opacity: 1, y: 0,  filter: "blur(0px)",
+    transition: { duration: 0.85, ease: EASE } },
 };
+
+const avatars = [
+  { char: "A", bg: "#e8e8e8", fg: "#111" },
+  { char: "M", bg: "#d0d0d0", fg: "#111" },
+  { char: "R", bg: "#b8b8b8", fg: "#111" },
+  { char: "+", bg: "#2a2a2a", fg: "#777" },
+];
 
 function HeroGeometric({
   badge = "Orderflow Society",
   title1 = "Master the",
-  title2 = "Order Flow Edge.",
   subtitle = "Stop guessing the tape. Start reading it. Futures trading mentorship for serious traders ready to trade with institutional edge.",
   primaryCTA = { label: "Join Free Discord", href: "https://discord.gg/d4xSrsWAK" },
   secondaryCTA = { label: "View Mentorship", href: "#mentorship" },
@@ -33,25 +44,25 @@ function HeroGeometric({
   return (
     <div
       className="relative min-h-screen w-full overflow-hidden flex items-center"
-      style={{ background: "#080808" }}
+      style={{ background: "var(--background)" }}
     >
       {/* Orange wireframe sphere — background right */}
       <div className="absolute inset-0 pointer-events-none">
         <GenerativeArtScene />
       </div>
 
-      {/* Dark left scrim so text stays readable */}
+      {/* Scrim so text stays readable */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "linear-gradient(to right, rgba(8,8,8,0.96) 0%, rgba(8,8,8,0.75) 50%, rgba(8,8,8,0.1) 100%)",
+          background: "linear-gradient(to right, rgba(var(--background-rgb),0.96) 0%, rgba(var(--background-rgb),0.75) 50%, rgba(var(--background-rgb),0.1) 100%)",
         }}
       />
 
-      {/* Bottom fade */}
+      {/* Bottom fade into surface-1 (StatsBar) */}
       <div
         className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
-        style={{ background: "linear-gradient(to bottom, transparent, #080808)" }}
+        style={{ background: "linear-gradient(to bottom, transparent, var(--surface-1))" }}
       />
 
       {/* Content — left aligned */}
@@ -67,14 +78,14 @@ function HeroGeometric({
           <motion.div variants={item} className="flex items-center gap-2.5 mb-10">
             <span
               className="w-1.5 h-1.5 rounded-full"
-              style={{ background: "rgba(255,255,255,0.6)" }}
+              style={{ background: "rgba(var(--foreground-rgb),0.6)" }}
             />
-            <span className="label-mono" style={{ color: "rgba(255,255,255,0.4)" }}>
+            <span className="label-mono" style={{ color: "rgba(var(--foreground-rgb),0.4)" }}>
               {badge}
             </span>
           </motion.div>
 
-          {/* Headline */}
+          {/* Headline — blur-fade reveal, "Edge." gets gold shimmer */}
           <motion.h1
             variants={item}
             style={{
@@ -82,23 +93,46 @@ function HeroGeometric({
               fontWeight: 800,
               letterSpacing: "-0.045em",
               lineHeight: 0.95,
-              color: "#f5f5f5",
+              color: "var(--foreground)",
               marginBottom: "1.5rem",
             }}
           >
             <span
-              style={{ display: "block", fontWeight: 300, color: "rgba(255,255,255,0.45)" }}
+              style={{ display: "block", fontWeight: 300, color: "rgba(var(--foreground-rgb),0.45)" }}
             >
               {title1}
             </span>
-            <span style={{ display: "block" }}>{title2}</span>
+            <span style={{ display: "block" }}>
+              Order Flow{" "}
+              {/* Gold shimmer — sweeps every ~5.5 s */}
+              <motion.span
+                animate={{
+                  textShadow: [
+                    "0 0 0px transparent",
+                    "0 0 18px rgba(245,200,66,0.65), 0 0 36px rgba(245,200,66,0.3)",
+                    "0 0 28px rgba(245,200,66,0.9),  0 0 56px rgba(245,200,66,0.45)",
+                    "0 0 18px rgba(245,200,66,0.65), 0 0 36px rgba(245,200,66,0.3)",
+                    "0 0 0px transparent",
+                  ],
+                }}
+                transition={{
+                  duration: 1.9,
+                  repeat: Infinity,
+                  repeatDelay: 3.6,
+                  ease: "easeInOut",
+                  times: [0, 0.25, 0.5, 0.75, 1],
+                }}
+              >
+                Edge.
+              </motion.span>
+            </span>
           </motion.h1>
 
           {/* Hairline */}
           <motion.div
             variants={item}
             className="w-16 h-px mb-8"
-            style={{ background: "rgba(255,255,255,0.15)" }}
+            style={{ background: "rgba(var(--foreground-rgb),0.15)" }}
           />
 
           {/* Subtitle */}
@@ -106,7 +140,7 @@ function HeroGeometric({
             variants={item}
             style={{
               fontSize: "1.0625rem",
-              color: "rgba(255,255,255,0.45)",
+              color: "rgba(var(--foreground-rgb),0.5)",
               lineHeight: 1.75,
               maxWidth: "30rem",
               marginBottom: "2.5rem",
@@ -121,6 +155,7 @@ function HeroGeometric({
             variants={item}
             className="flex flex-col sm:flex-row gap-3 items-start"
           >
+            {/* Primary — Discord */}
             <motion.a
               href={primaryCTA.href}
               target="_blank"
@@ -130,8 +165,8 @@ function HeroGeometric({
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
               className="inline-flex items-center gap-2.5 font-semibold"
               style={{
-                background: "#fff",
-                color: "#080808",
+                background: "var(--foreground)",
+                color: "var(--background)",
                 borderRadius: "9999px",
                 padding: "0.9rem 2rem",
                 fontSize: "0.9375rem",
@@ -144,75 +179,111 @@ function HeroGeometric({
               {primaryCTA.label}
             </motion.a>
 
-            <motion.a
+            {/* Secondary — Magnetic pull */}
+            <MagneticButton
               href={secondaryCTA.href}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              className="inline-flex items-center gap-2 font-semibold transition-all duration-200"
               style={{
-                border: "1px solid rgba(255,255,255,0.13)",
-                color: "rgba(255,255,255,0.5)",
+                border: "1px solid rgba(var(--foreground-rgb),0.2)",
+                color: "rgba(var(--foreground-rgb),0.55)",
                 borderRadius: "9999px",
                 padding: "0.9rem 2rem",
                 fontSize: "0.9375rem",
                 letterSpacing: "-0.01em",
+                gap: "0.5rem",
               }}
             >
               {secondaryCTA.label}
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
-            </motion.a>
+            </MagneticButton>
           </motion.div>
 
-          {/* Social proof */}
+          {/* Social proof — avatar stack + live dot */}
           <motion.div
             variants={item}
             className="flex items-center gap-3 mt-14"
           >
-            <div className="flex -space-x-2">
-              {[
-                { char: "A", bg: "#e8e8e8", fg: "#111" },
-                { char: "M", bg: "#d0d0d0", fg: "#111" },
-                { char: "R", bg: "#b8b8b8", fg: "#111" },
-                { char: "+", bg: "#2a2a2a", fg: "#777" },
-              ].map(({ char, bg, fg }) => (
-                <div
+            {/* Avatar stack — each avatar expands on hover */}
+            <div className="flex -space-x-1.5">
+              {avatars.map(({ char, bg, fg }, idx) => (
+                <motion.div
                   key={char}
-                  className="w-7 h-7 rounded-full border-2 flex items-center justify-center text-[0.6rem] font-bold"
-                  style={{ background: bg, color: fg, borderColor: "#080808" }}
+                  whileHover={{ scale: 1.32, y: -3, zIndex: 20 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 22 }}
+                  className="w-7 h-7 rounded-full border-2 flex items-center justify-center text-[0.6rem] font-bold cursor-default select-none"
+                  style={{
+                    background: bg,
+                    color: fg,
+                    borderColor: "var(--background)",
+                    zIndex: idx,
+                    position: "relative",
+                  }}
                 >
                   {char}
-                </div>
+                </motion.div>
               ))}
             </div>
-            <span style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.28)", letterSpacing: "-0.01em" }}>
-              Joined by{" "}
-              <span style={{ color: "rgba(255,255,255,0.55)" }}>40+ traders</span>{" "}
-              already building their edge
-            </span>
+
+            {/* Live pulsing dot + copy */}
+            <div className="flex items-center gap-2">
+              {/* Green pulse */}
+              <span className="relative flex h-1.5 w-1.5 flex-shrink-0">
+                <motion.span
+                  className="absolute inline-flex h-full w-full rounded-full"
+                  style={{ background: "#22c55e" }}
+                  animate={{ scale: [1, 2.8, 1], opacity: [0.8, 0, 0.8] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <span
+                  className="relative inline-flex rounded-full h-1.5 w-1.5"
+                  style={{ background: "#22c55e" }}
+                />
+              </span>
+
+              <span style={{ fontSize: "0.8125rem", color: "rgba(var(--foreground-rgb),0.4)", letterSpacing: "-0.01em" }}>
+                Joined by{" "}
+                <span style={{ color: "rgba(var(--foreground-rgb),0.65)" }}>40+ traders</span>{" "}
+                already building their edge
+              </span>
+            </div>
           </motion.div>
 
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — mouse wheel */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 0.6 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="label-mono" style={{ color: "rgba(255,255,255,0.2)" }}>Scroll</span>
-        <motion.div
-          animate={{ y: [0, 5, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+        {/* Mouse body */}
+        <div
+          style={{
+            width: 22,
+            height: 36,
+            borderRadius: 11,
+            border: "2px solid rgba(var(--foreground-rgb),0.22)",
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "center",
+            paddingTop: 5,
+          }}
         >
-          <svg className="w-3.5 h-3.5" style={{ color: "rgba(255,255,255,0.2)" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </motion.div>
+          {/* Scroll wheel — bounces downward */}
+          <motion.div
+            animate={{ y: [0, 9, 0], opacity: [1, 0.2, 1] }}
+            transition={{ duration: 1.9, repeat: Infinity, ease: "easeInOut" }}
+            style={{
+              width: 3,
+              height: 7,
+              borderRadius: 2,
+              background: "rgba(var(--foreground-rgb),0.32)",
+            }}
+          />
+        </div>
       </motion.div>
 
     </div>

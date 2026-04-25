@@ -10,7 +10,7 @@ const navLinks = [
 
 export default function Footer() {
   return (
-    <footer style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+    <footer style={{ background: "var(--surface-1)", borderTop: "1px solid var(--border)" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6 items-start">
 
@@ -18,18 +18,18 @@ export default function Footer() {
           <div>
             <a href="#" className="flex items-center gap-2.5 select-none mb-3">
               <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
-                <rect x="2"  y="19" width="4" height="11" rx="1" fill="rgba(255,255,255,0.4)" />
-                <rect x="8"  y="13" width="4" height="17" rx="1" fill="rgba(255,255,255,0.55)" />
-                <rect x="14" y="7"  width="4" height="23" rx="1" fill="rgba(255,255,255,0.8)" />
-                <rect x="20" y="11" width="4" height="19" rx="1" fill="rgba(255,255,255,0.5)" />
-                <rect x="26" y="15" width="4" height="15" rx="1" fill="rgba(255,255,255,0.3)" />
-                <polyline points="4,17 10,11 16,5 22,9 28,13" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <rect x="2"  y="19" width="4" height="11" rx="1" style={{ fill: "rgba(var(--foreground-rgb),0.4)" }} />
+                <rect x="8"  y="13" width="4" height="17" rx="1" style={{ fill: "rgba(var(--foreground-rgb),0.55)" }} />
+                <rect x="14" y="7"  width="4" height="23" rx="1" style={{ fill: "rgba(var(--foreground-rgb),0.8)" }} />
+                <rect x="20" y="11" width="4" height="19" rx="1" style={{ fill: "rgba(var(--foreground-rgb),0.5)" }} />
+                <rect x="26" y="15" width="4" height="15" rx="1" style={{ fill: "rgba(var(--foreground-rgb),0.3)" }} />
+                <polyline points="4,17 10,11 16,5 22,9 28,13" fill="none" style={{ stroke: "rgba(var(--foreground-rgb),0.2)" }} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <span style={{ fontSize: "0.875rem", fontWeight: 600, color: "rgba(255,255,255,0.85)", letterSpacing: "-0.01em" }}>
+              <span style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--foreground)", letterSpacing: "-0.01em" }}>
                 Orderflow Society
               </span>
             </a>
-            <p style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.28)", lineHeight: 1.65, maxWidth: "18rem" }}>
+            <p style={{ fontSize: "0.8125rem", color: "var(--muted-foreground)", lineHeight: 1.65, maxWidth: "18rem" }}>
               Futures and orderflow trading mentorship for serious traders ready to build a real edge.
             </p>
           </div>
@@ -43,9 +43,9 @@ export default function Footer() {
                 target={(l as { external?: boolean }).external ? "_blank" : undefined}
                 rel={(l as { external?: boolean }).external ? "noopener noreferrer" : undefined}
                 className="transition-colors duration-200"
-                style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.35)", letterSpacing: "-0.01em", width: "fit-content" }}
-                onMouseEnter={e => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.75)")}
-                onMouseLeave={e => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.35)")}
+                style={{ fontSize: "0.8125rem", color: "var(--muted-foreground)", letterSpacing: "-0.01em", width: "fit-content" }}
+                onMouseEnter={e => ((e.target as HTMLElement).style.color = "var(--foreground)")}
+                onMouseLeave={e => ((e.target as HTMLElement).style.color = "var(--muted-foreground)")}
               >
                 {l.label}
               </a>
@@ -60,7 +60,9 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 transition-colors duration-200 group"
-              style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.35)", letterSpacing: "-0.01em" }}
+              style={{ fontSize: "0.8125rem", color: "var(--muted-foreground)", letterSpacing: "-0.01em" }}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "var(--foreground)")}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "var(--muted-foreground)")}
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" style={{ opacity: 0.5 }}>
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
@@ -74,12 +76,12 @@ export default function Footer() {
         {/* Bottom bar */}
         <div
           className="mt-12 pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
+          style={{ borderTop: "1px solid var(--border)" }}
         >
-          <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.18)" }}>
+          <p style={{ fontSize: "0.72rem", color: "var(--muted-foreground)" }}>
             © 2025 Orderflow Society. All rights reserved.
           </p>
-          <p style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.12)", maxWidth: "32rem", lineHeight: 1.6 }}>
+          <p style={{ fontSize: "0.68rem", color: "rgba(var(--foreground-rgb),0.35)", maxWidth: "32rem", lineHeight: 1.6 }}>
             Trading futures involves substantial risk of loss. Past performance is not indicative of future results.
           </p>
         </div>

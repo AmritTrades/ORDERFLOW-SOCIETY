@@ -6,7 +6,7 @@ import SkewCards from "@/components/ui/gradient-card-showcase";
 
 export default function Community() {
   return (
-    <section id="community" className="py-36 relative overflow-hidden">
+    <section id="community" className="py-36 relative overflow-hidden" style={{ background: "var(--background)", borderTop: "1px solid var(--border)" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
         <motion.div
@@ -21,15 +21,15 @@ export default function Community() {
             style={{
               fontSize: "clamp(2.4rem, 5vw, 4rem)",
               fontWeight: 700,
-              color: "#f5f5f5",
+              color: "var(--foreground)",
               letterSpacing: "-0.04em",
               lineHeight: 1.05,
               maxWidth: "28rem",
             }}
           >
             Join the community.<br />
-            <span style={{ color: "rgba(255,255,255,0.35)", fontWeight: 300 }}>
-              It&apos;s free forever.
+            <span style={{ color: "var(--muted-foreground)", fontWeight: 300 }}>
+              Choose your level of edge.
             </span>
           </h2>
         </motion.div>

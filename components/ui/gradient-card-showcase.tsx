@@ -1,4 +1,7 @@
-import React from 'react';
+"use client";
+
+import { useRef } from "react";
+import { motion, useSpring } from "framer-motion";
 
 const cards = [
   {
@@ -27,6 +30,64 @@ const cards = [
   },
 ];
 
+function CardMagneticButton({
+  href,
+  label,
+  external,
+}: {
+  href: string;
+  label: string;
+  external: boolean;
+}) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const x = useSpring(0, { stiffness: 240, damping: 18, mass: 0.8 });
+  const y = useSpring(0, { stiffness: 240, damping: 18, mass: 0.8 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = wrapRef.current!.getBoundingClientRect();
+    x.set((e.clientX - rect.left - rect.width / 2) * 0.38);
+    y.set((e.clientY - rect.top - rect.height / 2) * 0.38);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={wrapRef}
+      style={{ x, y, display: "inline-flex" }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <motion.a
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
+        whileHover={{ background: "rgba(255,255,255,1)", color: "#000000" }}
+        whileTap={{ scale: 0.96 }}
+        transition={{ duration: 0.15, ease: "easeOut" }}
+        style={{
+          display: "inline-block",
+          fontSize: "0.875rem",
+          fontWeight: 700,
+          color: "rgba(255,255,255,0.9)",
+          background: "transparent",
+          border: "1px solid rgba(255,255,255,0.4)",
+          borderRadius: "0.375rem",
+          padding: "0.5rem 0.875rem",
+          cursor: "pointer",
+          letterSpacing: "-0.01em",
+          textDecoration: "none",
+        }}
+      >
+        {label}
+      </motion.a>
+    </motion.div>
+  );
+}
+
 export default function SkewCards() {
   return (
     <>
@@ -34,40 +95,44 @@ export default function SkewCards() {
         {cards.map(({ title, desc, gradientFrom, gradientTo, buttonLabel, buttonHref }, idx) => (
           <div
             key={idx}
-            className="group relative w-[320px] h-[400px] m-[40px_30px] transition-all duration-500"
+            className="group relative w-[320px] h-[400px] m-[40px_30px] flex items-center"
           >
-            {/* Skewed gradient panels */}
-            <span
+            {/* Solid gradient panel — 30% reduced opacity, slow pulse */}
+            <motion.span
+              animate={{ opacity: [0.7, 0.88, 0.7] }}
+              transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
               className="absolute top-0 left-[50px] w-1/2 h-full rounded-lg transform skew-x-[15deg] transition-all duration-500 group-hover:skew-x-0 group-hover:left-[20px] group-hover:w-[calc(100%-90px)]"
-              style={{
-                background: `linear-gradient(315deg, ${gradientFrom}, ${gradientTo})`,
-              }}
+              style={{ background: `linear-gradient(315deg, ${gradientFrom}, ${gradientTo})` }}
             />
-            <span
+            {/* Blurred glow panel — offset pulse phase */}
+            <motion.span
+              animate={{ opacity: [0.7, 0.88, 0.7] }}
+              transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
               className="absolute top-0 left-[50px] w-1/2 h-full rounded-lg transform skew-x-[15deg] blur-[30px] transition-all duration-500 group-hover:skew-x-0 group-hover:left-[20px] group-hover:w-[calc(100%-90px)]"
-              style={{
-                background: `linear-gradient(315deg, ${gradientFrom}, ${gradientTo})`,
-              }}
+              style={{ background: `linear-gradient(315deg, ${gradientFrom}, ${gradientTo})` }}
             />
 
-            {/* Animated blurs */}
+            {/* Animated corner blurs */}
             <span className="pointer-events-none absolute inset-0 z-10">
               <span className="absolute top-0 left-0 w-0 h-0 rounded-lg opacity-0 bg-[rgba(255,255,255,0.1)] backdrop-blur-[10px] shadow-[0_5px_15px_rgba(0,0,0,0.08)] transition-all duration-100 animate-blob group-hover:top-[-50px] group-hover:left-[50px] group-hover:w-[100px] group-hover:h-[100px] group-hover:opacity-100" />
               <span className="absolute bottom-0 right-0 w-0 h-0 rounded-lg opacity-0 bg-[rgba(255,255,255,0.1)] backdrop-blur-[10px] shadow-[0_5px_15px_rgba(0,0,0,0.08)] transition-all duration-500 animate-blob animation-delay-1000 group-hover:bottom-[-50px] group-hover:right-[50px] group-hover:w-[100px] group-hover:h-[100px] group-hover:opacity-100" />
             </span>
 
-            {/* Content */}
-            <div className="relative z-20 left-0 p-[20px_40px] bg-[rgba(255,255,255,0.05)] backdrop-blur-[10px] shadow-lg rounded-lg text-white transition-all duration-500 group-hover:left-[-25px] group-hover:p-[60px_40px]">
+            {/* Glass content card — increased blur, 1px border at 0.1 opacity */}
+            <div
+              className="relative z-20 w-full left-0 p-[20px_40px] backdrop-blur-[28px] shadow-lg rounded-lg text-white transition-all duration-500 group-hover:left-[-25px] group-hover:p-[60px_40px]"
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.1)",
+              }}
+            >
               <h2 className="text-2xl mb-2">{title}</h2>
               <p className="text-lg leading-relaxed mb-4">{desc}</p>
-              <a
+              <CardMagneticButton
                 href={buttonHref}
-                target={buttonHref.startsWith('http') ? '_blank' : undefined}
-                rel={buttonHref.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="inline-block text-sm font-bold text-black bg-white px-3 py-2 rounded hover:bg-[#ffcf4d] hover:border hover:border-[rgba(255,0,88,0.4)] hover:shadow-md transition-all duration-200"
-              >
-                {buttonLabel}
-              </a>
+                label={buttonLabel}
+                external={buttonHref.startsWith("http")}
+              />
             </div>
           </div>
         ))}

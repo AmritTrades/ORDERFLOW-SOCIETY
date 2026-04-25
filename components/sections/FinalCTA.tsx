@@ -2,20 +2,42 @@
 
 import { motion } from "framer-motion";
 import { fadeUp, stagger, viewport } from "@/lib/motion";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 
 export default function FinalCTA() {
   return (
-    <section className="py-40 relative overflow-hidden">
-      {/* Radial glow */}
+    <section
+      className="py-40 relative overflow-hidden"
+      style={{ background: "var(--background)", borderTop: "1px solid var(--border)" }}
+    >
+      {/* ── Multi-layer radial spotlight ── */}
+      {/* Outer ambient glow */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse 55% 45% at 50% 50%, rgba(255,255,255,0.04) 0%, transparent 65%)",
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 35%, rgba(var(--foreground-rgb),0.055) 0%, transparent 70%)",
+        }}
+      />
+      {/* Inner bright core — tighter spotlight behind headline */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 45% 35% at 50% 30%, rgba(var(--foreground-rgb),0.09) 0%, transparent 55%)",
+        }}
+      />
+      {/* Bottom vignette to pull eyes upward */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+        style={{
+          background: "linear-gradient(to top, var(--background), transparent)",
         }}
       />
 
       <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
 
+        {/* Label */}
         <motion.p
           className="label-mono mb-10"
           variants={fadeUp}
@@ -26,33 +48,57 @@ export default function FinalCTA() {
           Your Move
         </motion.p>
 
+        {/* ── Headline — blur-fade scroll animation ── */}
         <motion.h2
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
+          initial={{ opacity: 0, y: 40, filter: "blur(14px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
           style={{
             fontSize: "clamp(3rem, 9vw, 7.5rem)",
             fontWeight: 800,
-            color: "#f5f5f5",
+            color: "var(--foreground)",
             letterSpacing: "-0.045em",
             lineHeight: 0.95,
             marginBottom: "2rem",
           }}
         >
-          Stop Losing.<br />
-          <span style={{ color: "rgba(255,255,255,0.28)", fontWeight: 300 }}>Start Reading</span><br />
-          the Tape.
+          Stop Losing.
+          <br />
+          <motion.span
+            initial={{ opacity: 0, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, filter: "blur(0px)" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            style={{ color: "rgba(var(--foreground-rgb),0.28)", fontWeight: 300 }}
+          >
+            Start Reading
+          </motion.span>
+          <br />
+          <motion.span
+            initial={{ opacity: 0, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, filter: "blur(0px)" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
+          >
+            the Tape.
+          </motion.span>
         </motion.h2>
 
-        <div className="w-12 h-px mx-auto mb-8" style={{ background: "rgba(255,255,255,0.12)" }} />
+        <div className="w-12 h-px mx-auto mb-8" style={{ background: "rgba(var(--foreground-rgb),0.12)" }} />
 
         <motion.p
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
-          style={{ fontSize: "1.0625rem", color: "rgba(255,255,255,0.4)", lineHeight: 1.75, maxWidth: "30rem", margin: "0 auto 3rem" }}
+          style={{
+            fontSize: "1.0625rem",
+            color: "var(--muted-foreground)",
+            lineHeight: 1.75,
+            maxWidth: "30rem",
+            margin: "0 auto 3rem",
+          }}
         >
           The market gives you a signal every single session. Most traders miss it.
           Join Orderflow Society and learn to see what others can&apos;t.
@@ -65,6 +111,7 @@ export default function FinalCTA() {
           viewport={viewport}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
+          {/* Primary CTA — Discord */}
           <motion.a
             href="https://discord.gg/d4xSrsWAK"
             target="_blank"
@@ -75,8 +122,8 @@ export default function FinalCTA() {
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
             className="inline-flex items-center gap-2.5 font-semibold"
             style={{
-              background: "#fff",
-              color: "#080808",
+              background: "var(--foreground)",
+              color: "var(--background)",
               borderRadius: "9999px",
               padding: "1rem 2.25rem",
               fontSize: "0.9375rem",
@@ -89,24 +136,23 @@ export default function FinalCTA() {
             Join Free Discord
           </motion.a>
 
-          <motion.a
-            href="#mentorship"
-            variants={fadeUp}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            className="inline-flex items-center font-semibold transition-all duration-200"
-            style={{
-              border: "1px solid rgba(255,255,255,0.13)",
-              color: "rgba(255,255,255,0.55)",
-              borderRadius: "9999px",
-              padding: "1rem 2.25rem",
-              fontSize: "0.9375rem",
-              letterSpacing: "-0.015em",
-            }}
-          >
-            Get 1-on-1 Mentorship
-          </motion.a>
+          {/* Secondary CTA — Magnetic glow button */}
+          <motion.div variants={fadeUp}>
+            <MagneticButton
+              href="#mentorship"
+              style={{
+                border: "1px solid var(--border-bright)",
+                color: "var(--muted-foreground)",
+                borderRadius: "9999px",
+                padding: "1rem 2.25rem",
+                fontSize: "0.9375rem",
+                letterSpacing: "-0.015em",
+                transition: "color 0.18s ease",
+              }}
+            >
+              Get 1-on-1 Mentorship
+            </MagneticButton>
+          </motion.div>
         </motion.div>
 
       </div>
