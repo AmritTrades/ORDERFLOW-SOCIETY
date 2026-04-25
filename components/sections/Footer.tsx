@@ -1,11 +1,11 @@
 "use client";
 
 const navLinks = [
-  { label: "About",      href: "#about" },
-  { label: "Community",  href: "#community" },
-  { label: "Mentorship", href: "#mentorship" },
-  { label: "Guarantee",  href: "#guarantee" },
-  { label: "Discord",    href: "https://discord.gg/d4xSrsWAK", external: true },
+  { label: "Community",    href: "#community" },
+  { label: "Mentorship",   href: "#mentorship" },
+  { label: "Guarantee",    href: "#guarantee" },
+  { label: "Inner Circle", href: "https://buy.stripe.com/cNi3cneRvdDscK45Uk9AA00", external: true },
+  { label: "Discord",      href: "https://discord.gg/d4xSrsWAK", external: true },
 ];
 
 export default function Footer() {
@@ -31,6 +31,17 @@ export default function Footer() {
             </a>
             <p style={{ fontSize: "0.8125rem", color: "var(--muted-foreground)", lineHeight: 1.65, maxWidth: "18rem" }}>
               Futures and orderflow trading mentorship for serious traders ready to build a real edge.
+            </p>
+            <p
+              style={{
+                fontSize: "0.7rem",
+                color: "rgba(var(--foreground-rgb),0.28)",
+                marginTop: "0.6rem",
+                letterSpacing: "0.04em",
+                fontStyle: "italic",
+              }}
+            >
+              Mentorship by application only.
             </p>
           </div>
 

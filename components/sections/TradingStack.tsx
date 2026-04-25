@@ -2,20 +2,28 @@
 
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
-import { fadeUp } from "@/lib/motion";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const vp   = { once: true, margin: "-80px" } as const;
 
-/* ── Animated footprint-chart icon ── */
+const fadeUp = {
+  hidden:  { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE } },
+};
+
+const stagger = {
+  hidden:  {},
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
+};
+
+/* ── Footprint chart icon ── */
 const chartBars = [
-  /* [x, y, w, h, fill, delay] */
   [0,  0,  20, 5, "rgba(0,255,65,0.70)", 0.00],
   [22, 0,  8,  5, "rgba(239,68,68,0.38)", 0.30],
   [0,  7,  14, 5, "rgba(0,255,65,0.85)", 0.55],
   [16, 7,  6,  5, "rgba(239,68,68,0.32)", 0.80],
   [24, 7,  12, 5, "rgba(0,255,65,0.60)", 0.20],
-  [0,  14, 30, 5, "rgba(0,255,65,1.00)", 0.00], // POC — widest/brightest
+  [0,  14, 30, 5, "rgba(0,255,65,1.00)", 0.00],
   [32, 14, 4,  5, "rgba(239,68,68,0.28)", 0.70],
   [0,  21, 10, 5, "rgba(0,255,65,0.55)", 0.40],
   [12, 21, 7,  5, "rgba(239,68,68,0.38)", 0.65],
@@ -24,7 +32,7 @@ const chartBars = [
 
 function FootprintIcon() {
   return (
-    <svg width="36" height="26" viewBox="0 0 36 26" fill="none" aria-hidden>
+    <svg width="38" height="28" viewBox="0 0 36 26" fill="none" aria-hidden>
       {chartBars.map(([x, y, w, h, fill, delay], i) => (
         <motion.rect
           key={i}
@@ -43,98 +51,29 @@ function FootprintIcon() {
   );
 }
 
-/* ── Green-beam animated border CTA ── */
-function GreenBeamButton({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <div className="relative inline-flex" style={{ padding: "1px", borderRadius: "9999px" }}>
-      {/* Spinning green beam */}
-      <motion.div
-        className="absolute inset-0"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
-        style={{
-          borderRadius: "9999px",
-          background:
-            "conic-gradient(from 0deg, transparent 62%, #00ff41 78%, #aaffcc 85%, #00ff41 93%, transparent 100%)",
-        }}
-      />
-      {/* Mask — fills interior so only 1px beam edge shows */}
-      <div
-        className="absolute inset-[1px]"
-        style={{ borderRadius: "9999px", background: "var(--background)" }}
-      />
-      {/* Link */}
-      <motion.a
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        whileHover={{ background: "rgba(0,255,65,0.08)" }}
-        whileTap={{ scale: 0.97 }}
-        transition={{ duration: 0.15 }}
-        className="relative z-10 inline-flex items-center gap-2.5 font-semibold"
-        style={{
-          fontSize: "0.9rem",
-          color: "#00ff41",
-          padding: "0.8rem 2rem",
-          borderRadius: "9999px",
-          letterSpacing: "-0.01em",
-          textDecoration: "none",
-        }}
-      >
-        {children}
-      </motion.a>
-    </div>
-  );
-}
-
-/* ══════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════ */
 export default function TradingStack() {
   return (
     <section
       id="tools"
-      className="py-24 relative overflow-hidden"
+      className="py-24"
       style={{ background: "var(--background)", borderTop: "1px solid var(--border)" }}
     >
-      {/* Subtle trading grid */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(var(--foreground-rgb),0.032) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(var(--foreground-rgb),0.032) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
-        }}
-      />
-      {/* Faint green ambient glow at center */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 55% 45% at 50% 50%, rgba(0,255,65,0.04) 0%, transparent 70%)",
-        }}
-      />
-      {/* Vignette */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 85% 75% at 50% 50%, transparent 40%, var(--background) 100%)",
-        }}
-      />
+      <div className="max-w-4xl mx-auto px-6 lg:px-8">
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-
-        {/* Header */}
+        {/* Section header */}
         <motion.div
-          variants={fadeUp}
+          variants={stagger}
           initial="hidden"
           whileInView="visible"
           viewport={vp}
-          className="mb-12"
+          className="mb-10"
         >
-          <p className="label-mono mb-4">Partner Tools</p>
-          <h2
+          <motion.p variants={fadeUp} className="label-mono mb-4">
+            Partner Tools
+          </motion.p>
+          <motion.h2
+            variants={fadeUp}
             style={{
               fontSize: "clamp(2rem, 4vw, 3rem)",
               fontWeight: 700,
@@ -144,147 +83,166 @@ export default function TradingStack() {
             }}
           >
             My Trading Stack
-          </h2>
+          </motion.h2>
         </motion.div>
 
-        {/* ── ATAS card ── */}
+        {/* ══ ATAS card — rebuilt from scratch ══ */}
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={vp}
-          transition={{ duration: 0.65, delay: 0.1, ease: EASE }}
-          whileHover={{
-            boxShadow:
-              "0 0 50px rgba(0,255,65,0.10), 0 0 100px rgba(0,255,65,0.05), inset 0 1px 0 rgba(0,255,65,0.14)",
-            borderColor: "rgba(0,255,65,0.22)",
-            transition: { duration: 0.35, ease: "easeOut" },
-          }}
+          transition={{ duration: 0.8, ease: EASE }}
+          /*
+           * overflow-hidden ensures the absolute background glow is
+           * clipped at the card boundary and can never escape onto the page.
+           */
           className="relative rounded-2xl overflow-hidden"
           style={{
-            background: "rgba(var(--background-rgb),0.65)",
-            backdropFilter: "blur(28px)",
-            WebkitBackdropFilter: "blur(28px)",
-            border: "1px solid rgba(var(--foreground-rgb),0.08)",
-            padding: "2.5rem",
-            maxWidth: "56rem",
+            background: "rgba(5, 8, 12, 0.92)",
+            border: "1px solid rgba(255, 255, 255, 0.10)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
           }}
         >
-          {/* Green top accent line */}
-          <div
-            className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+
+          {/* ── Vapor glow — ABSOLUTE TOP-0 LEFT-0, Z-0, POINTER-EVENTS-NONE ──
+               overflow-hidden on the card clips it at the card boundary.
+               Opacity breath keeps it behind the content layer. */}
+          <motion.div
+            aria-hidden
+            animate={{ opacity: [0.4, 0.7, 0.4] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none"
             style={{
               background:
-                "linear-gradient(90deg, transparent 0%, rgba(0,255,65,0.55) 50%, transparent 100%)",
-            }}
-          />
-          {/* TL corner ambient */}
-          <div
-            className="absolute top-0 left-0 w-72 h-72 pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(circle at top left, rgba(0,255,65,0.07) 0%, transparent 65%)",
+                "radial-gradient(circle at 20% 50%, rgba(0, 255, 0, 0.15) 0%, transparent 70%)",
             }}
           />
 
-          <div className="relative flex flex-col md:flex-row md:items-center gap-8 lg:gap-12">
+          {/* ── Card content — RELATIVE, Z-10 ──
+               Explicit stacking context above the glow. */}
+          <div className="relative z-10 p-8 md:p-10">
+            <div className="grid grid-cols-1 md:grid-cols-[88px_1fr] gap-6 md:gap-10 items-center">
 
-            {/* Left: icon + badge */}
-            <div className="flex flex-row md:flex-col items-center md:items-start gap-4 md:gap-5 flex-shrink-0">
-              {/* Icon container */}
-              <div
-                className="flex items-center justify-center w-16 h-16 rounded-2xl"
-                style={{
-                  background: "rgba(0,255,65,0.07)",
-                  border: "1px solid rgba(0,255,65,0.22)",
-                  boxShadow: "0 0 24px rgba(0,255,65,0.1)",
-                }}
-              >
-                <FootprintIcon />
-              </div>
-
-              {/* Verified partner badge */}
-              <span
-                className="inline-flex items-center gap-1.5 label-mono"
-                style={{
-                  color: "#00ff41",
-                  background: "rgba(0,255,65,0.07)",
-                  border: "1px solid rgba(0,255,65,0.18)",
-                  borderRadius: "9999px",
-                  padding: "0.28rem 0.8rem",
-                  fontSize: "0.58rem",
-                  letterSpacing: "0.13em",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {/* Pulsing dot */}
-                <span className="relative flex h-1.5 w-1.5 flex-shrink-0">
-                  <motion.span
-                    className="absolute inline-flex h-full w-full rounded-full"
-                    style={{ background: "#00ff41" }}
-                    animate={{ scale: [1, 2.5, 1], opacity: [0.8, 0, 0.8] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5" style={{ background: "#00ff41" }} />
-                </span>
-                VERIFIED PARTNER
-              </span>
-            </div>
-
-            {/* Right: copy + CTA */}
-            <div className="flex-1 min-w-0">
-              <p
-                className="label-mono mb-2"
-                style={{ color: "rgba(var(--foreground-rgb),0.38)" }}
-              >
-                ATAS Orderflow Platform
-              </p>
-
-              <h3
-                style={{
-                  fontFamily:
-                    "var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif",
-                  fontSize: "clamp(1.4rem, 2.5vw, 1.875rem)",
-                  fontWeight: 700,
-                  color: "var(--foreground)",
-                  letterSpacing: "-0.03em",
-                  lineHeight: 1.15,
-                  marginBottom: "0.75rem",
-                }}
-              >
-                Professional Orderflow Software
-              </h3>
-
-              <p
-                style={{
-                  fontSize: "0.9375rem",
-                  color: "rgba(var(--foreground-rgb),0.55)",
-                  lineHeight: 1.72,
-                  maxWidth: "36rem",
-                  marginBottom: "1.75rem",
-                }}
-              >
-                The platform I use daily for footprint, DOM, and heatmap analysis.
-                Use our partner link to get started with the industry standard.
-              </p>
-
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                <GreenBeamButton href="https://atas.net/pricing/?rs=partners_oft269464">
-                  Get ATAS with Edge
-                  <ExternalLink className="w-3.5 h-3.5" strokeWidth={2} />
-                </GreenBeamButton>
-
-                <span
+              {/* Left column — icon + badge */}
+              <div className="flex flex-row md:flex-col items-center md:items-start gap-3">
+                <div
+                  className="flex-shrink-0 flex items-center justify-center w-16 h-16 rounded-2xl"
                   style={{
-                    fontSize: "0.75rem",
-                    color: "rgba(var(--foreground-rgb),0.3)",
-                    letterSpacing: "-0.01em",
+                    background: "rgba(0, 255, 65, 0.08)",
+                    border: "1px solid rgba(0, 255, 65, 0.20)",
                   }}
                 >
-                  Free trial available · No credit card required
+                  <FootprintIcon />
+                </div>
+
+                <span
+                  className="inline-flex items-center gap-1.5 label-mono whitespace-nowrap"
+                  style={{
+                    color: "#00ff41",
+                    background: "rgba(0, 255, 65, 0.07)",
+                    border: "1px solid rgba(0, 255, 65, 0.18)",
+                    borderRadius: "9999px",
+                    padding: "0.25rem 0.7rem",
+                    fontSize: "0.56rem",
+                    letterSpacing: "0.12em",
+                  }}
+                >
+                  <span className="relative flex h-1.5 w-1.5 flex-shrink-0">
+                    <motion.span
+                      className="absolute inline-flex h-full w-full rounded-full"
+                      style={{ background: "#00ff41" }}
+                      animate={{ scale: [1, 2.5, 1], opacity: [0.8, 0, 0.8] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    />
+                    <span
+                      className="relative inline-flex rounded-full h-1.5 w-1.5"
+                      style={{ background: "#00ff41" }}
+                    />
+                  </span>
+                  VERIFIED PARTNER
                 </span>
               </div>
-            </div>
 
+              {/* Right column — all text + CTA */}
+              <div>
+                <p
+                  className="label-mono mb-2"
+                  style={{ color: "rgba(255, 255, 255, 0.35)" }}
+                >
+                  ATAS Orderflow Platform
+                </p>
+
+                {/* Heading — white, bold, 2xl */}
+                <h3
+                  style={{
+                    fontSize: "clamp(1.35rem, 2.5vw, 1.75rem)",
+                    fontWeight: 700,
+                    color: "#ffffff",
+                    letterSpacing: "-0.03em",
+                    lineHeight: 1.15,
+                    marginBottom: "0.65rem",
+                  }}
+                >
+                  Professional Orderflow Software
+                </h3>
+
+                {/* Description — gray-400 */}
+                <p
+                  style={{
+                    fontSize: "0.9375rem",
+                    color: "rgb(156, 163, 175)",
+                    lineHeight: 1.72,
+                    marginBottom: "1.5rem",
+                  }}
+                >
+                  The platform I use daily for footprint, DOM, and heatmap
+                  analysis. Use our partner link to get started with the
+                  industry standard.
+                </p>
+
+                {/* 21st-dev secondary button */}
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                  <motion.a
+                    href="https://atas.net/pricing/?rs=partners_oft269464"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{
+                      background: "rgba(0, 255, 65, 0.14)",
+                      borderColor: "rgba(0, 255, 65, 0.50)",
+                    }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ duration: 0.15 }}
+                    className="inline-flex items-center gap-2 font-semibold"
+                    style={{
+                      fontSize: "0.9rem",
+                      color: "#00ff41",
+                      background: "rgba(0, 255, 65, 0.06)",
+                      border: "1px solid rgba(0, 255, 65, 0.28)",
+                      borderRadius: "9999px",
+                      padding: "0.7rem 1.5rem",
+                      letterSpacing: "-0.01em",
+                      textDecoration: "none",
+                      width: "fit-content",
+                    }}
+                  >
+                    Get ATAS with Edge
+                    <ExternalLink className="w-3.5 h-3.5" strokeWidth={2} />
+                  </motion.a>
+
+                  <span
+                    style={{
+                      fontSize: "0.75rem",
+                      color: "rgba(255, 255, 255, 0.28)",
+                      letterSpacing: "-0.01em",
+                    }}
+                  >
+                    Free trial available · No credit card required
+                  </span>
+                </div>
+              </div>
+
+            </div>
           </div>
         </motion.div>
 

@@ -41,6 +41,7 @@ const iconPop = {
 export default function Comparison() {
   return (
     <section
+      id="filter"
       className="py-36 relative overflow-hidden"
       style={{ background: "var(--surface-1)", borderTop: "1px solid var(--border)" }}
     >

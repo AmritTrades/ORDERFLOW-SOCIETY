@@ -6,7 +6,6 @@ import { ThemeSwitch } from "@/components/ui/theme-switch";
 import { AnimatedLogo } from "@/components/ui/animated-logo";
 
 const links = [
-  { label: "About",      href: "#about" },
   { label: "Community",  href: "#community" },
   { label: "Mentorship", href: "#mentorship" },
   { label: "Guarantee",  href: "#guarantee" },
@@ -23,6 +22,16 @@ function BorderBeamButton({ href, children, className = "" }: {
       className={`relative inline-flex ${className}`}
       style={{ padding: "1px", borderRadius: "9999px" }}
     >
+      <style>{`
+        @keyframes nav-shimmer {
+          0%, 62%  { transform: translateX(-160%) skewX(-15deg); opacity: 0; }
+          66%      { opacity: 1; }
+          96%      { opacity: 1; }
+          100%     { transform: translateX(160%) skewX(-15deg); opacity: 0; }
+        }
+        .nav-shimmer { animation: nav-shimmer 6s ease-in-out infinite; }
+      `}</style>
+
       {/* Spinning conic gradient — visible only through the 1px padding gap */}
       <motion.div
         className="absolute inset-0"
@@ -39,10 +48,12 @@ function BorderBeamButton({ href, children, className = "" }: {
         className="absolute inset-[1px]"
         style={{ borderRadius: "9999px", background: "var(--foreground)" }}
       />
-      {/* Clickable link on top */}
+      {/* Clickable link — overflow-hidden clips shimmer to pill shape */}
       <a
         href={href}
-        className="relative z-10 inline-flex items-center rounded-full font-semibold transition-opacity duration-200 hover:opacity-75"
+        target={href.startsWith("http") ? "_blank" : undefined}
+        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+        className="relative z-10 overflow-hidden inline-flex items-center rounded-full font-semibold transition-opacity duration-200 hover:opacity-75"
         style={{
           fontSize: "0.8125rem",
           color: "var(--background)",
@@ -50,7 +61,16 @@ function BorderBeamButton({ href, children, className = "" }: {
           letterSpacing: "-0.01em",
         }}
       >
-        {children}
+        {/* Shimmer sweep */}
+        <span
+          aria-hidden
+          className="nav-shimmer absolute inset-y-0 w-1/3 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.22) 50%, transparent 100%)",
+          }}
+        />
+        <span className="relative z-10">{children}</span>
       </a>
     </div>
   );
@@ -112,7 +132,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <ThemeSwitch className="hidden md:flex" />
             <BorderBeamButton href="#mentorship" className="hidden md:inline-flex">
-              Book 1-on-1
+              Apply Now
             </BorderBeamButton>
 
             <button
@@ -171,7 +191,7 @@ export default function Navbar() {
                 className="mt-3 inline-flex items-center justify-center rounded-full font-semibold"
                 style={{ fontSize: "0.875rem", background: "var(--foreground)", color: "var(--background)", padding: "0.75rem 1.5rem" }}
               >
-                Book 1-on-1
+                Apply Now
               </a>
             </div>
           </motion.div>

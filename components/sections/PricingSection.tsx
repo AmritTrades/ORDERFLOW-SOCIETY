@@ -1,56 +1,131 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ExternalLink, Users } from "lucide-react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const vp   = { once: true, margin: "-80px" } as const;
 
-/* ── Shiny "Best Value" badge ── */
-function ShinyBadge({ children }: { children: React.ReactNode }) {
+const APPLICATION_URL = "https://forms.gle/RC7TY65MEQDLE6Tp9";
+
+/* ── Scarcity badge with subtle pulse ── */
+function ScarcityBadge() {
   return (
-    <span
-      className="label-mono relative overflow-hidden"
-      style={{
-        borderRadius: "9999px",
-        padding: "0.2rem 0.7rem",
-        background: "rgba(var(--foreground-rgb),0.07)",
-        border: "1px solid rgba(var(--foreground-rgb),0.15)",
-        color: "rgba(var(--foreground-rgb),0.65)",
-        display: "inline-flex",
-        alignItems: "center",
-      }}
+    <motion.div
+      initial={{ opacity: 0, y: 12, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={vp}
+      transition={{ duration: 0.45, ease: EASE }}
+      className="flex justify-center mb-10"
     >
-      <style>{`
-        @keyframes shiny-sweep {
-          0%   { transform: translateX(-160%) skewX(-20deg); opacity: 0; }
-          8%   { opacity: 1; }
-          92%  { opacity: 1; }
-          100% { transform: translateX(260%) skewX(-20deg); opacity: 0; }
-        }
-        .shiny-badge-sweep { animation: shiny-sweep 2.8s ease-in-out infinite; }
-      `}</style>
-      <span
-        aria-hidden
-        className="shiny-badge-sweep absolute inset-y-0 w-2/5 pointer-events-none"
+      <motion.span
+        animate={{ scale: [1, 1.025, 1] }}
+        transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+        className="inline-flex items-center gap-2 relative overflow-hidden"
         style={{
-          background:
-            "linear-gradient(90deg, transparent 0%, rgba(var(--foreground-rgb),0.22) 50%, transparent 100%)",
+          borderRadius: "9999px",
+          padding: "0.38rem 1rem",
+          background: "rgba(245,200,66,0.07)",
+          border: "1px solid rgba(245,200,66,0.28)",
         }}
-      />
-      <span className="relative z-10">{children}</span>
-    </span>
+      >
+        <style>{`
+          @keyframes scarcity-sweep {
+            0%   { transform: translateX(-200%) skewX(-20deg); opacity: 0; }
+            6%   { opacity: 1; }
+            94%  { opacity: 1; }
+            100% { transform: translateX(300%) skewX(-20deg); opacity: 0; }
+          }
+          .scarcity-sweep { animation: scarcity-sweep 4s ease-in-out infinite 1s; }
+        `}</style>
+        <span
+          aria-hidden
+          className="scarcity-sweep absolute inset-y-0 w-1/3 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent 0%, rgba(245,200,66,0.22) 50%, transparent 100%)",
+          }}
+        />
+        <Users
+          width={11} height={11}
+          className="relative z-10 flex-shrink-0"
+          style={{ color: "#f5c842" }}
+          strokeWidth={2.5}
+        />
+        <span
+          className="relative z-10 label-mono"
+          style={{ fontSize: "0.6rem", letterSpacing: "0.14em", color: "#f5c842" }}
+        >
+          LIMITED TO 5 STUDENTS PER MONTH
+        </span>
+      </motion.span>
+    </motion.div>
+  );
+}
+
+/* ── Shimmer CTA button ── */
+function ShimmerButton({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <>
+      <style>{`
+        @keyframes btn-shimmer {
+          0%, 58%  { transform: translateX(-220%) skewX(-18deg); opacity: 0; }
+          63%      { opacity: 1; }
+          95%      { opacity: 1; }
+          100%     { transform: translateX(220%) skewX(-18deg); opacity: 0; }
+        }
+        .btn-shimmer-sweep { animation: btn-shimmer 5s ease-in-out infinite; }
+      `}</style>
+      <motion.a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{
+          boxShadow:
+            "0 0 24px rgba(var(--foreground-rgb),0.25), 0 0 50px rgba(var(--foreground-rgb),0.10)",
+          scale: 1.018,
+        }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+        className="relative w-full overflow-hidden font-semibold"
+        style={{
+          background: "var(--foreground)",
+          color: "var(--background)",
+          borderRadius: "9999px",
+          padding: "1.1rem",
+          fontSize: "1rem",
+          letterSpacing: "-0.01em",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "0.55rem",
+          textDecoration: "none",
+          cursor: "pointer",
+        }}
+      >
+        <span
+          aria-hidden
+          className="btn-shimmer-sweep absolute inset-y-0 w-1/3 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent 0%, rgba(var(--background-rgb),0.32) 50%, transparent 100%)",
+          }}
+        />
+        <span className="relative z-10 flex items-center gap-2">
+          {children}
+        </span>
+      </motion.a>
+    </>
   );
 }
 
 /* ── Check icon ── */
-function Check({ bright }: { bright?: boolean }) {
+function Check() {
   return (
     <svg
-      width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       style={{
-        color: bright
-          ? "rgba(var(--foreground-rgb),0.7)"
-          : "rgba(var(--foreground-rgb),0.3)",
+        color: "rgba(var(--foreground-rgb),0.55)",
         flexShrink: 0,
         marginTop: "2px",
       }}
@@ -60,19 +135,24 @@ function Check({ bright }: { bright?: boolean }) {
   );
 }
 
-const fullIncludes = [
-  "Full orderflow curriculum access",
-  "Weekly 1-on-1 screen-share sessions",
-  "Custom trading plan built for you",
-  "100-day money-back guarantee",
+const features = [
+  "10 Private 1-on-1 Sessions with Amrit (60–90 mins each)",
+  "Lifetime Inner Circle Discord Access",
+  "Custom ATAS & TradingView Templates",
+  "100-Day Profitability Guarantee",
 ];
 
-const splitIncludes = [
-  "Everything included — same programme",
-  "Flexible for your budget",
-  "Start immediately upon first payment",
-];
+/* Card stagger variants */
+const cardVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+};
+const rowVariant = {
+  hidden: { opacity: 0, y: 14 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
+};
 
+/* ══════════════════════════════════════════════════ */
 export default function PricingSection() {
   return (
     <section
@@ -80,7 +160,7 @@ export default function PricingSection() {
       className="py-36 relative overflow-hidden"
       style={{ background: "var(--surface-1)", borderTop: "1px solid var(--border)" }}
     >
-      {/* Radial gradient: center slightly lifted, edges fade back */}
+      {/* Radial center lift */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -93,176 +173,135 @@ export default function PricingSection() {
 
         {/* Section label */}
         <motion.p
-          className="label-mono mb-6"
+          className="label-mono mb-4 text-center"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={vp}
           transition={{ duration: 0.55, ease: EASE }}
         >
-          Choose your plan
+          Apply for Mentorship
         </motion.p>
 
-        {/* Pricing cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Scarcity badge */}
+        <ScarcityBadge />
 
-          {/* Full payment — glow card */}
+        {/* Section heading */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={vp}
+          transition={{ duration: 0.6, delay: 0.08, ease: EASE }}
+          className="text-center mb-12"
+          style={{
+            fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
+            fontWeight: 700,
+            color: "var(--foreground)",
+            letterSpacing: "-0.04em",
+            lineHeight: 1.1,
+          }}
+        >
+          One programme.
+          <br />
+          <span style={{ fontWeight: 300, color: "var(--muted-foreground)", fontSize: "0.7em" }}>
+            Mentorship by application only.
+          </span>
+        </motion.h2>
+
+        {/* ── Single elite card ── */}
+        <div className="flex justify-center">
           <motion.div
-            initial={{ opacity: 0, y: 28 }}
+            initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={vp}
-            transition={{ duration: 0.65, delay: 0.1, ease: EASE }}
-            whileHover={{ scale: 1.015 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
+            whileHover={{
+              scale: 1.012,
+              transition: { type: "spring", stiffness: 280, damping: 30 },
+            }}
             style={{
-              borderRadius: "1.25rem",
+              width: "100%",
+              maxWidth: "42rem",
+              borderRadius: "1.5rem",
               border: "1px solid var(--border-bright)",
-              background: "var(--surface-2)",
-              padding: "2rem",
+              background: "rgba(var(--background-rgb),0.6)",
+              backdropFilter: "blur(28px)",
+              WebkitBackdropFilter: "blur(28px)",
+              padding: "2.5rem",
               boxShadow:
-                "0 0 30px rgba(var(--foreground-rgb),0.05), 0 0 60px rgba(var(--foreground-rgb),0.025), inset 0 1px 0 rgba(var(--foreground-rgb),0.06)",
+                "0 0 40px rgba(var(--foreground-rgb),0.06), 0 0 80px rgba(var(--foreground-rgb),0.03), inset 0 1px 0 rgba(var(--foreground-rgb),0.08)",
             }}
           >
-            <div className="flex items-start justify-between mb-4">
-              <p className="label-mono">Full Payment</p>
-              <ShinyBadge>Best Value</ShinyBadge>
-            </div>
-
+            {/* Top accent line */}
             <div
+              className="absolute top-0 left-0 right-0 h-px pointer-events-none"
               style={{
-                fontFamily: "var(--font-cormorant), Georgia, serif",
-                fontSize: "clamp(3rem, 6vw, 4.5rem)",
-                fontWeight: 300,
-                color: "var(--foreground)",
-                lineHeight: 1,
-                letterSpacing: "-0.02em",
-                marginBottom: "0.5rem",
+                borderRadius: "1.5rem 1.5rem 0 0",
+                background:
+                  "linear-gradient(90deg, transparent 0%, rgba(var(--foreground-rgb),0.4) 50%, transparent 100%)",
               }}
+            />
+
+            {/* Staggered card content */}
+            <motion.div
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={vp}
+              className="flex flex-col"
             >
-              $799
-            </div>
+              {/* Card title */}
+              <motion.p variants={rowVariant} className="label-mono mb-3">
+                1-on-1 Orderflow Mentorship
+              </motion.p>
 
-            <p style={{ fontSize: "0.78rem", color: "var(--muted-foreground)", marginBottom: "1.5rem" }}>
-              One-time · save vs split
-            </p>
-
-            <ul className="flex flex-col gap-2.5 mb-6">
-              {fullIncludes.map(item => (
-                <li
-                  key={item}
-                  className="flex items-start gap-2.5"
-                  style={{ fontSize: "0.875rem", color: "rgba(var(--foreground-rgb),0.7)" }}
+              {/* Pricing */}
+              <motion.div variants={rowVariant} className="mb-6">
+                <p
+                  style={{
+                    fontSize: "0.9375rem",
+                    color: "var(--muted-foreground)",
+                    lineHeight: 1.6,
+                  }}
                 >
-                  <Check bright />
-                  {item}
-                </li>
-              ))}
-            </ul>
+                  Investment:{" "}
+                  <span style={{ color: "var(--foreground)", fontWeight: 600 }}>$799 Full</span>
+                  {" "}or{" "}
+                  <span style={{ color: "var(--foreground)", fontWeight: 600 }}>$400 × 2</span>
+                  <span style={{ fontSize: "0.8rem", color: "var(--muted-foreground)", marginLeft: "0.4rem" }}>
+                    (Split-Pay available)
+                  </span>
+                </p>
+              </motion.div>
 
-            <button
-              onClick={() =>
-                window.open(
-                  "https://www.paypal.com/paypalme/amrittrades/799",
-                  "_blank",
-                  "noopener,noreferrer"
-                )
-              }
-              className="w-full font-semibold transition-opacity duration-200 hover:opacity-80"
-              style={{
-                background: "var(--foreground)",
-                color: "var(--background)",
-                borderRadius: "9999px",
-                padding: "0.85rem",
-                fontSize: "0.875rem",
-                letterSpacing: "-0.01em",
-                cursor: "pointer",
-                border: "none",
-              }}
-            >
-              Pay $799 via PayPal
-            </button>
+              {/* Divider */}
+              <motion.div
+                variants={rowVariant}
+                style={{ height: "1px", background: "var(--border)", marginBottom: "1.5rem" }}
+              />
+
+              {/* Features list */}
+              <motion.ul variants={rowVariant} className="flex flex-col gap-3 mb-8">
+                {features.map(item => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-3"
+                    style={{ fontSize: "0.9375rem", color: "rgba(var(--foreground-rgb),0.72)" }}
+                  >
+                    <Check />
+                    {item}
+                  </li>
+                ))}
+              </motion.ul>
+
+              {/* CTA */}
+              <motion.div variants={rowVariant}>
+                <ShimmerButton href={APPLICATION_URL}>
+                  Submit Your Application
+                  <ExternalLink className="w-4 h-4" strokeWidth={2} />
+                </ShimmerButton>
+              </motion.div>
+            </motion.div>
           </motion.div>
-
-          {/* Split payment */}
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={vp}
-            transition={{ duration: 0.65, delay: 0.24, ease: EASE }}
-            whileHover={{ scale: 1.015 }}
-            style={{
-              borderRadius: "1.25rem",
-              border: "1px solid var(--border)",
-              background: "var(--surface-2)",
-              padding: "2rem",
-            }}
-          >
-            <p className="label-mono mb-4">Split Payment</p>
-
-            <div className="flex items-end gap-2 mb-1" style={{ lineHeight: 1 }}>
-              <span
-                style={{
-                  fontFamily: "var(--font-cormorant), Georgia, serif",
-                  fontSize: "clamp(2.4rem, 5vw, 3.5rem)",
-                  fontWeight: 300,
-                  color: "rgba(var(--foreground-rgb),0.75)",
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                $400
-              </span>
-              <span
-                style={{
-                  fontFamily: "var(--font-cormorant), Georgia, serif",
-                  fontSize: "1.5rem",
-                  fontWeight: 300,
-                  color: "rgba(var(--foreground-rgb),0.3)",
-                  marginBottom: "0.35rem",
-                }}
-              >
-                × 2
-              </span>
-            </div>
-
-            <p style={{ fontSize: "0.78rem", color: "var(--muted-foreground)", marginBottom: "1.5rem" }}>
-              30 days between payments
-            </p>
-
-            <ul className="flex flex-col gap-2.5 mb-6">
-              {splitIncludes.map(item => (
-                <li
-                  key={item}
-                  className="flex items-start gap-2.5"
-                  style={{ fontSize: "0.875rem", color: "rgba(var(--foreground-rgb),0.5)" }}
-                >
-                  <Check />
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            <button
-              onClick={() =>
-                window.open(
-                  "https://www.paypal.com/paypalme/amrittrades/400",
-                  "_blank",
-                  "noopener,noreferrer"
-                )
-              }
-              className="w-full font-semibold transition-all duration-200 hover:opacity-70"
-              style={{
-                background: "transparent",
-                color: "rgba(var(--foreground-rgb),0.5)",
-                border: "1px solid var(--border-bright)",
-                borderRadius: "9999px",
-                padding: "0.85rem",
-                fontSize: "0.875rem",
-                letterSpacing: "-0.01em",
-                cursor: "pointer",
-              }}
-            >
-              Start with $400 via PayPal
-            </button>
-          </motion.div>
-
         </div>
 
         {/* Footnote */}
@@ -270,15 +309,15 @@ export default function PricingSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={vp}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
           style={{
             fontSize: "0.72rem",
             color: "var(--muted-foreground)",
             textAlign: "center",
-            marginTop: "1.25rem",
+            marginTop: "1.5rem",
           }}
         >
-          Protected by 100-day profitability guarantee · Secure payments via PayPal
+          Mentorship by application only · All sessions conducted via Discord / Zoom
         </motion.p>
 
       </div>
