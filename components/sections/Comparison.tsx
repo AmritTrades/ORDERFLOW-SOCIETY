@@ -73,18 +73,25 @@ export default function Comparison() {
   return (
     <section
       id="filter"
-      className="py-36 relative overflow-hidden"
+      className="py-20 md:py-36 relative overflow-hidden"
       style={{ background: "var(--surface-1)", borderTop: "1px solid var(--border)" }}
     >
+      {/* Responsive grid opacity via style tag */}
+      <style>{`
+        @media (max-width: 767px) {
+          .comparison-grid-bg { opacity: 0.45; }
+        }
+      `}</style>
+
       {/* ── Trading-chart grid background ── */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="comparison-grid-bg absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(var(--foreground-rgb),0.055) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(var(--foreground-rgb),0.055) 1px, transparent 1px),
-            linear-gradient(rgba(var(--foreground-rgb),0.018) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(var(--foreground-rgb),0.018) 1px, transparent 1px)
+            linear-gradient(rgba(var(--foreground-rgb),0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(var(--foreground-rgb),0.05) 1px, transparent 1px),
+            linear-gradient(rgba(var(--foreground-rgb),0.016) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(var(--foreground-rgb),0.016) 1px, transparent 1px)
           `,
           backgroundSize: "80px 80px, 80px 80px, 16px 16px, 16px 16px",
         }}
@@ -105,16 +112,16 @@ export default function Comparison() {
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
-          className="mb-16"
+          className="mb-10 md:mb-16"
         >
           <p className="label-mono mb-4">Is this right for you?</p>
           <h2
             style={{
-              fontSize: "clamp(2.4rem, 5vw, 4rem)",
+              fontSize: "clamp(2rem, 5vw, 4rem)",
               fontWeight: 700,
               color: "var(--foreground)",
               letterSpacing: "-0.04em",
-              lineHeight: 1.05,
+              lineHeight: 1.08,
             }}
           >
             Be honest with yourself
@@ -134,7 +141,8 @@ export default function Comparison() {
         </motion.div>
 
         {/* ── Bento comparison grid ── */}
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* gap-10 on mobile keeps stacked cards separated; gap-6 on desktop is side-by-side */}
+        <div className="grid md:grid-cols-2 gap-10 md:gap-6">
 
           {/* ── LEFT: FOR YOU — green glow ── */}
           <motion.div
@@ -144,7 +152,7 @@ export default function Comparison() {
             viewport={viewport}
             onHoverStart={() => setBeamL(true)}
             onHoverEnd={() => setBeamL(false)}
-            className="relative rounded-2xl overflow-hidden"
+            className="relative rounded-2xl overflow-hidden w-full max-w-[90vw] md:max-w-none mx-auto"
             style={{
               background: "rgba(var(--background-rgb),0.55)",
               backdropFilter: "blur(14px)",
@@ -178,9 +186,9 @@ export default function Comparison() {
               }}
             />
 
-            <div className="relative p-8">
+            <div className="relative p-5 md:p-8">
               {/* Card header */}
-              <div className="flex items-center gap-3 mb-8">
+              <div className="flex items-center gap-3 mb-5 md:mb-8">
                 <motion.div
                   initial={{ scale: 0, rotate: -120, opacity: 0 }}
                   whileInView={{ scale: 1, rotate: 0, opacity: 1 }}
@@ -195,9 +203,8 @@ export default function Comparison() {
                 >
                   <Check className="w-4 h-4" style={{ color: "rgb(34,197,94)" }} strokeWidth={2.5} />
                 </motion.div>
-                <h3
+                <h3 className="text-[0.82rem] md:text-[0.9375rem]"
                   style={{
-                    fontSize: "0.9375rem",
                     fontWeight: 600,
                     color: "var(--foreground)",
                     letterSpacing: "-0.02em",
@@ -226,7 +233,7 @@ export default function Comparison() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={viewport}
-                    className="flex items-start gap-4 py-3.5"
+                    className="flex items-start gap-3 py-3 md:py-3.5"
                     style={{
                       borderTop:
                         i === 0
@@ -240,7 +247,8 @@ export default function Comparison() {
                       initial="hidden"
                       whileInView="visible"
                       viewport={viewport}
-                      className="flex-shrink-0 mt-0.5"
+                      className="flex-shrink-0"
+                      style={{ marginTop: "0.2rem" }}
                     >
                       <Check
                         className="w-3.5 h-3.5"
@@ -250,9 +258,9 @@ export default function Comparison() {
                     </motion.span>
                     <span
                       style={{
-                        fontSize: "0.9rem",
+                        fontSize: "0.875rem",
                         color: "rgba(var(--foreground-rgb),0.72)",
-                        lineHeight: 1.65,
+                        lineHeight: 1.75,
                       }}
                     >
                       {item}
@@ -271,7 +279,7 @@ export default function Comparison() {
             viewport={viewport}
             onHoverStart={() => setBeamR(true)}
             onHoverEnd={() => setBeamR(false)}
-            className="relative rounded-2xl overflow-hidden"
+            className="relative rounded-2xl overflow-hidden w-full max-w-[90vw] md:max-w-none mx-auto"
             style={{
               background: "rgba(var(--background-rgb),0.55)",
               backdropFilter: "blur(14px)",
@@ -305,9 +313,9 @@ export default function Comparison() {
               }}
             />
 
-            <div className="relative p-8">
+            <div className="relative p-5 md:p-8">
               {/* Card header */}
-              <div className="flex items-center gap-3 mb-8">
+              <div className="flex items-center gap-3 mb-5 md:mb-8">
                 <motion.div
                   initial={{ scale: 0, rotate: 120, opacity: 0 }}
                   whileInView={{ scale: 1, rotate: 0, opacity: 1 }}
@@ -322,9 +330,8 @@ export default function Comparison() {
                 >
                   <X className="w-4 h-4" style={{ color: "rgb(239,68,68)" }} strokeWidth={2.5} />
                 </motion.div>
-                <h3
+                <h3 className="text-[0.82rem] md:text-[0.9375rem]"
                   style={{
-                    fontSize: "0.9375rem",
                     fontWeight: 600,
                     color: "var(--muted-foreground)",
                     letterSpacing: "-0.02em",
@@ -353,7 +360,7 @@ export default function Comparison() {
                     initial="hidden"
                     whileInView="visible"
                     viewport={viewport}
-                    className="flex items-start gap-4 py-3.5"
+                    className="flex items-start gap-3 py-3 md:py-3.5"
                     style={{
                       borderTop:
                         i === 0
@@ -367,7 +374,8 @@ export default function Comparison() {
                       initial="hidden"
                       whileInView="visible"
                       viewport={viewport}
-                      className="flex-shrink-0 mt-0.5"
+                      className="flex-shrink-0"
+                      style={{ marginTop: "0.2rem" }}
                     >
                       <X
                         className="w-3.5 h-3.5"
@@ -377,9 +385,9 @@ export default function Comparison() {
                     </motion.span>
                     <span
                       style={{
-                        fontSize: "0.9rem",
+                        fontSize: "0.875rem",
                         color: "rgba(var(--foreground-rgb),0.42)",
-                        lineHeight: 1.65,
+                        lineHeight: 1.75,
                       }}
                     >
                       {item}
