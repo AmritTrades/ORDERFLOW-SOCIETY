@@ -4,6 +4,7 @@ import StatsBar          from "@/components/sections/StatsBar";
 import TradingStack      from "@/components/sections/TradingStack";
 import Community         from "@/components/sections/Community";
 import Comparison        from "@/components/sections/Comparison";
+import StudentSuccess    from "@/components/sections/StudentSuccess";
 import PricingSection    from "@/components/sections/PricingSection";
 import Guarantee         from "@/components/sections/Guarantee";
 import ClosingQuote      from "@/components/sections/ClosingQuote";
@@ -43,12 +44,17 @@ export default function Home() {
         <Comparison />
       </SectionReveal>
 
-      {/* 5 — Mentorship: The offer */}
+      {/* 5 — Social Proof: Student success */}
+      <SectionReveal>
+        <StudentSuccess />
+      </SectionReveal>
+
+      {/* 6 — Mentorship: The offer */}
       <SectionReveal>
         <PricingSection />
       </SectionReveal>
 
-      {/* 6 — Guarantee: Remove final risk */}
+      {/* 7 — Guarantee: Remove final risk */}
       <SectionReveal>
         <Guarantee />
       </SectionReveal>
