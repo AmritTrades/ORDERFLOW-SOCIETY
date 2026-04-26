@@ -1,3 +1,4 @@
+import SplashWrapper    from "@/components/ui/SplashWrapper";
 import { HeroGeometric } from "@/components/ui/shape-landing-hero";
 import Navbar            from "@/components/sections/Navbar";
 import StatsBar          from "@/components/sections/StatsBar";
@@ -14,6 +15,7 @@ import { SectionReveal } from "@/components/ui/section-reveal";
 
 export default function Home() {
   return (
+    <SplashWrapper>
     <main style={{ background: "var(--background)" }}>
 
       {/* ── Fixed chrome ── */}
@@ -69,5 +71,6 @@ export default function Home() {
       <Footer />
 
     </main>
+    </SplashWrapper>
   );
 }
