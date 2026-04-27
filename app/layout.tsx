@@ -40,8 +40,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${cormorant.variable} ${jetbrainsMono.variable}`}>
-      <body className="antialiased bg-[#09090B] text-zinc-100 overflow-x-hidden">
+    <html lang="en" className={`dark ${inter.variable} ${spaceGrotesk.variable} ${cormorant.variable} ${jetbrainsMono.variable}`}>
+      <body className="antialiased bg-black text-zinc-100 overflow-x-hidden">
         {children}
       </body>
     </html>

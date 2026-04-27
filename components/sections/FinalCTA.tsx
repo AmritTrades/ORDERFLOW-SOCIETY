@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { fadeUp, stagger, viewport } from "@/lib/motion";
-import { MagneticButton } from "@/components/ui/magnetic-button";
+import { GreenCTAButton } from "@/components/ui/green-cta-button";
 
 export default function FinalCTA() {
   return (
@@ -136,22 +136,11 @@ export default function FinalCTA() {
             Join Free Discord
           </motion.a>
 
-          {/* Secondary CTA — Magnetic glow button */}
+          {/* Secondary CTA — Green brand button */}
           <motion.div variants={fadeUp}>
-            <MagneticButton
-              href="#mentorship"
-              style={{
-                border: "1px solid var(--border-bright)",
-                color: "var(--muted-foreground)",
-                borderRadius: "9999px",
-                padding: "1rem 2.25rem",
-                fontSize: "0.9375rem",
-                letterSpacing: "-0.015em",
-                transition: "color 0.18s ease",
-              }}
-            >
+            <GreenCTAButton href="#mentorship">
               Get 1-on-1 Mentorship
-            </MagneticButton>
+            </GreenCTAButton>
           </motion.div>
         </motion.div>
 

@@ -2,79 +2,14 @@
 
 import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ThemeSwitch } from "@/components/ui/theme-switch";
-import { AnimatedLogo } from "@/components/ui/animated-logo";
+import { AnimatedLogo }    from "@/components/ui/animated-logo";
+import { GreenCTAButton }  from "@/components/ui/green-cta-button";
 
 const links = [
   { label: "Community",  href: "#community" },
   { label: "Mentorship", href: "#mentorship" },
   { label: "Guarantee",  href: "#guarantee" },
 ];
-
-/* ── Border-beam CTA button ── */
-function BorderBeamButton({ href, children, className = "" }: {
-  href: string;
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <div
-      className={`relative inline-flex ${className}`}
-      style={{ padding: "1px", borderRadius: "9999px" }}
-    >
-      <style>{`
-        @keyframes nav-shimmer {
-          0%, 62%  { transform: translateX(-160%) skewX(-15deg); opacity: 0; }
-          66%      { opacity: 1; }
-          96%      { opacity: 1; }
-          100%     { transform: translateX(160%) skewX(-15deg); opacity: 0; }
-        }
-        .nav-shimmer { animation: nav-shimmer 6s ease-in-out infinite; }
-      `}</style>
-
-      {/* Spinning conic gradient — visible only through the 1px padding gap */}
-      <motion.div
-        className="absolute inset-0"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-        style={{
-          borderRadius: "9999px",
-          background:
-            "conic-gradient(from 0deg, transparent 72%, #065f46 83%, #34d399 87%, #065f46 93%, transparent 100%)",
-        }}
-      />
-      {/* Solid fill covers the center — only the 1px edge shows as the beam */}
-      <div
-        className="absolute inset-[1px]"
-        style={{ borderRadius: "9999px", background: "var(--foreground)" }}
-      />
-      {/* Clickable link — overflow-hidden clips shimmer to pill shape */}
-      <a
-        href={href}
-        target={href.startsWith("http") ? "_blank" : undefined}
-        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-        className="relative z-10 overflow-hidden inline-flex items-center rounded-full font-semibold transition-opacity duration-200 hover:opacity-75"
-        style={{
-          fontSize: "0.8125rem",
-          color: "var(--background)",
-          padding: "0.5rem 1.25rem",
-          letterSpacing: "-0.01em",
-        }}
-      >
-        {/* Shimmer sweep */}
-        <span
-          aria-hidden
-          className="nav-shimmer absolute inset-y-0 w-1/3 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.22) 50%, transparent 100%)",
-          }}
-        />
-        <span className="relative z-10">{children}</span>
-      </a>
-    </div>
-  );
-}
 
 export default function Navbar() {
   const [open, setOpen]       = useState(false);
@@ -132,10 +67,9 @@ export default function Navbar() {
 
           {/* CTA + hamburger */}
           <div className="flex items-center gap-3">
-            <ThemeSwitch className="hidden md:flex" />
-            <BorderBeamButton href="#mentorship" className="hidden md:inline-flex">
-              Apply Now
-            </BorderBeamButton>
+            <div className="hidden md:inline-flex">
+              <GreenCTAButton href="#mentorship">Apply Now</GreenCTAButton>
+            </div>
 
             <button
               onClick={() => setOpen(v => !v)}
@@ -185,18 +119,11 @@ export default function Navbar() {
                   {l.label}
                 </motion.a>
               ))}
-              <div className="flex items-center gap-3 mt-2">
-                <ThemeSwitch />
-                <span style={{ fontSize: "0.75rem", color: "var(--muted-foreground)" }}>Toggle theme</span>
+              <div className="mt-3">
+                <GreenCTAButton href="#mentorship" onClick={() => setOpen(false)}>
+                  Apply Now
+                </GreenCTAButton>
               </div>
-              <a
-                href="#mentorship"
-                onClick={() => setOpen(false)}
-                className="mt-3 inline-flex items-center justify-center rounded-full font-semibold"
-                style={{ fontSize: "0.875rem", background: "var(--foreground)", color: "var(--background)", padding: "0.75rem 1.5rem" }}
-              >
-                Apply Now
-              </a>
             </div>
           </motion.div>
         )}

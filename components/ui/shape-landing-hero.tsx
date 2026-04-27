@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { GenerativeArtScene } from "@/components/ui/anomalous-matter-hero";
+import { GreenCTAButton } from "@/components/ui/green-cta-button";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -180,51 +181,16 @@ function HeroGeometric({
               {/* Buttons — relative z-10 */}
               <div className="relative z-10">
 
-                {/* Shimmer keyframe */}
-                <style>{`
-                  @keyframes hero-btn-shimmer {
-                    0%, 58%  { transform: translateX(-200%) skewX(-18deg); opacity: 0; }
-                    63%      { opacity: 1; }
-                    96%      { opacity: 1; }
-                    100%     { transform: translateX(200%) skewX(-18deg); opacity: 0; }
-                  }
-                  .hero-btn-shimmer { animation: hero-btn-shimmer 5.5s ease-in-out infinite; }
-                `}</style>
-
                 <div className="flex flex-col sm:flex-row flex-wrap items-start gap-3">
 
-                  {/* Primary — solid, shimmer, the main event */}
-                  <motion.a
+                  {/* Primary — green CTA */}
+                  <GreenCTAButton
                     href="https://forms.gle/RC7TY65MEQDLE6Tp9"
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{
-                      scale: 1.03,
-                      boxShadow: "0 0 24px rgba(var(--foreground-rgb),0.18), 0 0 48px rgba(var(--foreground-rgb),0.08)",
-                    }}
-                    whileTap={{ scale: 0.97 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                    className="relative overflow-hidden inline-flex items-center font-semibold"
-                    style={{
-                      background: "var(--foreground)",
-                      color: "var(--background)",
-                      borderRadius: "9999px",
-                      padding: "0.95rem 2.25rem",
-                      fontSize: "0.9375rem",
-                      letterSpacing: "-0.01em",
-                      textDecoration: "none",
-                    }}
                   >
-                    <span
-                      aria-hidden
-                      className="hero-btn-shimmer absolute inset-y-0 w-1/3 pointer-events-none"
-                      style={{
-                        background:
-                          "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.22) 50%, transparent 100%)",
-                      }}
-                    />
-                    <span className="relative z-10">Apply for 1-on-1 Mentorship</span>
-                  </motion.a>
+                    Apply for 1-on-1 Mentorship
+                  </GreenCTAButton>
 
                   {/* Secondary + caption — stacked */}
                   <div className="flex flex-col items-start gap-1.5">
