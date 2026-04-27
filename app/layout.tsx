@@ -29,9 +29,39 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Orderflow Society — Master the Order Flow",
+  metadataBase: new URL("https://orderflowsociety.com"),
+  title: "Orderflow Society | Master the Order Flow Edge",
   description:
-    "Futures and orderflow trading mentorship. Learn to read the tape, understand market microstructure, and trade with institutional edge.",
+    "Professional futures trading mentorship for serious traders. Learn tape reading, auction market theory, and institutional orderflow.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Orderflow Society | Master the Order Flow Edge",
+    description:
+      "Professional futures trading mentorship for serious traders. Learn tape reading, auction market theory, and institutional orderflow.",
+    url: "https://orderflowsociety.com",
+    siteName: "Orderflow Society",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Orderflow Society | Master the Order Flow Edge",
+    description:
+      "Professional futures trading mentorship for serious traders. Learn tape reading, auction market theory, and institutional orderflow.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
