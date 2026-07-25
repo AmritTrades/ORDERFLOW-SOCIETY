@@ -46,6 +46,11 @@ export function GreenCTAButton({
           100% { transform: translateY(400%); opacity: 0; }
         }
         .green-scan-line { animation: green-scan 2.6s linear infinite; }
+        @keyframes sweep-once {
+          from { transform: translateX(0%); }
+          to   { transform: translateX(420%); }
+        }
+        .green-sweep { animation: sweep-once 0.85s ease-in-out forwards; will-change: transform; }
       `}</style>
 
       <motion.a
@@ -82,6 +87,21 @@ export function GreenCTAButton({
           className="green-scan-line absolute inset-x-0 pointer-events-none"
           style={{ height: "2px", background: scanLine, top: 0 }}
         />
+
+        {/* White reflection sweep — remounts on each hover to re-trigger */}
+        {hovered && (
+          <span
+            key={Date.now()}
+            aria-hidden
+            className="green-sweep absolute inset-y-0 pointer-events-none"
+            style={{
+              left: "-40%",
+              width: "38%",
+              background:
+                "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.22) 50%, transparent 100%)",
+            }}
+          />
+        )}
 
         {/* Text — jitters on hover */}
         <motion.span

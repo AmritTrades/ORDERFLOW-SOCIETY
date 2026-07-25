@@ -25,7 +25,7 @@ const cards: CardData[] = [
     gradientFrom: "#ffbc00",
     gradientTo: "#ff0058",
     buttonLabel: "Join Free Discord",
-    buttonHref: "https://discord.gg/d4xSrsWAK",
+    buttonHref: "https://discord.gg/bZ2hVCrCMw",
   },
   {
     title: "Inner Circle",

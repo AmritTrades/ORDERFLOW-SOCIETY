@@ -1,6 +1,6 @@
 import SplashWrapper    from "@/components/ui/SplashWrapper";
 import { HeroGeometric } from "@/components/ui/shape-landing-hero";
-import Navbar            from "@/components/sections/Navbar";
+import { FloatingDock }  from "@/components/ui/dock";
 import StatsBar          from "@/components/sections/StatsBar";
 import TradingStack      from "@/components/sections/TradingStack";
 import Community         from "@/components/sections/Community";
@@ -19,7 +19,7 @@ export default function Home() {
     <main style={{ background: "var(--background)" }}>
 
       {/* ── Fixed chrome ── */}
-      <Navbar />
+      <FloatingDock />
 
       {/* 1 — Hero */}
       <HeroGeometric

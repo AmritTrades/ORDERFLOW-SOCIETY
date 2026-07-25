@@ -113,7 +113,7 @@ export default function FinalCTA() {
         >
           {/* Primary CTA — Discord */}
           <motion.a
-            href="https://discord.gg/d4xSrsWAK"
+            href="https://discord.gg/bZ2hVCrCMw"
             target="_blank"
             rel="noopener noreferrer"
             variants={fadeUp}
