@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import * as THREE from "three"
+import { isWebGLSupported } from "@/lib/webgl"
 
 export function WebGLShader({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -23,6 +24,7 @@ export function WebGLShader({ className }: { className?: string }) {
 
   useEffect(() => {
     if (!canvasRef.current) return
+    if (!isWebGLSupported()) return
 
     const canvas = canvasRef.current
     const { current: refs } = sceneRef

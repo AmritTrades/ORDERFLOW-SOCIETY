@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from 'react';
+import { isWebGLSupported } from '@/lib/webgl';
 
 declare const gsap: any;
 declare const THREE: any;
@@ -319,6 +320,7 @@ export function Component() {
       });
 
       const initRenderer = async () => {
+        if (!isWebGLSupported()) return;
         const canvas = document.querySelector(".webgl-canvas") as HTMLCanvasElement; if (!canvas) return;
         scene = new THREE.Scene(); camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
         renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });

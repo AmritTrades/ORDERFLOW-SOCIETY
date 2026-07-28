@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import * as THREE from "three";
+import { isWebGLSupported } from "@/lib/webgl";
 
 export function GenerativeArtScene() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -10,6 +11,7 @@ export function GenerativeArtScene() {
   useEffect(() => {
     const currentMount = mountRef.current;
     if (!currentMount) return;
+    if (!isWebGLSupported()) return;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -20,7 +22,12 @@ export function GenerativeArtScene() {
     );
     camera.position.z = 3;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    } catch {
+      return;
+    }
     renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     currentMount.appendChild(renderer.domElement);
