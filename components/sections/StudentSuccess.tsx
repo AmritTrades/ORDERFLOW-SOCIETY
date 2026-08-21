@@ -13,22 +13,33 @@ const GOLD = "rgba(201,162,39,";
 
 /* ─── Data ────────────────────────────────────────────────────── */
 const FEATURED = {
-  name: "Harpreet",
-  tag:  "1-on-1 Mentorship",
-  text: "i just want to start by saying thank u for everything you're doing. the level of support u give is honestly not something u find everywhere. every time i have a problem or don't understand something, i can just text u and you're always available. i'm already starting to see some results — even in the last couple of days i took some really good trades thanks to the concepts you taught me. really solid experience so far.",
+  name: "1-on-1 Mentorship Student",
+  tag:  "1-on-1 Mentorship · Transitioned from ICT",
+  text: `When I first met Amrit, I had just started transitioning from one year of studying ICT concepts to order flow trading. He guided me with daily examples of why he would take or avoid a trade.
+
+After 3 months:
+• Max drawdown dropped to $180 (down from $400 with ICT)
+• Taking 1-2 high-quality trades with real confidence by interpreting institutional data in real-time
+• Take-profit targets consistently range from 2.5R to 4–5R
+• Improved both technically and psychologically.`,
 };
 
 type Review = { name: string; text: string; tag?: string };
 
 const ROW_1: Review[] = [
-  { name: "Dhruv",    text: "finally understanding how the tape moves. i used to be so confused but the way u explain delta and footprint is actually simple. best mentor so far." },
-  { name: "Nick",     text: "Top tier 1-on-1 mentorship. No fluff, just pure data. If you use ATAS, you need his templates. My execution is much cleaner now.", tag: "ATAS" },
-  { name: "Harry S.", text: "Really organized guy. The sessions are intense but clear. I appreciate that he always stops to ask if i have doubts. Feeling confident for the first time." },
+  { name: "Dhruv",           text: "finally understanding how the tape moves. i used to be so confused but the way u explain delta and footprint is actually simple. best mentor so far." },
+  { name: "Nick",            text: "Top tier 1-on-1 mentorship. No fluff, just pure data. If you use ATAS, you need his templates. My execution is much cleaner now.", tag: "ATAS" },
+  { name: "Harry S.",        text: "Really organized guy. The sessions are intense but clear. I appreciate that he always stops to ask if i have doubts. Feeling confident for the first time." },
+  { name: "Amrit Randhawa",  text: "Great experience learning order flow from Amrit. Helped me set up ATAS, templates, footprint, gamma levels, and tight SL execution. Takes time to answer every doubt.", tag: "1-on-1 Mentorship" },
+  { name: "Laksamana",       text: "Learnt AMT, VWAP, DOM, and time & sales workflow framework. His Loom videos and heatmap analysis clearly show market destination.", tag: "Framework & Heatmap" },
 ];
 
 const ROW_2: Review[] = [
-  { name: "Akhi", text: "had the first session and it was very informative. he talks about building a foundation and telling you to do things which makes you a trader. not just some random strategy." },
-  { name: "Zaid", text: "shoutout to amrit for the atas templates. saved me so much time. now i can actually see where the big orders are sitting on the heatmap. solid.", tag: "ATAS" },
+  { name: "Akhi",     text: "had the first session and it was very informative. he talks about building a foundation and telling you to do things which makes you a trader. not just some random strategy." },
+  { name: "Zaid",     text: "shoutout to amrit for the atas templates. saved me so much time. now i can actually see where the big orders are sitting on the heatmap. solid.", tag: "ATAS" },
+  { name: "Harpreet", text: "i just want to start by saying thank u for everything you're doing. the level of support u give is honestly not something u find everywhere. every time i have a problem or don't understand something, i can just text u and you're always available.", tag: "1-on-1 Mentorship" },
+  { name: "dineshv",  text: "Was confused by free stuff everywhere. Amrit provided structured order flow learning from basics, plus full ATAS setup.", tag: "Structured Learning" },
+  { name: "Jeremiah", text: "Amrit is a great mentor and unbiased. Helped me a lot when I was new — you can consult him without any stress.", tag: "Community" },
 ];
 
 /* ─── Theme token pack ────────────────────────────────────────── */
@@ -401,6 +412,7 @@ export default function StudentSuccess() {
             lineHeight:   1.82,
             marginBottom: "1.5rem",
             maxWidth:     "72ch",
+            whiteSpace:   "pre-line",
           }}>
             {FEATURED.text}
           </p>
