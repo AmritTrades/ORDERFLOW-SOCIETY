@@ -7,7 +7,6 @@ const fullIncludes = [
   "Full orderflow curriculum access",
   "Weekly 1-on-1 screen-share sessions",
   "Custom trading plan built for you",
-  "100-day money-back guarantee",
 ];
 
 const splitIncludes = [
@@ -168,7 +167,7 @@ export default function Mentorship() {
             </motion.div>
 
             <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.18)", textAlign: "center" }}>
-              Protected by 100-day profitability guarantee · Secure payments via PayPal
+              Secure payments via PayPal
             </p>
         </motion.div>
 

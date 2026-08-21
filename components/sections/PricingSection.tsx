@@ -167,9 +167,10 @@ function Check() {
 
 const features = [
   "10 Private 1-on-1 Sessions with Amrit (60–90 mins each)",
-  "Lifetime Inner Circle Discord Access",
-  "Custom ATAS & TradingView Templates",
-  "100-Day Profitability Guarantee",
+  "Daily Trade Reviews & Personal Playbook Audits",
+  "Direct 1-on-1 Private Chat & Ongoing Feedback",
+  "Complete Orderflow Society Workspace & ATAS / TradingView Templates",
+  "Full Access to Inner Circle Archives & Trade Breakdowns",
 ];
 
 /* Card stagger variants */

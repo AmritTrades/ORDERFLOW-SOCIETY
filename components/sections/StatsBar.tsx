@@ -11,7 +11,7 @@ const stats = [
   { end: 40,  suffix: "+",     label: "Active Students"      },
   { end: 100, suffix: "%",     label: "Orderflow Focused"    },
   { end: 24,  suffix: "/7",    label: "Tape Reading Support" },
-  { end: 100, suffix: " Days", label: "Mentorship Guarantee" },
+  { end: 10,  suffix: "",      label: "1-on-1 Sessions"      },
 ];
 
 function StatCounter({

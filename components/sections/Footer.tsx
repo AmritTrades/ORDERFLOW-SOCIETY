@@ -3,7 +3,6 @@
 const navLinks = [
   { label: "Community",    href: "#community" },
   { label: "Mentorship",   href: "#mentorship" },
-  { label: "Guarantee",    href: "#guarantee" },
   { label: "Inner Circle", href: "https://buy.stripe.com/cNi3cneRvdDscK45Uk9AA00", external: true },
   { label: "Discord",      href: "https://discord.gg/bZ2hVCrCMw", external: true },
 ];

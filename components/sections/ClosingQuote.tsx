@@ -8,7 +8,7 @@ const vp    = { once: true, margin: "-80px" } as const;
 const INTER = "var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
 const MONO  = "var(--font-jetbrains), 'JetBrains Mono', ui-monospace, monospace";
 
-const TYPEWRITER_TEXT = "TRADING IS DATA.  DATA IS TRUTH.  BECOME PROFITABLE.";
+const TYPEWRITER_TEXT = "TRADING IS DATA.  DATA IS TRUTH.  BUILD YOUR EDGE.";
 
 /* ── Typewriter reveal (triggers once on scroll-in) ── */
 function TypeWriter({ text, delayMs = 0 }: { text: string; delayMs?: number }) {
@@ -55,7 +55,7 @@ const HEADLINE_WORDS = "STOP GUESSING. START READING THE TAPE.".split(" ");
 
 const WIDGETS = [
   { label: "MARKET SIGNAL", value: "DATA IS TRUTH"            },
-  { label: "OUTCOME",       value: "BECOME PROFITABLE"        },
+  { label: "OUTCOME",       value: "BUILD REAL EDGE"          },
   { label: "METHOD",        value: "ORDERFLOW + MENTORSHIP"   },
 ];
 

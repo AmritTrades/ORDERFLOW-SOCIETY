@@ -29,7 +29,7 @@ const cards: CardData[] = [
   },
   {
     title: "Inner Circle",
-    desc: "Live sessions, priority feedback, exclusive recordings, and direct access to Amrit.",
+    desc: "Daily trade reviews & execution breakdowns, session preparation, exclusive tape analysis archives, and structured peer trade discussions.",
     gradientFrom: "#03a9f4",
     gradientTo: "#ff0058",
     buttonLabel: "Join Inner Circle",

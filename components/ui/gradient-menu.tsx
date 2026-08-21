@@ -5,7 +5,6 @@ import {
   IoPersonOutline,
   IoPeopleOutline,
   IoSchoolOutline,
-  IoShieldCheckmarkOutline,
 } from "react-icons/io5";
 
 export type GradientMenuItem = {
@@ -37,13 +36,6 @@ export const navMenuItems: GradientMenuItem[] = [
     icon: <IoSchoolOutline />,
     gradientFrom: "#FF9966",
     gradientTo: "#FF5E62",
-  },
-  {
-    title: "Guarantee",
-    href: "#guarantee",
-    icon: <IoShieldCheckmarkOutline />,
-    gradientFrom: "#80FF72",
-    gradientTo: "#7EE8FA",
   },
 ];
 

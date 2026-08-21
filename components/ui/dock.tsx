@@ -5,7 +5,6 @@ import {
   Home,
   Users,
   GraduationCap,
-  ShieldCheck,
   Layers,
   MessageSquare,
   ExternalLink
@@ -29,7 +28,6 @@ export function FloatingDock() {
           <DockIcon href="#" icon={Home} label="Home" />
           <DockIcon href="#community" icon={Users} label="Community" />
           <DockIcon href="#mentorship" icon={GraduationCap} label="Mentorship" />
-          <DockIcon href="#guarantee" icon={ShieldCheck} label="Guarantee" />
           <DockIcon href="#tools" icon={Layers} label="Stack" />
           <DockIcon href="https://discord.gg/bZ2hVCrCMw" icon={MessageSquare} label="Discord" isExternal />
 

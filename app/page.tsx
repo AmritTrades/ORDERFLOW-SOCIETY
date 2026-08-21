@@ -7,7 +7,6 @@ import Community         from "@/components/sections/Community";
 import Comparison        from "@/components/sections/Comparison";
 import StudentSuccess    from "@/components/sections/StudentSuccess";
 import PricingSection    from "@/components/sections/PricingSection";
-import Guarantee         from "@/components/sections/Guarantee";
 import ClosingQuote      from "@/components/sections/ClosingQuote";
 import TapeMarquee       from "@/components/ui/tape-marquee";
 import Footer            from "@/components/sections/Footer";
@@ -54,11 +53,6 @@ export default function Home() {
       {/* 6 — Mentorship: The offer */}
       <SectionReveal>
         <PricingSection />
-      </SectionReveal>
-
-      {/* 7 — Guarantee: Remove final risk */}
-      <SectionReveal>
-        <Guarantee />
       </SectionReveal>
 
       {/* 7 — Closing Quote: The send-off */}

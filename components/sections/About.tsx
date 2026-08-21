@@ -82,7 +82,6 @@ const fullIncludes = [
   "Full orderflow curriculum access",
   "Weekly 1-on-1 screen-share sessions",
   "Custom trading plan built for you",
-  "100-day money-back guarantee",
 ];
 
 const splitIncludes = [
@@ -344,7 +343,7 @@ export default function About() {
             marginTop: "1.25rem",
           }}
         >
-          Protected by 100-day profitability guarantee · Secure payments via PayPal
+          Secure payments via PayPal
         </motion.p>
 
       </div>
