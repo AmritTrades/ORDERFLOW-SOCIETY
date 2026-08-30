@@ -192,7 +192,7 @@ export default function Comparison() {
                 <motion.div
                   initial={{ scale: 0, rotate: -120, opacity: 0 }}
                   whileInView={{ scale: 1, rotate: 0, opacity: 1 }}
-                  viewport={viewport}
+                  viewport={{ once: true, margin: "-80px 0px" }}
                   transition={{ type: "spring", stiffness: 380, damping: 15, delay: 0.1 }}
                   className="flex items-center justify-center w-8 h-8 rounded-full flex-shrink-0"
                   style={{
@@ -246,7 +246,7 @@ export default function Comparison() {
                       variants={iconPop}
                       initial="hidden"
                       whileInView="visible"
-                      viewport={viewport}
+                      viewport={{ once: true, margin: "-80px 0px" }}
                       className="flex-shrink-0"
                       style={{ marginTop: "0.2rem" }}
                     >
@@ -319,7 +319,7 @@ export default function Comparison() {
                 <motion.div
                   initial={{ scale: 0, rotate: 120, opacity: 0 }}
                   whileInView={{ scale: 1, rotate: 0, opacity: 1 }}
-                  viewport={viewport}
+                  viewport={{ once: true, margin: "-80px 0px" }}
                   transition={{ type: "spring", stiffness: 380, damping: 15, delay: 0.1 }}
                   className="flex items-center justify-center w-8 h-8 rounded-full flex-shrink-0"
                   style={{
@@ -373,7 +373,7 @@ export default function Comparison() {
                       variants={iconPop}
                       initial="hidden"
                       whileInView="visible"
-                      viewport={viewport}
+                      viewport={{ once: true, margin: "-80px 0px" }}
                       className="flex-shrink-0"
                       style={{ marginTop: "0.2rem" }}
                     >
