@@ -7,7 +7,6 @@ import Community         from "@/components/sections/Community";
 import Comparison        from "@/components/sections/Comparison";
 import StudentSuccess    from "@/components/sections/StudentSuccess";
 import PricingSection    from "@/components/sections/PricingSection";
-import ClosingQuote      from "@/components/sections/ClosingQuote";
 import TapeMarquee       from "@/components/ui/tape-marquee";
 import Footer            from "@/components/sections/Footer";
 import { SectionReveal } from "@/components/ui/section-reveal";
@@ -35,29 +34,24 @@ export default function Home() {
         <TradingStack />
       </SectionReveal>
 
-      {/* 3 — Community: Free & paid tiers */}
+      {/* 3 — Social Proof: Student success */}
+      <SectionReveal>
+        <StudentSuccess />
+      </SectionReveal>
+
+      {/* 4 — Community: Free & paid tiers */}
       <SectionReveal>
         <Community />
       </SectionReveal>
 
-      {/* 4 — Honesty Filter: Qualify the lead */}
+      {/* 5 — Honesty Filter: Qualify the lead */}
       <SectionReveal>
         <Comparison />
-      </SectionReveal>
-
-      {/* 5 — Social Proof: Student success */}
-      <SectionReveal>
-        <StudentSuccess />
       </SectionReveal>
 
       {/* 6 — Mentorship: The offer */}
       <SectionReveal>
         <PricingSection />
-      </SectionReveal>
-
-      {/* 7 — Closing Quote: The send-off */}
-      <SectionReveal>
-        <ClosingQuote />
       </SectionReveal>
 
       {/* ── Footer chrome ── */}
