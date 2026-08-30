@@ -33,8 +33,8 @@ const cards: CardData[] = [
     gradientFrom: "#03a9f4",
     gradientTo: "#ff0058",
     buttonLabel: "Join Inner Circle",
-    buttonHref: "https://buy.stripe.com/cNi3cneRvdDscK45Uk9AA00",
-    price: "$39 / mo",
+    buttonHref: "https://whop.com/orderflow-society/orderflow-society-membership/",
+    price: "$49 / mo",
     priceLabel: "Recurring Monthly",
     glowColor: "#03a9f4",
     isInnerCircle: true,
@@ -258,7 +258,6 @@ export default function SkewCards() {
                 href={card.buttonHref}
                 label={card.buttonLabel}
                 glowColor={card.glowColor}
-                onActivate={card.isInnerCircle ? triggerToast : undefined}
               />
             </div>
           </div>

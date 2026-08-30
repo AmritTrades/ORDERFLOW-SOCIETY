@@ -3,7 +3,7 @@
 const navLinks = [
   { label: "Community",    href: "#community" },
   { label: "Mentorship",   href: "#mentorship" },
-  { label: "Inner Circle", href: "https://buy.stripe.com/cNi3cneRvdDscK45Uk9AA00", external: true },
+  { label: "Inner Circle", href: "https://whop.com/orderflow-society/orderflow-society-membership/", external: true },
   { label: "Discord",      href: "https://discord.gg/bZ2hVCrCMw", external: true },
 ];
 

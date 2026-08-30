@@ -444,7 +444,7 @@ function HeroGeometric({
               {/* Row B — Inner Circle */}
               <div className="flex flex-col items-start gap-1.5">
                 <motion.a
-                  href="https://buy.stripe.com/cNi3cneRvdDscK45Uk9AA00"
+                  href="https://whop.com/orderflow-society/orderflow-society-membership/"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileTap={{ scale: 0.97 }}
