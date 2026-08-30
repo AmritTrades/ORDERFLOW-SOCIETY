@@ -454,7 +454,7 @@ function HeroGeometric({
                   Join Inner Circle
                 </motion.a>
                 <p style={{ fontSize: "0.71rem", color: "rgba(var(--foreground-rgb),0.24)", letterSpacing: "-0.005em", paddingLeft: "0.75rem" }}>
-                  $39/mo — Cancel anytime.
+                  $49/mo — Cancel anytime.
                 </p>
               </div>
             </div>
