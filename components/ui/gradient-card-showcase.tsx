@@ -1,9 +1,7 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import { AnimatePresence, motion, useSpring } from "framer-motion";
-
-const EASE = [0.16, 1, 0.3, 1] as const;
+import { useRef } from "react";
+import { motion, useSpring } from "framer-motion";
 
 interface CardData {
   title: string;
@@ -12,10 +10,7 @@ interface CardData {
   gradientTo: string;
   buttonLabel: string;
   buttonHref: string;
-  price?: string;
-  priceLabel?: string;
   glowColor?: string;
-  isInnerCircle?: boolean;
 }
 
 const cards: CardData[] = [
@@ -27,84 +22,7 @@ const cards: CardData[] = [
     buttonLabel: "Join Free Discord",
     buttonHref: "https://discord.gg/bZ2hVCrCMw",
   },
-  {
-    title: "Inner Circle",
-    desc: "Daily trade reviews & execution breakdowns, session preparation, exclusive tape analysis archives, and structured peer trade discussions.",
-    gradientFrom: "#03a9f4",
-    gradientTo: "#ff0058",
-    buttonLabel: "Join Inner Circle",
-    buttonHref: "https://whop.com/orderflow-society/orderflow-society-membership/",
-    price: "$49 / mo",
-    priceLabel: "Recurring Monthly",
-    glowColor: "#03a9f4",
-    isInnerCircle: true,
-  },
 ];
-
-/* ── Success toast ── */
-function SuccessToast({ visible }: { visible: boolean }) {
-  return (
-    <div
-      style={{
-        position: "fixed",
-        bottom: "2rem",
-        left: 0,
-        right: 0,
-        display: "flex",
-        justifyContent: "center",
-        zIndex: 9999,
-        pointerEvents: "none",
-      }}
-    >
-      <AnimatePresence>
-        {visible && (
-          <motion.div
-            key="toast"
-            initial={{ opacity: 0, y: 28, scale: 0.93 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 14, scale: 0.96 }}
-            transition={{ duration: 0.38, ease: EASE }}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.65rem",
-              padding: "0.8rem 1.5rem",
-              borderRadius: "9999px",
-              background: "rgba(var(--background-rgb),0.9)",
-              backdropFilter: "blur(24px)",
-              WebkitBackdropFilter: "blur(24px)",
-              border: "1px solid rgba(3,169,244,0.35)",
-              boxShadow:
-                "0 8px 32px rgba(0,0,0,0.18), 0 0 0 1px rgba(3,169,244,0.1), 0 0 24px rgba(3,169,244,0.12)",
-            }}
-          >
-            {/* Animated check circle */}
-            <motion.svg
-              width="17" height="17" viewBox="0 0 24 24" fill="none"
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.1, duration: 0.3, ease: EASE }}
-            >
-              <circle cx="12" cy="12" r="10" stroke="#03a9f4" strokeWidth="2" />
-              <path d="M8 12l3 3 5-6" stroke="#03a9f4" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-            </motion.svg>
-            <span
-              style={{
-                fontSize: "0.8125rem",
-                fontWeight: 600,
-                color: "var(--foreground)",
-                letterSpacing: "-0.01em",
-                whiteSpace: "nowrap",
-              }}
-            >
-              Welcome to the Inner Circle — check your email.
-            </span>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
 
 /* ── Magnetic card button ── */
 function CardMagneticButton({
@@ -174,17 +92,6 @@ function CardMagneticButton({
 }
 
 export default function SkewCards() {
-  const [toastVisible, setToastVisible] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const triggerToast = () => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    setToastVisible(true);
-    timerRef.current = setTimeout(() => setToastVisible(false), 3200);
-  };
-
-  useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
-
   return (
     <>
       <div className="flex justify-center items-center flex-wrap py-10">
@@ -218,41 +125,12 @@ export default function SkewCards() {
             <div
               className="relative z-20 w-full left-0 p-[20px_40px] backdrop-blur-[32px] shadow-lg rounded-lg text-white transition-all duration-500 group-hover:left-[-25px] group-hover:p-[60px_40px]"
               style={{
-                background: card.isInnerCircle
-                  ? "rgba(255,255,255,0.1)"
-                  : "rgba(255,255,255,0.06)",
-                border: card.isInnerCircle
-                  ? "1px solid rgba(255,255,255,0.22)"
-                  : "1px solid rgba(255,255,255,0.12)",
-                boxShadow: card.isInnerCircle
-                  ? `0 4px 24px rgba(0,0,0,0.18), 0 0 40px rgba(3,169,244,0.08)`
-                  : undefined,
+                background: "rgba(255,255,255,0.06)",
+                border: "1px solid rgba(255,255,255,0.12)",
               }}
             >
               <h2 className="text-2xl mb-2">{card.title}</h2>
               <p className="text-lg leading-relaxed mb-3">{card.desc}</p>
-
-              {/* Price block for Inner Circle */}
-              {card.price && (
-                <div className="mb-4">
-                  <span style={{ fontSize: "1.35rem", fontWeight: 700, color: "rgba(255,255,255,0.95)" }}>
-                    {card.price}
-                  </span>
-                  {card.priceLabel && (
-                    <p
-                      style={{
-                        fontSize: "0.68rem",
-                        color: "rgba(255,255,255,0.42)",
-                        letterSpacing: "0.07em",
-                        marginTop: "0.18rem",
-                        fontStyle: "italic",
-                      }}
-                    >
-                      {card.priceLabel}
-                    </p>
-                  )}
-                </div>
-              )}
 
               <CardMagneticButton
                 href={card.buttonHref}
@@ -272,8 +150,6 @@ export default function SkewCards() {
         .animate-blob { animation: blob 2s ease-in-out infinite; }
         .animation-delay-1000 { animation-delay: -1s; }
       `}</style>
-
-      <SuccessToast visible={toastVisible} />
     </>
   );
 }

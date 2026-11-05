@@ -73,7 +73,7 @@ export default function Comparison() {
   return (
     <section
       id="filter"
-      className="py-20 md:py-36 relative overflow-hidden"
+      className="py-20 md:py-28 relative overflow-hidden"
       style={{ background: "var(--surface-1)", borderTop: "1px solid var(--border)" }}
     >
       {/* Responsive grid opacity via style tag */}

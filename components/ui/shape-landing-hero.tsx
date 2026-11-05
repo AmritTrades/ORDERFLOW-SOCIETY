@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import {
   motion,
   useMotionValue,
@@ -10,34 +10,12 @@ import {
   useTransform,
   useVelocity,
 } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { GenerativeArtScene } from "@/components/ui/anomalous-matter-hero";
-import { Liquid, type Colors } from "@/components/ui/button-1";
+import { ShinyButton } from "@/components/ui/shiny-button";
 
 /* ─── design tokens ─── */
 const EASE = [0.16, 1, 0.3, 1] as const;
 const MONO = "var(--font-geist-mono, var(--font-jetbrains), ui-monospace, monospace)";
-
-/* ─── liquid primary CTA palette — Orderflow Green ─── */
-const GREEN_LIQUID_COLORS: Colors = {
-  color1: "#FFFFFF",
-  color2: "#00FF66",
-  color3: "#059669",
-  color4: "#FCFCFE",
-  color5: "#F9F9FD",
-  color6: "#10B981",
-  color7: "#004D25",
-  color8: "#00CC52",
-  color9: "#047857",
-  color10: "#34D399",
-  color11: "#00FF66",
-  color12: "#A7F3D0",
-  color13: "#065F46",
-  color14: "#6EE7B7",
-  color15: "#34D399",
-  color16: "#047857",
-  color17: "#059669",
-};
 
 /* ─── social proof ─── */
 const AVATARS = [
@@ -84,57 +62,6 @@ const WV = {
   hidden:  { y: "112%", opacity: 0 },
   visible: { y: "0%",   opacity: 1, transition: { duration: 0.62, ease: [0.16, 1, 0.3, 1] } },
 };
-
-/* ═══════════════════════════════════════════════
-   PRIMARY CTA — liquid gradient button
-═══════════════════════════════════════════════ */
-function LiquidPrimaryCTA() {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <a
-      href="#mentorship"
-      onClick={(e) => {
-        e.preventDefault();
-        document.getElementById("mentorship")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="group relative inline-block h-[4.6em] w-full max-w-[280px] rounded-xl border-2 border-black bg-black"
-    >
-      {/* soft ambient bloom */}
-      <div className="absolute top-[8.57%] left-1/2 h-[128.57%] w-[112.81%] -translate-x-1/2 opacity-70 blur-[19px] filter">
-        <span className="absolute inset-0 rounded-xl bg-[#062018] blur-[6.5px] filter" />
-        <div className="relative h-full w-full overflow-hidden rounded-xl">
-          <Liquid isHovered={isHovered} colors={GREEN_LIQUID_COLORS} />
-        </div>
-      </div>
-
-      {/* inner dark backing */}
-      <div className="absolute top-1/2 left-1/2 h-[112.85%] w-[92.23%] -translate-x-1/2 -translate-y-[40%] rounded-xl bg-[#01120b] blur-[7.3px] filter" />
-
-      <div className="relative h-full w-full overflow-hidden rounded-xl">
-        <span className="absolute inset-0 rounded-xl bg-[#062018]" />
-        <span className="absolute inset-0 rounded-xl bg-black" />
-        <Liquid isHovered={isHovered} colors={GREEN_LIQUID_COLORS} />
-        {[1, 2, 3, 4, 5].map((i) => (
-          <span
-            key={i}
-            className={`absolute inset-0 rounded-xl border-[3px] border-solid border-gradient-to-b from-transparent to-white mix-blend-overlay filter ${
-              i <= 2 ? "blur-[3px]" : i === 3 ? "blur-[5px]" : "blur-[4px]"
-            }`}
-          />
-        ))}
-        <span className="absolute top-1/2 left-1/2 h-[42.85%] w-[70.8%] -translate-x-1/2 -translate-y-[40%] rounded-xl bg-[#003318] blur-[15px] filter" />
-      </div>
-
-      <span className="absolute inset-0 z-10 flex items-center justify-center gap-2 rounded-xl px-6 text-center text-[0.82rem] font-extrabold uppercase leading-tight tracking-wider text-white transition-colors duration-200 group-hover:text-black">
-        <span>Apply for 1-on-1 Mentorship</span>
-        <ArrowRight aria-hidden className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1.5" />
-      </span>
-    </a>
-  );
-}
 
 /* ═══════════════════════════════════════════════
    MAIN HERO
@@ -405,44 +332,26 @@ function HeroGeometric({
             />
 
             <div className="relative z-10 flex flex-col gap-3.5">
-              {/* Row A — Primary + Inner Circle */}
-              <div className="flex flex-col sm:flex-row flex-wrap items-start gap-3">
+              {/* Row A — Primary + IQ Capital, balanced ShinyButtons side-by-side */}
+              <div className="flex flex-col sm:flex-row items-center gap-4">
 
-                {/* Primary — liquid gradient terminal CTA */}
-                <LiquidPrimaryCTA />
+                {/* Button 1 — Mentorship (scrolls to #mentorship) */}
+                <ShinyButton className="h-14 min-w-[240px] px-8 text-sm" href="#mentorship" variant="emerald">
+                  <span>Apply for 1-on-1 Mentorship</span>
+                  <span className="text-base">→</span>
+                </ShinyButton>
 
-                {/* Inner Circle — glassmorphic indigo capsule */}
-                <div className="flex flex-col items-start gap-1.5">
-                  <motion.a
-                    href="https://whop.com/orderflow-society/orderflow-society-membership/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileTap={{ scale: 0.97 }}
-                    transition={{ duration: 0.18 }}
-                    className="group inline-flex items-center gap-2.5 rounded-xl border border-indigo-500/30 bg-zinc-900/60 px-5 py-3.5 text-[0.875rem] font-medium text-white/72 backdrop-blur-md transition-all duration-200 hover:border-indigo-400/80 hover:bg-indigo-950/30 hover:text-white hover:shadow-[0_0_20px_rgba(99,102,241,0.25)]"
-                    style={{ fontFamily: MONO }}
-                  >
-                    Join Inner Circle
-                    <span aria-hidden className="inline-block transition-transform duration-200 group-hover:-translate-y-1 group-hover:translate-x-1">↗</span>
-                  </motion.a>
-                  <p style={{ fontSize: "0.71rem", color: "rgba(var(--foreground-rgb),0.24)", letterSpacing: "-0.005em", paddingLeft: "0.75rem" }}>
-                    $49/mo — Cancel anytime.
-                  </p>
-                </div>
-              </div>
-
-              {/* Row B — Free Discord */}
-              <div className="flex flex-col items-start gap-1.5">
-                <motion.a
-                  href="https://discord.gg/bZ2hVCrCMw"
-                  target="_blank"
+                {/* Button 2 — IQ Capital ($9 evaluation) */}
+                <ShinyButton
+                  className="h-14 min-w-[240px] px-8 text-sm"
+                  href="https://checkout.iqcapital.io/products?aff=apsim"
                   rel="noopener noreferrer"
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ duration: 0.15 }}
-                  className="inline-flex items-center rounded-full border border-zinc-800 bg-zinc-900/40 px-8 py-[0.9rem] text-[0.9375rem] font-medium tracking-[-0.01em] text-white/46 backdrop-blur-sm transition-all duration-200 hover:border-zinc-600 hover:text-white hover:shadow-[0_0_16px_rgba(255,255,255,0.1)]"
+                  target="_blank"
+                  variant="emerald"
                 >
-                  Join Free Discord
-                </motion.a>
+                  <span className="font-semibold text-sm tracking-wide text-white">Get Funded for $9</span>
+                  <span className="text-base">↗</span>
+                </ShinyButton>
               </div>
             </div>
           </div>
@@ -480,7 +389,7 @@ function HeroGeometric({
             </span>
             <span style={{ fontSize: "0.8125rem", color: "rgba(var(--foreground-rgb),0.38)", letterSpacing: "-0.01em" }}>
               Joined by{" "}
-              <span style={{ color: "rgba(var(--foreground-rgb),0.7)" }}>50+ Funded Traders</span>{" "}
+              <span style={{ color: "rgba(var(--foreground-rgb),0.7)" }}>100+ Funded Traders</span>{" "}
               Scaling Their Edge
             </span>
           </div>

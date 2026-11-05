@@ -70,7 +70,7 @@ export default function Mentorship() {
                   marginBottom: "0.5rem",
                 }}
               >
-                $799
+                $999
               </div>
               <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.28)", marginBottom: "1.5rem" }}>
                 One-time · save vs split
@@ -84,7 +84,7 @@ export default function Mentorship() {
                 ))}
               </ul>
               <button
-                onClick={() => window.open("https://www.paypal.com/paypalme/amrittrades/799", "_blank", "noopener,noreferrer")}
+                onClick={() => window.open("https://www.paypal.com/paypalme/amrittrades/999", "_blank", "noopener,noreferrer")}
                 className="w-full font-semibold transition-all duration-200 hover:bg-white/90"
                 style={{
                   background: "#fff",
@@ -97,7 +97,7 @@ export default function Mentorship() {
                   border: "none",
                 }}
               >
-                Pay $799 via PayPal
+                Pay $999 via PayPal
               </button>
             </motion.div>
 
@@ -123,7 +123,7 @@ export default function Mentorship() {
                     letterSpacing: "-0.02em",
                   }}
                 >
-                  $400
+                  $500
                 </span>
                 <span
                   style={{
@@ -149,7 +149,7 @@ export default function Mentorship() {
                 ))}
               </ul>
               <button
-                onClick={() => window.open("https://www.paypal.com/paypalme/amrittrades/400", "_blank", "noopener,noreferrer")}
+                onClick={() => window.open("https://www.paypal.com/paypalme/amrittrades/500", "_blank", "noopener,noreferrer")}
                 className="w-full font-semibold transition-all duration-200 hover:border-white/25 hover:text-white/70"
                 style={{
                   background: "transparent",
@@ -162,7 +162,7 @@ export default function Mentorship() {
                   cursor: "pointer",
                 }}
               >
-                Start with $400 via PayPal
+                Start with $500 via PayPal
               </button>
             </motion.div>
 

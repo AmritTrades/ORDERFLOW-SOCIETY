@@ -202,7 +202,7 @@ export default function About() {
                 marginBottom: "0.5rem",
               }}
             >
-              $799
+              $999
             </div>
 
             <p style={{ fontSize: "0.78rem", color: "var(--muted-foreground)", marginBottom: "1.5rem" }}>
@@ -225,7 +225,7 @@ export default function About() {
             <button
               onClick={() =>
                 window.open(
-                  "https://www.paypal.com/paypalme/amrittrades/799",
+                  "https://www.paypal.com/paypalme/amrittrades/999",
                   "_blank",
                   "noopener,noreferrer"
                 )
@@ -242,7 +242,7 @@ export default function About() {
                 border: "none",
               }}
             >
-              Pay $799 via PayPal
+              Pay $999 via PayPal
             </button>
           </motion.div>
 
@@ -272,7 +272,7 @@ export default function About() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                $400
+                $500
               </span>
               <span
                 style={{
@@ -307,7 +307,7 @@ export default function About() {
             <button
               onClick={() =>
                 window.open(
-                  "https://www.paypal.com/paypalme/amrittrades/400",
+                  "https://www.paypal.com/paypalme/amrittrades/500",
                   "_blank",
                   "noopener,noreferrer"
                 )
@@ -324,7 +324,7 @@ export default function About() {
                 cursor: "pointer",
               }}
             >
-              Start with $400 via PayPal
+              Start with $500 via PayPal
             </button>
           </motion.div>
 

@@ -284,7 +284,7 @@ export default function StudentSuccess() {
   return (
     <section
       id="student-success"
-      className="py-36 relative overflow-hidden"
+      className="py-20 md:py-28 relative overflow-hidden"
       style={{ background: "var(--background)", borderTop: "1px solid var(--border)" }}
     >
       {/* Dot grid */}

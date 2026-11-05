@@ -170,7 +170,7 @@ const features = [
   "Daily Trade Reviews & Personal Playbook Audits",
   "Direct 1-on-1 Private Chat & Ongoing Feedback",
   "Complete Orderflow Society Workspace & ATAS / TradingView Templates",
-  "Full Access to Inner Circle Archives & Trade Breakdowns",
+  "Full Access to Trade Archive & Breakdowns",
 ];
 
 /* Card stagger variants */
@@ -189,7 +189,7 @@ export default function PricingSection() {
   return (
     <section
       id="mentorship"
-      className="py-36 relative overflow-hidden"
+      className="py-20 md:py-28 relative overflow-hidden"
       style={{ background: "var(--surface-1)", borderTop: "1px solid var(--border)" }}
     >
       {/* Radial center lift */}
@@ -293,7 +293,10 @@ export default function PricingSection() {
               className="flex flex-col"
             >
               {/* Card title */}
-              <motion.p variants={rowVariant} className="label-mono mb-3">
+              <motion.p
+                variants={rowVariant}
+                className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-zinc-300 sm:text-sm"
+              >
                 1-on-1 Orderflow Mentorship
               </motion.p>
 
@@ -307,9 +310,9 @@ export default function PricingSection() {
                   }}
                 >
                   Investment:{" "}
-                  <span style={{ color: "var(--foreground)", fontWeight: 600 }}>$799 Full</span>
+                  <span style={{ color: "var(--foreground)", fontWeight: 600 }}>$999 Full</span>
                   {" "}or{" "}
-                  <span style={{ color: "var(--foreground)", fontWeight: 600 }}>$400 × 2</span>
+                  <span style={{ color: "var(--foreground)", fontWeight: 600 }}>$500 × 2</span>
                   <span style={{ fontSize: "0.8rem", color: "var(--muted-foreground)", marginLeft: "0.4rem" }}>
                     (Split-Pay available)
                   </span>

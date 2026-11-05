@@ -31,6 +31,13 @@ const tradingTools: CarouselItem[] = [
     description: "AI-powered market intelligence engine. Tracks macro releases, capital flows, headlines, and economic data in real-time.",
     link: "https://www.mrktedge.ai/?ref=amritpal",
   },
+  {
+    id: 3,
+    title: "IQ CAPITAL",
+    badge: "$9 Special Evaluation",
+    description: "Futures prop firm funding with low-latency execution and direct payout structures. Start your evaluation for just $9.",
+    link: "https://checkout.iqcapital.io/products?aff=apsim",
+  },
 ];
 
 /* ══════════════════════════════════════════════════════════════════ */
@@ -38,7 +45,7 @@ export default function TradingStack() {
   return (
     <section
       id="tools"
-      className="py-24"
+      className="py-20 md:py-28"
       style={{ background: "var(--background)", borderTop: "1px solid var(--border)" }}
     >
       <div className="max-w-4xl mx-auto px-6 lg:px-8">

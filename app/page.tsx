@@ -34,14 +34,14 @@ export default function Home() {
         <TradingStack />
       </SectionReveal>
 
-      {/* 3 — Social Proof: Student success */}
+      {/* 3 — Mentorship: The offer (anchor #mentorship) */}
       <SectionReveal>
-        <StudentSuccess />
+        <PricingSection />
       </SectionReveal>
 
-      {/* 4 — Community: Free & paid tiers */}
+      {/* 4 — Social Proof: Student reviews */}
       <SectionReveal>
-        <Community />
+        <StudentSuccess />
       </SectionReveal>
 
       {/* 5 — Honesty Filter: Qualify the lead */}
@@ -49,9 +49,9 @@ export default function Home() {
         <Comparison />
       </SectionReveal>
 
-      {/* 6 — Mentorship: The offer */}
+      {/* 6 — Community: Free Discord (anchor #community) */}
       <SectionReveal>
-        <PricingSection />
+        <Community />
       </SectionReveal>
 
       {/* ── Footer chrome ── */}
