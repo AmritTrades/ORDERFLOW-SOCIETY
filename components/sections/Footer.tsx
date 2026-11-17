@@ -94,6 +94,9 @@ export default function Footer() {
             Trading futures involves substantial risk of loss. Past performance is not indicative of future results.
           </p>
         </div>
+        <p style={{ fontSize: "0.68rem", color: "rgba(var(--foreground-rgb),0.35)", lineHeight: 1.6, marginTop: "1rem" }}>
+          All payments are refundable within 24 hours of purchase only. No refunds are given after 24 hours, for any reason.
+        </p>
 
       </div>
     </footer>

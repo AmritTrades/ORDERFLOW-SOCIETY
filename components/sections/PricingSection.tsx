@@ -171,6 +171,8 @@ const features = [
   "Direct 1-on-1 Private Chat & Ongoing Feedback",
   "Complete Orderflow Society Workspace & ATAS / TradingView Templates",
   "Full Access to Trade Archive & Breakdowns",
+  "Sessions booked whenever suits you: you tell me when, we book it",
+  "Start on the New York session, then London or Asia if you need it",
 ];
 
 /* Card stagger variants */
@@ -309,12 +311,13 @@ export default function PricingSection() {
                     lineHeight: 1.6,
                   }}
                 >
-                  Investment:{" "}
-                  <span style={{ color: "var(--foreground)", fontWeight: 600 }}>$999 Full</span>
-                  {" "}or{" "}
-                  <span style={{ color: "var(--foreground)", fontWeight: 600 }}>$500 × 2</span>
-                  <span style={{ fontSize: "0.8rem", color: "var(--muted-foreground)", marginLeft: "0.4rem" }}>
-                    (Split-Pay available)
+                  <span style={{ color: "var(--foreground)", fontWeight: 600, fontSize: "1.5rem" }}>$999</span>
+                  {" "}for all 10 sessions
+                  <span style={{ display: "block", fontSize: "0.85rem", marginTop: "0.35rem" }}>
+                    Booked one by one, 10 sessions would cost <span style={{ textDecoration: "line-through" }}>$1,500</span> ($150 each).
+                  </span>
+                  <span style={{ display: "block", fontSize: "0.85rem", marginTop: "0.2rem" }}>
+                    Or split it: <span style={{ color: "var(--foreground)", fontWeight: 600 }}>$500 to start</span>, the second $500 after session 4.
                   </span>
                 </p>
               </motion.div>
@@ -345,6 +348,9 @@ export default function PricingSection() {
                   Submit Your Application
                   <ExternalLink className="w-4 h-4" strokeWidth={2} />
                 </ShimmerButton>
+                <p style={{ fontSize: "0.8rem", color: "var(--muted-foreground)", textAlign: "center", marginTop: "0.9rem" }}>
+                  Want to talk to a current student before you apply? Just ask me.
+                </p>
               </motion.div>
             </motion.div>
           </motion.div>

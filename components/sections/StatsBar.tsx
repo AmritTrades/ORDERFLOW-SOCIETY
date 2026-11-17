@@ -21,7 +21,7 @@ function StatCounter({
 }) {
   const ref    = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true });
-  const [val, setVal] = useState(0);
+  const [val, setVal] = useState(end);
 
   useEffect(() => {
     if (!inView) return;

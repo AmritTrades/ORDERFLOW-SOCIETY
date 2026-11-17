@@ -35,7 +35,7 @@ export default function SplashScreen({ onComplete }: { onComplete: () => void })
      *   0.65 – 1.4 s text holds visible (~0.75 s ≈ 0.8 s requested)
      *   1.4 s        onComplete fires → AnimatePresence triggers slide-up
      */
-    const t = setTimeout(() => cb.current(), 1400);
+    const t = setTimeout(() => cb.current(), 1000);
 
     return () => {
       clearTimeout(t);

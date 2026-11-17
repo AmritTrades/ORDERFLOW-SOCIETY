@@ -1,0 +1,20 @@
+# Orderflow Society
+
+> Futures orderflow trading mentorship and free community run by Amrit (@amrittrades), an ES and NQ futures trader who trades with orderflow on ATAS.
+
+## 1-on-1 Orderflow Mentorship
+- 10 private 1-on-1 sessions with Amrit, 60 to 90 minutes each, over Discord or Zoom
+- Trade reviews, direct private chat for feedback, ATAS and TradingView templates
+- Price: $999 for all 10 sessions, or 2 x $500 (the second payment after session 4). A single session costs $150.
+- Scheduling: no fixed schedule. The student picks when, then the session is booked, in any time zone. Students start on the New York session, then move to London or Asia if needed.
+- Topics: footprint charts, delta, absorption, DOM, heatmap, volume profile, VWAP, auction market theory, ATAS setup
+- No profit guarantees. Trading futures involves substantial risk of loss.
+- Refunds: payments are refundable within 24 hours of purchase only.
+- Apply: https://www.orderflowsociety.com/#mentorship or DM @amrittrades on Instagram
+
+## Free community
+- Orderflow Society Discord (free, no signals): https://discord.gg/bZ2hVCrCMw
+
+## Links
+- Website: https://www.orderflowsociety.com
+- Instagram: https://instagram.com/amrittrades

@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://orderflowsociety.com/sitemap.xml",
+    sitemap: "https://www.orderflowsociety.com/sitemap.xml",
   };
 }

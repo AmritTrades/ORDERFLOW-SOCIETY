@@ -29,27 +29,27 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://orderflowsociety.com"),
-  title: "Orderflow Society | Master the Order Flow Edge",
+  metadataBase: new URL("https://www.orderflowsociety.com"),
+  title: "Orderflow Society | 1-on-1 Orderflow Trading Mentorship",
   description:
-    "Professional futures trading mentorship for serious traders. Learn tape reading, auction market theory, and institutional orderflow.",
+    "1-on-1 orderflow trading mentorship for ES and NQ futures traders. Learn footprint, delta, DOM and heatmap on ATAS with Amrit (@amrittrades). 10 private sessions, booked at your time.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Orderflow Society | Master the Order Flow Edge",
+    title: "Orderflow Society | 1-on-1 Orderflow Trading Mentorship",
     description:
-      "Professional futures trading mentorship for serious traders. Learn tape reading, auction market theory, and institutional orderflow.",
-    url: "https://orderflowsociety.com",
+      "1-on-1 orderflow trading mentorship for ES and NQ futures traders. Learn footprint, delta, DOM and heatmap on ATAS with Amrit (@amrittrades). 10 private sessions, booked at your time.",
+    url: "https://www.orderflowsociety.com",
     siteName: "Orderflow Society",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Orderflow Society | Master the Order Flow Edge",
+    title: "Orderflow Society | 1-on-1 Orderflow Trading Mentorship",
     description:
-      "Professional futures trading mentorship for serious traders. Learn tape reading, auction market theory, and institutional orderflow.",
+      "1-on-1 orderflow trading mentorship for ES and NQ futures traders. Learn footprint, delta, DOM and heatmap on ATAS with Amrit (@amrittrades). 10 private sessions, booked at your time.",
   },
   robots: {
     index: true,
